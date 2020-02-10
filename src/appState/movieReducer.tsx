@@ -3,12 +3,14 @@ import { Actions } from "./movieActions";
 export const initialState = {
   loading: false,
   movieArr: [],
+  tvShowArr: [],
   error: ""
 };
 
 export type State = {
   loading: boolean;
   movieArr: any[];
+  tvShowArr: any[];
   error: string;
 };
 // export type Actions = MOVIE_REQUEST | fetch | MOVIE_REQUEST_FAILURE | any;
@@ -23,6 +25,13 @@ export const movieReducer = (
         loading: true
       };
 
+    case "TvShowRequestSuccess":
+      return {
+        ...state,
+        loading: false,
+        tvShowArr: action.payload
+      };
+
     case "MovieRequestSuccess":
       return {
         ...state,
@@ -35,6 +44,7 @@ export const movieReducer = (
         // ...state,
         loading: false,
         movieArr: [],
+        tvShowArr: [],
         // error: action.payload
         error: "something went wrong! "
       };

@@ -24,4 +24,4 @@ yarn-debug.log*
 yarn-error.log*
 
 urls_and_keys.ts
-/draft
+draft/

@@ -19,6 +19,11 @@ export type MovieRequestSend = {
   payload?: any;
 };
 
+export type TvShowRequestSuccess = {
+  type: string;
+  payload: PopularMovie[];
+};
+
 export type MovieRequestSuccess = {
   type: string;
   payload: PopularMovie[];
@@ -33,11 +38,19 @@ export type MovieRequestFailure = {
 export type Actions =
   | MovieRequestSend
   | MovieRequestSuccess
+  | TvShowRequestSuccess
   | MovieRequestFailure;
 
 export function movieRequestSend() {
   return {
     type: "MovieRequestSend"
+  };
+}
+
+export function tvShowRequestSuccess(tvShows: PopularMovie[]) {
+  return {
+    type: "TvShowRequestSuccess",
+    payload: tvShows
   };
 }
 

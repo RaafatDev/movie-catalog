@@ -2,40 +2,57 @@ import React, { useContext, useEffect } from "react";
 import {
   movieRequestSend,
   movieRequestSuccess,
-  movieRequestFailure
+  movieRequestFailure,
+  tvShowRequestSuccess
 } from "../appState/movieActions";
 import { MoviesContext } from "../App";
 import { PopularMovie } from "../model/PopularMovie";
 
 import Movie from "./Movie";
 
-// import { Container, Row, Col } from "react-bootstrap";
 import { popular_tv_url, popular_url } from "../urls_and_keys";
-// import useSortMovieInfo from "../hooks/useSortMovieInfo";
+
 import usePrepareMoviesArr from "../hooks/usePrepareMoviesArr";
 import { useFetch } from "../hooks/useFetch";
 
 const MoviesList: React.FC = () => {
-  // const contextTest = useContext<any>(MoviesContext);
   //!
   const { state, dispatch } = useContext<any>(MoviesContext);
-  // const [dataArr, isLoading, error] = useFetch(popular_tv_url);
   const [dataArr, isLoading, error] = useFetch(popular_url);
+  const [tvDataArr, tvIsLoading, tvError] = useFetch(popular_tv_url);
+  const [sortedTvShowsArr] = usePrepareMoviesArr(tvDataArr, dispatch);
   const [sortedMoviesArr] = usePrepareMoviesArr(dataArr, dispatch);
   useEffect(() => {
     if (isLoading) dispatch(movieRequestSend());
+    if (sortedTvShowsArr) dispatch(tvShowRequestSuccess(sortedTvShowsArr));
     if (sortedMoviesArr) dispatch(movieRequestSuccess(sortedMoviesArr));
     if (error) dispatch(movieRequestFailure);
-  }, [sortedMoviesArr]);
+  }, [sortedMoviesArr, sortedTvShowsArr]);
   console.log({ state });
 
   return (
     <div className="container bg-primary p-4 p-md-0 mt-4">
+      <h1>Movies</h1>
       <div className="container">
         <div className="row">
           {state &&
             state.movieArr &&
-            state.movieArr.map((x: PopularMovie) => (
+            state.movieArr.slice(0, 10).map((x: PopularMovie) => (
+              <div
+                className="col border m-2 p-0 d-flex align-items-stretch"
+                key={x.id}
+              >
+                <Movie oneMovie={x} key={x.id} />
+              </div>
+            ))}
+        </div>
+      </div>
+      <h1>TV Shows</h1>
+      <div className="container">
+        <div className="row">
+          {state &&
+            state.tvShowArr &&
+            state.tvShowArr.slice(0, 10).map((x: PopularMovie) => (
               <div
                 className="col border m-2 p-0 d-flex align-items-stretch"
                 key={x.id}
