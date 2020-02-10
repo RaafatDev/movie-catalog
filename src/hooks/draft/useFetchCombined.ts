@@ -1,5 +1,6 @@
+// react-app.d.ts
 import { useState, useEffect } from "react";
-import { omdb_url_before, omdb_url_after } from "../urls_and_keys";
+import { omdb_url_before, omdb_url_after } from "../../urls_and_keys";
 
 // export function useFetch(url: string): [any[] | null, boolean, string | null] {
 interface ICombine {
@@ -10,6 +11,7 @@ interface ICombine {
   overview: string;
   videos: { results: any[] };
   images: { backdrops: any[]; posters: any[] };
+  // Actors: string;
 }
 type Hook = (url: string) => [ICombine | null];
 // [Token, React.Dispatch<React.SetStateAction<string>>]
@@ -39,13 +41,30 @@ export function useFetchCombined(url: string) {
         //   json.external_ids.imdb_id
         // );
 
+        console.log("first fetch ");
+
+        console.log({ json });
+
         // const response2 = await fetch(
         //   `${omdb_url_before}${json.external_ids.imdb_id}${omdb_url_after}`
         // );
+        //
+        /* 
+        !!!!!!!!!!!!
         const response2 = await fetch(
           `${omdb_url_before}${json.imdb_id}${omdb_url_after}`
         );
+        */
+        const response2 = await fetch(
+          `https://www.omdbapi.com/?apikey=${process.env.REACT_APP_OMDB_KEY}&i=${json.imdb_id}&plot=full`
+        );
         const json2 = await response2.json();
+
+        // console.log({json});
+
+        console.log("second fetch ");
+
+        console.log({ json2 });
 
         // setData({ imdb: { ...json }, ...json2 });
         setData({ ...json, ...json2 });

@@ -10,7 +10,7 @@ const MainNav: React.FC<Props> = () => {
     <nav className="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
       <div className="container">
         <Link className="navbar-brand" to="/">
-          Movie Info
+          Movie Catalog
         </Link>
         <button
           className="navbar-toggler"

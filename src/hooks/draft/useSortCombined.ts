@@ -3,7 +3,7 @@ import {
   omdb_url_before,
   omdb_url_after,
   basePosterUrl
-} from "../urls_and_keys";
+} from "../../urls_and_keys";
 import { useFetchCombined } from "./useFetchCombined";
 interface ICombined {
   imdb_id: string;
@@ -49,10 +49,10 @@ export function useFetchTMDB(url: string) {
   }, [url, combined]);
 
   // const omdb_url = `${omdb_url_before}${imdb_id}${omdb_url_after}`;
-  console.log("useFetchTMDB");
-  console.log({ combined });
+  // console.log("useFetchTMDB");
+  // console.log({ combined });
 
-  console.log({ sorted });
+  // console.log({ sorted });
 
   // // const fetchTMDB = useCallback(async () => {
   // const fetchTMDB = async () => {

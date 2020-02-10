@@ -1,3 +1,6 @@
+// @import "../node_modules/rfs/scss";
+@import "~rfs/scss";
+
 @import "~slick-carousel/slick/slick.css";
 @import "~slick-carousel/slick/slick-theme.css";
 /* d */
@@ -32,7 +35,6 @@
 }
 
 /* .slide__caption__title */
-
 /* end caption  */
 .slick-dots {
   bottom: 100px;
@@ -97,6 +99,24 @@
 /* li {
   position: relative;
 } */
+
+// #module a.collapsed:after {
+//   content: "+ Show More";
+// }
+
+// #module a:not(.collapsed):after {
+//   content: "- Show Less";
+// }
+// # a.collapsed:after {
+//   content: "+ Show More";
+// }
+
+// #collapseCast a:not(.collapsed):after {
+//   content: "- Show Less";
+// }
+// #collapseExample {
+//   margin: -40px;
+// }
 /* .test1 { */
 /* min-height: 80px; */
 /* position: absolute; */

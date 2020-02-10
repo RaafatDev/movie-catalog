@@ -5,7 +5,7 @@ import { Actions } from "./appState/movieActions";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 // import MainSlider from "./components/slider/MainSlider";
 
-import "./App.css";
+import "./App.scss";
 // import MoviesList from "./components/MoviesList";
 import MainNav from "./components/navbar/MainNav";
 import Home from "./pages/Home";
