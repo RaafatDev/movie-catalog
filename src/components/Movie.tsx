@@ -20,35 +20,16 @@ const Movie: React.FC<MovieProps> = ({ oneMovie }) => {
       <Link
         to={{
           pathname: `/${id}/${title.split(" ").join("-")}`,
-          // pathname: `/${id}/${name.split(" ").join("-")}`,
           state: {
             movie: JSON.stringify(oneMovie)
           }
         }}
       >
         <img
-          // className="w-lg-100"
-          // width="250px"
-          // width="250px"
-          // className="img-responsive"
-          // className="img-fluid"
-          // style={{ minWidth: "250px", width: "100%" }}
           style={{ minWidth: "200px", width: "100%" }}
-          // style={{
-          //   height: "100%",
-          //   display: "block",
-          //   margin: "auto",
-          //   maxWidth: "100%"
-          // }}
           src={poster_path}
           alt={title + id}
         />
-        {/* <img
-          // className="rounded d-block mx-auto"
-          width="250px"
-          src={poster_path}
-          alt={title + id}
-        /> */}
       </Link>
       <div className="p-2">
         <p className="font-weight-bold lead mb-0">{title}</p>

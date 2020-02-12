@@ -1,23 +1,7 @@
 import { useState, useEffect } from "react";
+import { ICombined } from "../model/combined";
 
-interface ICombined {
-  imdb_id: string;
-  id: string;
-  // poster_path: string;
-  // backdrop_path: string;
-  // overview: string;
-  // credits: { cast: any[] };
-  credits: { cast: any[] };
-  Actors: string;
-  // videos: { results: any[] };
-  // images: { backdrops: any[]; posters: any[] };
-}
 type Hook = (tmdb_url: string) => [ICombined, boolean, string | null];
-// interface ICombinedFetch {
-//   data: any[];
-//   isLoading: boolean;
-//   error: string;
-// }
 
 const useCombineFetch: Hook = (tmdb_url: string) => {
   //   const [state, setState] = useState();
@@ -56,13 +40,6 @@ const useCombineFetch: Hook = (tmdb_url: string) => {
           console.log({ json });
 
           combined = { ...json, ...json2 };
-          //   console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5");
-          //   console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5");
-
-          //   console.log({ json2 });
-          //   console.log({ combined });
-
-          //   console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5");
         } catch (error) {}
       }
       // setData(( prevState : any ) => {...prevState,  ...combined });

@@ -7,7 +7,7 @@ interface Props {}
 const Home: React.FC<Props> = () => {
   return (
     <div className="mt-4 pt-3 border">
-      {/* <MainSlider /> */}
+      <MainSlider />
       <MoviesList />
     </div>
   );

@@ -43,12 +43,13 @@ const Credits: React.FC<Props> = ({ cast, actors }) => {
       {/* <div className="container bg-danger collapse" id="collapseExample"> */}
       <div className="container">
         <div className="row collapse" id="collapseExample">
-          {cast.map((member: ICast) => {
+          {cast.map((member: ICast, index: number) => {
             const imgSrc = member.profile_path
               ? `https://image.tmdb.org/t/p/original${member.profile_path}`
               : `${process.env.PUBLIC_URL}/img/no_image.png`;
             return (
               <div
+                key={index}
                 className="clo col-6 col-sm-4 col-md-3 p-0 border d-flex align-items-stretch"
                 style={{ maxWidth: "180px" }}
               >

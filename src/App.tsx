@@ -11,7 +11,8 @@ import MainNav from "./components/navbar/MainNav";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import SearchResults from "./pages/SearchResults";
-import MovieDetails from "./pages/MovieDetails";
+// import MovieDetails from "./pages/MovieDetails";
+import MovieDetails2 from "./pages/MovieDetails2";
 import ViewAll from "./pages/ViewAll";
 
 export type StoreApi = {
@@ -37,7 +38,8 @@ const App: React.FC = () => {
           <Route path="/about" component={About} />
           <Route path="/results" component={SearchResults} />
           <Route path="/viewall" component={ViewAll} />
-          <Route path="/:id" component={MovieDetails} />
+          {/* <Route path="/:id" component={MovieDetails} /> */}
+          <Route path="/:id" component={MovieDetails2} />
           {/* <Router exact path="/" component={Home} /> */}
         </Switch>
         {/* <div className="App">

@@ -43,19 +43,8 @@
   /* background-color: blue; */
   width: auto;
   /* width: 10px; */
-
-  /* font-size: 20px; */
-  /* line-height: 30px; */
-  /* font-size: large; */
-  /* // play with the number of pixels to position it as you want */
 }
-/* .slick-dots li:not(.slick-active) { */
-/* opacity: 0.25; */
-/* } */
-/* .slick-dots li.slick-active button { */
-/* background-color: brown; */
-/* opacity: 0.25; */
-/* } */
+
 .slick-dots li button {
   /* opacity: 0.25; */
   border: 1px solid white;
@@ -66,22 +55,9 @@
   /* width: ; */
 }
 .slick-dots li button:before {
-  /* .slick-dots ::before { */
-  /* background-color: blueviolet; */
   font-size: large;
-  /* border-radius: 50%; */
-  /* border: solid 1px black; */
-  /* color: white; */
-  /* opacity: 0.25; */
-
-  /* width: 30px; */
   width: 17px;
-  /* width: 100%; */
-  /* margin: 0; */
-  /* padding: 0; */
   height: 17px;
-  /* height: 100%; */
-  /* border-radius: 50%; */
 }
 /* !!!!!!!!!!!1 */
 .slick-dots li button:focus:before {
@@ -111,6 +87,30 @@
 //   content: "+ Show More";
 // }
 
+.modal-dialog {
+  // width: 90%;
+  width: auto;
+  height: 600px !important;
+}
+
+.modal-content {
+  /* 80% of window height */
+
+  // height: 100%;
+  height: auto;
+
+  background-color: #bbd6ec;
+}
+
+.modal-header {
+  background-color: #337ab7;
+
+  padding: 16px 16px;
+
+  color: #fff;
+
+  border-bottom: 2px dashed #337ab7;
+}
 // #collapseCast a:not(.collapsed):after {
 //   content: "- Show Less";
 // }

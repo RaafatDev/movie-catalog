@@ -1,22 +1,15 @@
-// import React, { useState, useEffect } from "react";
 import React from "react";
-// import { RouteComponentProps, useHistory, useLocation } from "react-router-dom";
 import { RouteComponentProps, useHistory } from "react-router-dom";
-// import { PopularMovie } from "../model/PopularMovie";
-import { useFetch } from "../hooks/useFetch";
-// import { useFetchTMDB } from "../hooks/useSortCombined";
 import { useURL } from "../hooks/useURL";
-// import usePrepareMovie from "../hooks/draft/usePrepareMovie";
 import useCombineFetch from "../hooks/useCombineFetch";
 import Credits from "../components/Credits";
-// import usePrepareMoviesArr from "../hooks/usePrepareMoviesArr";
-
-// interface ICombinedFetch {
-//   credits: { cast: any[] };
-// }
+// import MovieImages from "../components/MovieVideos";
+import ImagesSlide from "../components/ImagesSlide";
+import MovieVideos from "../components/MovieVideos";
 
 interface Props extends RouteComponentProps<{ id: string }> {}
 
+// const MovieDetails: React.FC<Props> = props => {
 const MovieDetails: React.FC<Props> = props => {
   const id = props.match.params.id;
   const history = useHistory<any>();
@@ -32,31 +25,9 @@ const MovieDetails: React.FC<Props> = props => {
     Genres
   } = JSON.parse(history.location.state.movie);
 
-  // console.log({ isMovie });
-
   const { url } = useURL(isMovie, movieId);
-  console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1");
 
-  console.log({ url });
-
-  // const [tmdb_movie_info, isLoading, error] = useFetch(url);
   const [combinedFetch] = useCombineFetch(url);
-  // const [sortedMovie] = usePrepareMovie(combinedFetch);
-
-  // setArrToSort(tmdb_movie_info);
-  console.log("after Sorting $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$4");
-  console.log({ combinedFetch });
-
-  // console.log({ sortedMovie });
-  // console.log({ tmdb_movie_info });
-
-  // if(!Object.keys(combinedFetch).length === 0 ){
-
-  // }
-  // todo
-  // const [tmdb_movie_infooooo] = useFetchTMDB(url);
-
-  // const [tmdb_movie_infooooo] = usefetchTMDB(url);
 
   console.log({ combinedFetch });
 
@@ -78,7 +49,8 @@ const MovieDetails: React.FC<Props> = props => {
           <div className="col">
             <p>Release Date: {release_date} </p>
             <p>Genres: {Genres}</p>
-            <p>id: {id}</p>
+            {/* <p>id: {id}</p> */}
+            <p>{combinedFetch.budget} </p>
             <p>Overview: {overview} </p>
           </div>
         </div>
@@ -92,6 +64,25 @@ const MovieDetails: React.FC<Props> = props => {
           />
         </div>
       )}
+
+      {combinedFetch && combinedFetch.images && (
+        <div>
+          {/* <MovieImages images={combinedFetch.images} /> */}
+          <ImagesSlide images={combinedFetch.images} />
+        </div>
+      )}
+      {/* {combinedFetch &&
+        combinedFetch.videos &&
+        combinedFetch.videos.results.map((video, index) => (
+          // <MovieVideos video={video} key={video.name} index={index} />
+          <MovieVideos video={video} key={index} index={index} />
+        ))} */}
+
+      {/* {combinedFetch && combinedFetch.videos && (
+        <div>
+          <MovieVideos videos={combinedFetch.videos.results} />
+        </div>
+      )} */}
     </div>
   );
 };
