@@ -23,8 +23,21 @@ const ImagesSlide: React.FC<Props> = ({ images: { backdrops } }) => {
 
     console.log({ imageSrc });
   };
-  const closeOverlay = () => {
-    setShowOverlay(false);
+  // const closeOverlay = () => {
+  //   setShowOverlay(false);
+  // };
+  const overlayClickHandler = (e: MouseEvent) => {
+    // if (e.target)
+    // console.log("");
+    // console.log("the target clicked is :", e.target);
+    if (e.target === overlayRef.current) {
+      // console.log("Image clicked !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1");
+      setShowOverlay(false);
+      // console.log("overlay is : ::::", overlayRef.current);
+    }
+    // else {
+    //   console.log("overlay clicked !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1");
+    // }
   };
   // useEffect(() => {
   // setImageSrc(imageSrc2);
@@ -35,6 +48,7 @@ const ImagesSlide: React.FC<Props> = ({ images: { backdrops } }) => {
     dots: true,
     infinite: true,
     initialSlide: 1,
+    // slidesToShow: 3,
     slidesToShow: 3,
     slidesToScroll: 3,
     // autoplay: true,
@@ -43,9 +57,26 @@ const ImagesSlide: React.FC<Props> = ({ images: { backdrops } }) => {
     autoplaySpeed: 2000,
     // autoplaySpeed: 1500
     // cssEase: "linear"
-    pauseOnHover: false
+    pauseOnHover: false,
 
     // pauseOnHover: true
+    responsive: [
+      {
+        breakpoint: 768,
+        settings: {
+          dots: false,
+          arrows: false,
+          slidesToShow: 2,
+          infinite: true,
+          slidesToScroll: 1,
+          swipeToSlide: true
+        }
+      }
+      // {
+      //   breakpoint: 992,
+      //   settings: "unslick"
+      // }
+    ]
   };
   return (
     <div className="ImagesSlide">
@@ -62,16 +93,25 @@ const ImagesSlide: React.FC<Props> = ({ images: { backdrops } }) => {
       </Slider>
       {showOverlay ? (
         <>
-          <div className="overlay" onClick={closeOverlay} ref={overlayRef}>
+          {/* <div className="overlay" onClick={closeOverlay} ref={overlayRef}> */}
+          <div
+            className="overlay"
+            onClick={overlayClickHandler}
+            ref={overlayRef}
+          >
             <button
-              onClick={closeOverlay}
+              // onClick={closeOverlay}
+              onClick={() => setShowOverlay(false)}
               type="button"
               className="close"
               aria-label="Close"
             >
               <span aria-hidden="true">&times;</span>
             </button>
-            <div className="overlay__image-container">
+            <div
+              className="overlay__image-container"
+              style={{ height: "auto" }}
+            >
               {/* <img src={basePosterUrl + "w1280" + backdrops[0].file_path} /> */}
               <img src={imageSrc} />
               {/* <img src={`${basePosterUrl}w1280${backdrops[0].file_path}}` /> */}

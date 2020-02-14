@@ -31,7 +31,7 @@ const MovieDetails2: React.FC<Props> = props => {
   console.log({ combinedFetch });
 
   return (
-    <div className="m-5 p-5 border">
+    <div className="mt-5 p-5 border container-fluid">
       <div id="accordion">
         <div className="card">
           <div className="card-header" id="headingOne">
@@ -117,12 +117,15 @@ const MovieDetails2: React.FC<Props> = props => {
             !combinedFetch.videos.results ? (
               <h3>there is no Trailers to show </h3>
             ) : (
-              combinedFetch &&
-              combinedFetch.videos &&
-              combinedFetch.videos.results.map((video, index) => (
-                <MovieVideos video={video} key={index} index={index} />
-                //   <MovieVideos video={video} key={video.key} />
-              ))
+              <>
+                <p className="h3 mt-4">Trailers available: </p>
+                {combinedFetch &&
+                  combinedFetch.videos &&
+                  combinedFetch.videos.results.map((video, index) => (
+                    <MovieVideos video={video} key={index} index={index} />
+                    // <MovieVideos video={video} key={video.key} />
+                  ))}
+              </>
             )}
             {/* </div> */}
           </div>

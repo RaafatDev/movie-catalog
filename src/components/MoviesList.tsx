@@ -20,8 +20,10 @@ const MoviesList: React.FC = () => {
   const { state, dispatch } = useContext<any>(MoviesContext);
   const [dataArr, isLoading, error] = useFetch(popular_url);
   const [tvDataArr, tvIsLoading, tvError] = useFetch(popular_tv_url);
-  const [sortedTvShowsArr] = usePrepareMoviesArr(tvDataArr, dispatch);
-  const [sortedMoviesArr] = usePrepareMoviesArr(dataArr, dispatch);
+  // const [sortedTvShowsArr] = usePrepareMoviesArr(tvDataArr, dispatch);
+  const [sortedTvShowsArr] = usePrepareMoviesArr(tvDataArr);
+  // const [sortedMoviesArr] = usePrepareMoviesArr(dataArr, dispatch);
+  const [sortedMoviesArr] = usePrepareMoviesArr(dataArr);
   useEffect(() => {
     if (isLoading) dispatch(movieRequestSend());
     if (sortedTvShowsArr) dispatch(tvShowRequestSuccess(sortedTvShowsArr));
@@ -31,7 +33,8 @@ const MoviesList: React.FC = () => {
   console.log({ state });
 
   return (
-    <div className="container bg-primary p-4 p-md-0 mt-4">
+    // <div className="container bg-primary p-4 p-md-0 mt-4">
+    <div className="container bg-primary  mt-4">
       <h1>Movies</h1>
       <div className="container">
         <div className="row">

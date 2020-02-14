@@ -4,7 +4,9 @@ import { PopularMovie } from "../model/PopularMovie";
 import { basePosterUrl } from "../urls_and_keys";
 // import { movieRequestSuccess } from "../appState/movieActions";
 
-const usePrepareMoviesArr = (rowArr: any, dispatch: any) => {
+// const usePrepareMoviesArr = (rowArr: any, dispatch: any) => {
+const usePrepareMoviesArr = (rowArr: any) => {
+  // const usePrepareMoviesArr = ([]) => {
   //
   const [sortedArr, setSortedArr] = useState();
 
@@ -13,14 +15,20 @@ const usePrepareMoviesArr = (rowArr: any, dispatch: any) => {
   // console.log({ rowArr });
   // console.log({ sortedArr });
 
-  const sort = () => {
+  const sort = (rowArr: any) => {
+    // const sort = () => {
     let Arr: any[] = [];
-    console.log("usePrepareMoviesArr 2");
+    // console.log("usePrepareMoviesArr 2");
     if (!rowArr) return;
-    console.log("usePrepareMoviesArr 3");
-    console.log({ rowArr });
+    // console.log("usePrepareMoviesArr 3");
+    // console.log({ rowArr });
 
+    if (rowArr.length === 0) return;
+    // console.log({ rowArr });
+
+    // if (!rowArr.results) return;
     rowArr.results.map((movie: PopularMovie) => {
+      if (!movie.genre_ids) return;
       const movie_genre = movie.genre_ids
         .map((number: any) => {
           return movieGenres.find(genreObject => {
@@ -38,8 +46,12 @@ const usePrepareMoviesArr = (rowArr: any, dispatch: any) => {
           : movie.first_air_date,
         // imdbID: movie.id,
         id: JSON.stringify(movie.id),
-        poster_path: `${basePosterUrl}w1280${movie.poster_path}`,
-        backdrop_path: `${basePosterUrl}w1280${movie.backdrop_path}`,
+        poster_path: movie.poster_path
+          ? `${basePosterUrl}w1280${movie.poster_path}`
+          : `${process.env.PUBLIC_URL}/img/no_image.png`,
+        backdrop_path: movie.backdrop_path
+          ? `${basePosterUrl}w1280${movie.backdrop_path}`
+          : `${process.env.PUBLIC_URL}/img/no_image.png`,
         overview: movie.overview,
         genre_ids: movie.genre_ids,
         Genres: movie_genre
@@ -51,10 +63,12 @@ const usePrepareMoviesArr = (rowArr: any, dispatch: any) => {
   };
   useEffect(() => {
     // setSortedArr(rowArr);
-    sort();
+    // sort();
+    sort(rowArr);
   }, [rowArr]);
 
-  return [sortedArr];
+  return [sortedArr, sort];
+  // return [sortedArr];
 };
 
 export default usePrepareMoviesArr;

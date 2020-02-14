@@ -72,6 +72,12 @@ const MovieImages: React.FC<Props> = ({ image, length, openOverlay }) => {
     // <div onClick={() => openModal(e: Event)}>
     <div>
       <img
+        // onFocus={() => {
+        //   console.log("Received focus image ");
+        // }}
+        // onBlur={() => {
+        //   console.log("Lost focus image");
+        // }}
         onClick={openModal}
         src={`${basePosterUrl}w1280${image.file_path}`}
         style={{ width: "100%" }}

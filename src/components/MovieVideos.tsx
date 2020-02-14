@@ -12,8 +12,8 @@ interface Props {
 const MovieVideos: React.FC<Props> = ({ video, index }) => {
   // let classShow = "show";
   //
-  console.log(video.key);
-  console.log(video.id);
+  // console.log(video.key);
+  // console.log(video.id);
 
   const videoSrc = "https://www.youtube.com/embed/" + video.key;
 
@@ -24,7 +24,7 @@ const MovieVideos: React.FC<Props> = ({ video, index }) => {
     // modalRef.current.display = "block";
     // classShow = "show"
     iframeRef.current.src = videoSrc;
-    console.log(modalRef.current.display);
+    // console.log(modalRef.current.display);
   };
 
   const stopVideo = () => {
@@ -37,15 +37,6 @@ const MovieVideos: React.FC<Props> = ({ video, index }) => {
   }, []);
   return (
     <div>
-      {/* <iframe
-        ref={iframeRef}
-        className="embed-responsive-item"
-        src={`https://www.youtube.com/embed/3hSjs2hBa94`}
-        // src={""}
-        allowFullScreen
-      ></iframe> */}
-      {/* <h1> Videos </h1> */}
-
       <button
         type="button"
         className="btn btn-primary mt-3"

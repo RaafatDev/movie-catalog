@@ -23,36 +23,41 @@ const Slid: React.FC<MovieProps> = ({ oneMovie }) => {
       {/* <h2>{oneMovie.title}</h2> */}
       {/* <img width="200px" src={poster_path} /> */}
       <img
-        style={{ width: "100%", height: "90vh", cursor: "grab" }}
+        // style={{ width: "100%", height: "90vh", cursor: "grab" }}
+        style={{ width: "100%", cursor: "grab" }}
         // src={poster_path}
         src={backdrop_path}
         alt={title}
       />
       {/* <img .../> */}
-      <div className="slide slide--has-caption slick-slide">
-        <div className="slide__caption">
-          <Link
-            to={{
-              pathname: `/${id}/${title}`,
-              state: {
-                // from: "root",
-                // name: `${title}`,
-                movie: JSON.stringify(oneMovie)
-                // detail: oneMovie
-              }
-            }}
-          >
-            <h1 className="slide__caption__title">{title}</h1>
-          </Link>
-          <ul className="list-inline">
-            <li className="slide__caption__release-date list-inline-item">
-              Release date: {release_date}
-            </li>
-            <li className="list-inline-item text-white">Genres: {Genres}</li>
-          </ul>
-          <p className="slide__caption__overview d-none d-md-block">
-            {overview}{" "}
-          </p>
+      <div className="container">
+        <div className="slide slide--has-caption slick-slide">
+          {/* <div className="container"> */}
+          <div className="slide__caption border">
+            <Link
+              to={{
+                pathname: `/${id}/${title}`,
+                state: {
+                  // from: "root",
+                  // name: `${title}`,
+                  movie: JSON.stringify(oneMovie)
+                  // detail: oneMovie
+                }
+              }}
+            >
+              <h1 className="slide__caption__title">{title}</h1>
+            </Link>
+            <ul className="list-inline">
+              <li className="slide__caption__release-date list-inline-item">
+                Release date: {release_date}
+              </li>
+              <li className="list-inline-item text-white">Genres: {Genres}</li>
+            </ul>
+            <p className="slide__caption__overview d-none d-md-block">
+              {overview}{" "}
+            </p>
+          </div>
+          {/* </div> */}
         </div>
       </div>
       {/* </Link> */}

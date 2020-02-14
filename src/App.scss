@@ -15,7 +15,7 @@
 .slide__caption {
   bottom: 110px;
   min-height: 80px;
-  left: 40px;
+  // left: 40px;
   position: absolute;
   width: 100%;
   z-index: 2;
@@ -34,17 +34,63 @@
   color: #fff;
 }
 
+.slick-list {
+  // width: 100vw !important;
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  // position: absolute;
+  // margin-left: ;
+}
 /* .slide__caption__title */
 /* end caption  */
 .slick-dots {
+  //! bottom: 100px;
   bottom: 100px;
   /* // play with the number of pixels to position it as you want */
-  left: 30px;
+  //! left: 30px;
+  // left: 30px;
   /* background-color: blue; */
+  //! width: auto;
   width: auto;
   /* width: 10px; */
+  // text-align: left;
+  // display: flex;
+  // flex-direction: row;
+  // margin: 0;
+  // padding: 0;
+  .li {
+    // display: flex;
+    // margin: 0;
+    // padding: 0;
+  }
+  // .container {
+  // padding-right: 15px;
+  // padding-left: 15px;
+  // margin-right: auto;
+  // margin-left: auto;
+  // // }
+  // @media (min-width: 768px) {
+  //   .container {
+  //     width: 750px;
+  //   }
+  // }
+  // @media (min-width: 992px) {
+  //   .container {
+  //     width: 970px;
+  //   }
+  // }
+  // @media (min-width: 1200px) {
+  //   .container {
+  //     width: 1170px;
+  //   }
+  // }
 }
-
+//!!!!!!!!!!!!!!!!!!!!!!!!!
+//!!!!!!!!!!!!!!!!!!!!!!!!!
 .slick-dots li button {
   /* opacity: 0.25; */
   border: 1px solid white;
@@ -69,12 +115,38 @@
   opacity: 1;
 }
 
+//!!!!!!!!!!!!!!!!!!!!!!!!!
 /* .slide { */
 /* position: relative; */
 /* } */
 /* li {
   position: relative;
 } */
+
+// @media screen and (max-width: 1599px) {
+//   // .container{
+//   .main-slider {
+//     width: 1300px;
+//   }
+// }
+
+// @media (min-width: 1200px) {
+//   .main-slider {
+//     width: 1160px;
+//   }
+// }
+
+// @media (min-width: 992px) {
+//   .main-slider {
+//     width: 960px;
+//   }
+// }
+
+// @media (min-width: 768px) {
+//   .main-slider {
+//     width: 740px;
+//   }
+// }
 
 // #module a.collapsed:after {
 //   content: "+ Show More";
@@ -90,7 +162,7 @@
 .modal-dialog {
   // width: 90%;
   width: auto;
-  height: 600px !important;
+  // height: 600px !important;
 }
 
 .modal-content {
@@ -123,6 +195,34 @@
 /* bottom: 100; */
 /* left: 0; */
 /* width: 100%; */
+.form-control {
+  width: 280px !important;
+}
+.search-form {
+  // width: 280px !important;
+  position: relative;
+  // input {
+  // width: 100%;
+  // width: 280px;
+  // }
+}
+
+.suggestions {
+  font-size: 11.7px;
+  position: absolute;
+  top: 37px;
+  width: 100%;
+  overflow: hidden;
+  // border-radius: inherit;
+  &__item {
+    padding: 10px;
+  }
+
+  // &__item__info__genres {
+  // width: 100%;
+  // }
+}
+
 /* z-index: 2; */
 /* background-color: blue; */
 /* } */
@@ -130,41 +230,56 @@
 /* background-color: red; */
 /* } */
 
-.App {
-  text-align: center;
-}
+// .App {
+//   text-align: center;
+// }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
+// .App-logo {
+//   height: 40vmin;
+//   pointer-events: none;
+// }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
+// @media (prefers-reduced-motion: no-preference) {
+//   .App-logo {
+//     animation: App-logo-spin infinite 20s linear;
+//   }
+// }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
+// .App-header {
+//   background-color: #282c34;
+//   min-height: 100vh;
+//   display: flex;
+//   flex-direction: column;
+//   align-items: center;
+//   justify-content: center;
+//   font-size: calc(10px + 2vmin);
+//   color: white;
+// }
 
-.App-link {
-  color: #61dafb;
-}
+// .App-link {
+//   color: #61dafb;
+// }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
+// @keyframes App-logo-spin {
+//   from {
+//     transform: rotate(0deg);
+//   }
+//   to {
+//     transform: rotate(360deg);
+//   }
+// }
+// @media (min-width: 568px) {
+//   .container {
+//     width: 550px;
+//   }
+// }
+// @media (min-width: 992px) {
+//   .container {
+//     width: 970px;
+//   }
+// }
+// @media (min-width: 1200px) {
+//   .container {
+//     width: 1170px;
+//   }
+// }
