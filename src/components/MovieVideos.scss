@@ -1,0 +1,31 @@
+.modal-dialog {
+  // width: 90%;
+  width: auto;
+  // height: 600px !important;
+  .modal-content {
+    /* 80% of window height */
+    // height: 100%;
+    height: auto;
+    background-color: #bbd6ec;
+    // background-color: green;
+
+    .modal-header {
+      background-color: #337ab7;
+      padding: 16px 16px;
+      color: #fff;
+      border-bottom: 2px dashed #337ab7;
+    }
+  }
+}
+// #collapseCast a:not(.collapsed):after {
+//   content: "- Show Less";
+// }
+// #collapseExample {
+//   margin: -40px;
+// }
+/* .test1 { */
+/* min-height: 80px; */
+/* position: absolute; */
+/* bottom: 100; */
+/* left: 0; */
+/* width: 100%; */

@@ -1,6 +1,6 @@
 import React, { useRef, MouseEvent, useState, useEffect } from "react";
 import Slider from "react-slick";
-import "./ImagesSlide.scss";
+// import "./ImagesSlide.scss";
 // import MovieImages from "./MovieImages";
 import { basePosterUrl } from "../urls_and_keys";
 import MovieImages from "./MovieImages";

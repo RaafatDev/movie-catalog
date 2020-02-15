@@ -1,0 +1,86 @@
+/* d */
+/* begin caption  */
+.slide {
+  position: relative;
+  width: 50%;
+  /* width: auto; */
+  /* border: 1px solid red; */
+  // }
+
+  &__caption {
+    bottom: 110px;
+    min-height: 80px;
+    // left: 40px;
+    position: absolute;
+    width: 100%;
+    z-index: 2;
+    // }
+    &__title {
+      display: inline-block;
+      font-weight: 400;
+      font-size: 1.86rem;
+      color: white;
+    }
+
+    &__release-date {
+      color: #fff;
+    }
+
+    &__overview {
+      color: #fff;
+    }
+  }
+}
+.main-slider {
+  .slick-list {
+    // width: 100vw !important;
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    // position: absolute;
+    overflow: hidden;
+    // margin-left: ;
+  }
+}
+/* .slide__caption__title */
+/* end caption  */
+.slick-dots {
+  //! bottom: 100px;
+  bottom: 100px;
+  /* // play with the number of pixels to position it as you want */
+  //! left: 30px;
+  // left: 30px;
+  /* background-color: blue; */
+  //! width: auto;
+  width: auto;
+}
+//!!!!!!!!!!!!!!!!!!!!!!!!!
+//!!!!!!!!!!!!!!!!!!!!!!!!!
+.slick-dots li button {
+  /* opacity: 0.25; */
+  border: 1px solid white;
+  box-sizing: border-box;
+  width: 17px;
+  height: 17px;
+  border-radius: 50%;
+  /* width: ; */
+}
+.slick-dots li button:before {
+  font-size: large;
+  width: 17px;
+  height: 17px;
+}
+/* !!!!!!!!!!!1 */
+.slick-dots li button:focus:before {
+  opacity: 0.25;
+  /* opacity: 0.55; */
+}
+.slick-dots li.slick-active button:focus:before,
+.slick-dots li button:hover:before {
+  opacity: 1;
+}
+
+//!!!!!!!!!!!!!!!!!!!!!!!!!

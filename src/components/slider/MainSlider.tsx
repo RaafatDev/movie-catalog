@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useLayoutEffect } from "react";
+import React, { useContext } from "react";
 import Slider from "react-slick";
 import { MoviesContext } from "../../App";
 import Slid from "./Slid";
@@ -9,78 +9,6 @@ const MainSlider: React.FC = () => {
   // const { state, dispatch } = useContext<any>(MoviesContext);
   const { state } = useContext<any>(MoviesContext);
   // const mainSliderRef = React.useRef<any>(null);
-  const mainSliderRef = React.useRef<any>(null);
-  // React.useLayoutEffect(() => {
-  // const ParentNode = mainSliderRef.current.innerSlider._reactInternalFiber.stateNode;
-  // const ParentNode =
-  //   mainSliderRef.current.innerSlider._reactInternalFiber.stateNode.lastChild;
-  // const ParentNode =
-  //   mainSliderRef.current.innerSlider._reactInternalFiber.stateNode.list;
-  // const ParentNode =
-  //   mainSliderRef.current.innerSlider._reactInternalFiber.stateNode
-  //     .childNodes;
-  // const child = ParentNode?.item;
-  // console.log("tessssssssssssssssssss@@@@@@@@@@@@@@@@@@@@@@ ");
-  // // console.log(mainSliderRef.current.innerSlider.list.offsetParent);
-  // // console.log(mainSliderRef.current?.childNodes[0]);
-  // console.log(mainSliderRef.current?.childNodes);
-  // const Arr22: any = Array.from(mainSliderRef.current?.childNodes)[0];
-  // console.log("Arr22 before", Arr22);
-  // console.log("Arr22", Arr22.children);
-  // console.log(mainSliderRef.current?.childNodes[0].children);
-  // const Arr = mainSliderRef.current?.childNodes[0].children;
-  // const Arr444 = mainSliderRef.current?.children;
-  // console.log("Arr444", Arr444[0].children);
-  // console.log(Arr[0].nextSibling);
-  // console.log(Arr[0].nextElementSibling);
-  // console.log({ child });
-  // }, [mainSliderRef]);
-  //! $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$4
-  //! $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$4
-  // useEffect(() => {
-  //   let dotContainer = null;
-  //   if (dotContainer === null) {
-  //     dotContainer = document.createElement("div");
-  //     dotContainer.classList.add("container");
-  //   }
-  //   let slickSlider = null;
-  //   if (slickSlider === null) {
-  //     slickSlider = document.querySelector(".slick-slider");
-  //   }
-
-  //   console.log({ slickSlider });
-
-  //   if (dotContainer && slickSlider) {
-  //     slickSlider?.appendChild(dotContainer);
-  //   }
-
-  //   // useLayoutEffect(() => {
-  //   // document.querySelector("slick-slider")?.classList.add(".container");
-  //   // const info = document.querySelector(".slide__caption__overview");
-  //   let ul_element = null;
-  //   if (ul_element === null) {
-  //     ul_element = document.querySelector(".slick-dots");
-  //   }
-
-  //   // element?.classList.add("container");
-  //   console.log({ ul_element });
-  //   console.log({ info });
-  //   // if (info) {
-  //   if (ul_element !== null) {
-  //     // info?.after(element);
-  //     dotContainer?.appendChild(ul_element);
-  //     // element.classList.add("container");
-  //   }
-  //   // element?.after(info);
-  //   // }
-  // }, [state]);
-
-  // const info = document.querySelector(".slide__caption__overview");
-  // console.log({ info });
-
-  // const element = document.querySelector(".slick-dots");
-  // // element?.classList.add("container");
-  // console.log({ element });
   //! $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$4
 
   var settings = {
@@ -114,6 +42,7 @@ const MainSlider: React.FC = () => {
     // slidesToScroll: 3
     // autoplay: true,
     autoplay: false,
+    arrows: false,
     // speed: 2000,
     autoplaySpeed: 2000,
     // autoplaySpeed: 1500

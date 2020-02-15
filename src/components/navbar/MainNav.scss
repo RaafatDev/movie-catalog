@@ -1,0 +1,27 @@
+.form-control {
+  width: 280px !important;
+}
+.search-form {
+  // width: 280px !important;
+  position: relative;
+  // input {
+  // width: 100%;
+  // width: 280px;
+  // }
+}
+
+.suggestions {
+  font-size: 11.7px;
+  position: absolute;
+  top: 37px;
+  width: 100%;
+  overflow: hidden;
+  // border-radius: inherit;
+  &__item {
+    padding: 10px;
+  }
+
+  // &__item__info__genres {
+  // width: 100%;
+  // }
+}
