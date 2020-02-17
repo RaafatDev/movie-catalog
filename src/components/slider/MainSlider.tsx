@@ -71,7 +71,6 @@ const MainSlider: React.FC = () => {
     //   {
     //     breakpoint: 480,
     //     settings: {
-
     //       slidesToShow: 1,
     //       slidesToScroll: 1
     //     }

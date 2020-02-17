@@ -8,22 +8,21 @@ import { basePosterUrl } from "../urls_and_keys";
 const usePrepareMoviesArr = (rowArr: any) => {
   // const usePrepareMoviesArr = ([]) => {
   //
-  const [sortedArr, setSortedArr] = useState();
+  const [sortedArr, setSortedArr] = useState<any>([]);
 
   // console.log("usePrepareMoviesArr 1");
 
   // console.log({ rowArr });
   // console.log({ sortedArr });
 
-  const sort = (rowArr: any) => {
+  const sortData = (rowArr: any) => {
     // const sort = () => {
     let Arr: any[] = [];
-    // console.log("usePrepareMoviesArr 2");
+
     if (!rowArr) return;
-    // console.log("usePrepareMoviesArr 3");
-    // console.log({ rowArr });
 
     if (rowArr.length === 0) return;
+
     // console.log({ rowArr });
 
     // if (!rowArr.results) return;
@@ -35,7 +34,7 @@ const usePrepareMoviesArr = (rowArr: any) => {
             return genreObject.id === number;
           })?.name;
         })
-        .join();
+        .join(", ");
 
       // console.log("usePrepareMoviesArr 4");
       const movieArrTwo = {
@@ -64,10 +63,10 @@ const usePrepareMoviesArr = (rowArr: any) => {
   useEffect(() => {
     // setSortedArr(rowArr);
     // sort();
-    sort(rowArr);
+    sortData(rowArr);
   }, [rowArr]);
 
-  return [sortedArr, sort];
+  return [sortedArr, sortData];
   // return [sortedArr];
 };
 

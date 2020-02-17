@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 interface Props {
   movie: any;
@@ -18,9 +19,23 @@ const Suggestion: React.FC<Props> = ({ movie }) => {
         />
 
         <div className="suggestions__item__info pl-2">
-          <a className="suggestions__item__info__name m-0">
-            <p className="m-0  font-weight-bold">{movie.title}</p>
-          </a>
+          {/* <a className="suggestions__item__info__name m-0"> */}
+          <Link
+            to={{
+              pathname: `/${movie.id}/${movie.title}`,
+              state: {
+                // from: "root",
+                // name: `${title}`,
+                movie: JSON.stringify(movie)
+                // detail: oneMovie
+              }
+            }}
+          >
+            <p className="suggestions__item__info__title m-0  font-weight-bold">
+              {movie.title}
+            </p>
+          </Link>
+          {/* </a> */}
           <p className="suggestions__item__info__year m-0 text-muted">
             Release: {movie.release_date}
           </p>
