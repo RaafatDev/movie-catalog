@@ -5,7 +5,7 @@ import useCombineFetch from "../hooks/useCombineFetch";
 import Credits from "../components/Credits";
 // import MovieImages from "../components/MovieVideos";
 import ImagesSlide from "../components/ImagesSlide";
-import MovieVideos from "../components/MovieVideos";
+// import MovieVideos from "../components/MovieVideos";
 
 interface Props extends RouteComponentProps<{ id: string }> {}
 

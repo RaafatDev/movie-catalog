@@ -19,7 +19,7 @@ const Movie: React.FC<MovieProps> = ({ oneMovie }) => {
     <div className="shadow text-center">
       <Link
         to={{
-          pathname: `/${id}/${title.split(" ").join("-")}`,
+          pathname: `/movie/${id}/${title.split(" ").join("-")}`,
           state: {
             movie: JSON.stringify(oneMovie)
           }

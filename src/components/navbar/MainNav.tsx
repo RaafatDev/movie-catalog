@@ -1,32 +1,24 @@
 import React, { useState, useEffect, useLayoutEffect } from "react";
 import { Link } from "react-router-dom";
-import { useFetch } from "../../hooks/useFetch";
-import useDebounce from "../../hooks/useDebounce";
-import usePrepareMoviesArr from "../../hooks/usePrepareMoviesArr";
+// import { useFetch } from "../../hooks/useFetch";
+// import useDebounce from "../../hooks/draft/useDebounce";
+// import usePrepareMoviesArr from "../../hooks/usePrepareMoviesArr";
 import Suggestion from "./Suggestion";
+import useDebouncedSearch from "../../hooks/useDebouncedSearch";
 
 interface Props {}
 
 const MainNav: React.FC<Props> = () => {
   const [searchTerm, setSearchTerm] = useState("");
-  const [sortedArr, setSortedArr] = usePrepareMoviesArr([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
-
   const searchRef = React.useRef<any>(null);
-  const debouncedSearchTerm = useDebounce(searchTerm, 500);
-
-  const searchMovie = async (searchTerm: string) => {
-    const search_url = `https://api.themoviedb.org/3/search/multi?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&query=${searchTerm}&page=1&include_adult=false`;
-
-    const response = await fetch(search_url);
-    const data = await response.json();
-
-    return data;
-  };
+  const sortedArr = useDebouncedSearch(searchTerm, 500);
+  // const sortedArr = useDebouncedSearch(searchTerm, 700);
 
   function handleClick(e: any) {
     const clickedElement = e.target;
 
+    const clickedButton = clickedElement.closest(".suggestions__button");
     const clickedSearchBox = clickedElement.closest(".search-box");
     const clickedSuggestions = clickedElement.closest(".suggestions");
     const clickedTitle = clickedElement.closest(
@@ -34,12 +26,16 @@ const MainNav: React.FC<Props> = () => {
     );
 
     if (clickedTitle) {
-      // console.log("title was clieckkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk");
       setShowSuggestions(false);
-      // console.log(searchRef.current.value);
-
       searchRef.current.value = "";
+
       return;
+    }
+
+    if (clickedButton) {
+      // console.log("button clicked !!!!!!!");
+      setShowSuggestions(false);
+      searchRef.current.value = "";
     }
 
     if (!clickedSearchBox && !clickedSuggestions) {
@@ -48,41 +44,12 @@ const MainNav: React.FC<Props> = () => {
 
       // return;
     }
-
-    if (clickedSearchBox) {
-      // this id is important to get the movie and show it in a single page
-      // const id = clickedTeaser.dataset.id;
-      console.log("the Search box was clicked ");
-
-      // const single = new SingleMovie(moviesArr);
-      // single.displaySingleMovie(id);
-    }
-    if (clickedSuggestions) {
-      // this id is important to get the movie and show it in a single page
-
-      console.log("the suggestions List was Clicked !!!!");
-
-      // const id = clickedSlider.dataset.id;
-
-      // const single = new SingleMovie(sliderMoviesArr);
-      // single.displaySingleMovie(id);
-    }
   }
   useEffect(() => {
     window.addEventListener("click", handleClick);
 
-    // return () => window.removeEventListener("click", clickHandler);
     return () => window.removeEventListener("click", handleClick);
   }, []);
-  useEffect(() => {
-    if (debouncedSearchTerm) {
-      searchMovie(debouncedSearchTerm).then((results: any) => {
-        setSortedArr(results);
-      });
-    } else {
-      setSortedArr([]);
-    }
-  }, [debouncedSearchTerm]);
 
   // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -144,9 +111,22 @@ const MainNav: React.FC<Props> = () => {
                 ))}
 
               {showSuggestions && sortedArr.length !== 0 && (
-                <button className="btn btn-primary btn-block border">
-                  View All
-                </button>
+                <Link
+                  to={{
+                    pathname: `/search?keyword=${searchRef.current.value
+                      .split(" ")
+                      .join("-")}`,
+                    state: {
+                      searchedMovies: JSON.stringify(sortedArr),
+                      keyword: searchRef.current.value
+                    }
+                  }}
+                >
+                  {/* <Link to={`/search?keyword=${searchRef.current.value}`}> */}
+                  <button className="suggestions__button btn btn-primary btn-block border">
+                    View All
+                  </button>
+                </Link>
               )}
             </div>
             {/* </div> */}

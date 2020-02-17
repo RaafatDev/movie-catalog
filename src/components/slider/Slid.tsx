@@ -36,7 +36,7 @@ const Slid: React.FC<MovieProps> = ({ oneMovie }) => {
           <div className="slide__caption border">
             <Link
               to={{
-                pathname: `/${id}/${title}`,
+                pathname: `/movie/${id}/${title.split(" ").join("-")}`,
                 state: {
                   // from: "root",
                   // name: `${title}`,

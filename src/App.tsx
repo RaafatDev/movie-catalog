@@ -35,11 +35,18 @@ const App: React.FC = () => {
 
         <Switch>
           <Route exact path="/" component={Home} />
-          <Route path="/about" component={About} />
-          <Route path="/results" component={SearchResults} />
-          <Route path="/viewall" component={ViewAll} />
+          <Route exact path="/about" component={About} />
+          <Route exact path="/results" component={SearchResults} />
+          <Route exact path="/viewall" component={ViewAll} />
           {/* <Route path="/:id" component={MovieDetails} /> */}
-          <Route path="/:id" component={MovieDetails2} />
+          <Route exact path="/movie/:id/:title" component={MovieDetails2} />
+          {/* <Route path="/search/keyword/:id" component={SearchResults} /> */}
+          <Route
+            exact
+            path="/search?keyword:keyword"
+            component={SearchResults}
+          />
+          <Route path="/" render={() => <div className="display-1">404</div>} />
           {/* <Router exact path="/" component={Home} /> */}
         </Switch>
         {/* <div className="App">

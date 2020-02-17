@@ -22,7 +22,9 @@ const Suggestion: React.FC<Props> = ({ movie }) => {
           {/* <a className="suggestions__item__info__name m-0"> */}
           <Link
             to={{
-              pathname: `/${movie.id}/${movie.title}`,
+              pathname: `/movie/${movie.id}/${movie.title
+                .split(" ")
+                .join("-")}`,
               state: {
                 // from: "root",
                 // name: `${title}`,
