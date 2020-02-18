@@ -5,11 +5,14 @@ interface Props {
     name: string;
     key: string;
     id: string;
+    type: string;
   };
   index: number;
 }
 
 const MovieVideos: React.FC<Props> = ({ video, index }) => {
+  console.log({ video, index });
+
   // let classShow = "show";
   //
   // console.log(video.key);
@@ -43,7 +46,7 @@ const MovieVideos: React.FC<Props> = ({ video, index }) => {
         data-toggle="modal"
         // data-target=".bd-example-modal-lg"
         // data-target={"#" + video.key}
-        data-target={"#" + video.key + index.toString()}
+        data-target={"#" + video.type + index.toString()}
         // data-target={"#" + video.id}
         onClick={playVideo}
       >
@@ -53,7 +56,7 @@ const MovieVideos: React.FC<Props> = ({ video, index }) => {
         // className={`modal fade bd-example-modal-lg ${classShow}`}
         className="modal fade bd-example-modal-lg"
         // id={video.key}
-        id={video.key + index.toString()}
+        id={video.type + index.toString()}
         // id={video.id}
         ref={modalRef}
         tabIndex={-1}

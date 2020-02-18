@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import Slider from "react-slick";
 import { MoviesContext } from "../../App";
-import Slid from "./Slid";
+import Slid from "./Slide";
 import { PopularMovie } from "../../model/PopularMovie";
 
 // class MainSlider extends React.Component {

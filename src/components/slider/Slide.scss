@@ -1,0 +1,37 @@
+.slide-container {
+  img {
+    width: 100%;
+    cursor: grab;
+  }
+  .slide {
+    position: relative;
+    width: 50%;
+    /* width: auto; */
+    /* border: 1px solid red; */
+    // }
+
+    &__caption {
+      bottom: 110px;
+      min-height: 80px;
+      // left: 40px;
+      position: absolute;
+      width: 100%;
+      z-index: 2;
+      // }
+      &__title {
+        display: inline-block;
+        font-weight: 400;
+        font-size: 1.86rem;
+        color: white;
+      }
+
+      &__release-date {
+        color: #fff;
+      }
+
+      &__overview {
+        color: #fff;
+      }
+    }
+  }
+}

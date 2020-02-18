@@ -50,16 +50,16 @@ const Credits: React.FC<Props> = ({ cast, actors }) => {
             return (
               <div
                 key={index}
-                className="clo col-6 col-sm-4 col-md-3 p-0 border d-flex align-items-stretch"
-                style={{ maxWidth: "180px" }}
+                className="cast-container clo col-6 col-sm-4 col-md-3 p-0 border d-flex align-items-stretch"
+                // style={{ maxWidth: "180px" }}
               >
                 <div className="cast text-center">
                   <div className="cast__img-container">
                     <img
-                      style={{
-                        width: "100%",
-                        height: "200px"
-                      }}
+                      // style={{
+                      //   width: "100%",
+                      //   height: "200px"
+                      // }}
                       src={imgSrc}
                       alt={member.name}
                     />

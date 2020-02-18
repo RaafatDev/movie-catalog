@@ -35,37 +35,44 @@
   // }
 
   .slick-dots {
+    // position: static;
+    //!
+    // ! bottom: 50px;
     bottom: 50px;
     /* // play with the number of pixels to position it as you want */
+    //!
+    // !left: 30px;
     left: 30px;
     /* background-color: blue; */
+    //!
+    //! width: auto;
     width: auto;
     /* width: 10px; */
   }
 
-  .slick-dots li button {
-    /* opacity: 0.25; */
-    border: 1px solid white;
-    box-sizing: border-box;
-    width: 17px;
-    height: 17px;
-    border-radius: 50%;
-    /* width: ; */
-  }
-  .slick-dots li button:before {
-    font-size: large;
-    width: 17px;
-    height: 17px;
-  }
-  /* !!!!!!!!!!!1 */
-  .slick-dots li button:focus:before {
-    opacity: 0.25;
-    /* opacity: 0.55; */
-  }
-  .slick-dots li.slick-active button:focus:before,
-  .slick-dots li button:hover:before {
-    opacity: 1;
-  }
+  // .slick-dots li button {
+  //   /* opacity: 0.25; */
+  //   border: 1px solid white;
+  //   box-sizing: border-box;
+  //   width: 17px;
+  //   height: 17px;
+  //   border-radius: 50%;
+  //   /* width: ; */
+  // }
+  // .slick-dots li button:before {
+  //   font-size: large;
+  //   width: 17px;
+  //   height: 17px;
+  // }
+  // /* !!!!!!!!!!!1 */
+  // .slick-dots li button:focus:before {
+  //   opacity: 0.25;
+  //   /* opacity: 0.55; */
+  // }
+  // .slick-dots li.slick-active button:focus:before,
+  // .slick-dots li button:hover:before {
+  //   opacity: 1;
+  // }
 
   //
   //
@@ -85,18 +92,19 @@
 
     &__image-container {
       width: 80%;
-      height: 80%;
+      // height: 80%;
 
       margin: auto;
       display: block;
       width: 80%;
-      height: 80%;
+      // height: 80%;
       max-height: 700px;
       max-width: 1000px;
       margin-top: 30px;
 
-      // background-color: red;
+      height: auto;
 
+      // background-color: red;
       img {
         width: 100%;
       }

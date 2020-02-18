@@ -48,8 +48,14 @@ const ImagesSlide: React.FC<Props> = ({ images: { backdrops } }) => {
     dots: true,
     infinite: true,
     initialSlide: 1,
-    // slidesToShow: 3,
+
+    // className: "center",
+    // centerMode: true,
+
+    // slidesToShow: 1,
     slidesToShow: 3,
+    // centerPadding: "60px",
+    // lazyLoad: true,
     slidesToScroll: 3,
     // autoplay: true,
     autoplay: false,
@@ -108,10 +114,7 @@ const ImagesSlide: React.FC<Props> = ({ images: { backdrops } }) => {
             >
               <span aria-hidden="true">&times;</span>
             </button>
-            <div
-              className="overlay__image-container"
-              style={{ height: "auto" }}
-            >
+            <div className="overlay__image-container">
               {/* <img src={basePosterUrl + "w1280" + backdrops[0].file_path} /> */}
               <img src={imageSrc} />
               {/* <img src={`${basePosterUrl}w1280${backdrops[0].file_path}}` /> */}

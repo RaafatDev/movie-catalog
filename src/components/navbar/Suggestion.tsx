@@ -15,7 +15,7 @@ const Suggestion: React.FC<Props> = ({ movie }) => {
         <img
           src={movie.poster_path}
           className="suggestions__item__image"
-          style={{ width: "32px", height: "50px" }}
+          // style={{ width: "32px", height: "50px" }}
         />
 
         <div className="suggestions__item__info pl-2">

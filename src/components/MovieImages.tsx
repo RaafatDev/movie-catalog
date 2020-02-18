@@ -60,8 +60,8 @@ const MovieImages: React.FC<Props> = ({ image, length, openOverlay }) => {
   // };
 
   const openModal = (e: MouseEvent<HTMLImageElement>) => {
-    console.log("modal opend ");
-    console.log({ length });
+    // console.log("modal opend ");
+    // console.log({ length });
 
     // openOverlay(event: MouseEvent);
     openOverlay(e);

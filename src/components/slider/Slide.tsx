@@ -17,14 +17,14 @@ const Slid: React.FC<MovieProps> = ({ oneMovie }) => {
     Genres
   } = oneMovie;
   return (
-    <div>
+    <div className="slide-container">
       {/* <h1>Hiiiii</h1> */}
       {/* <h1>single Movie</h1> */}
       {/* <h2>{oneMovie.title}</h2> */}
       {/* <img width="200px" src={poster_path} /> */}
       <img
         // style={{ width: "100%", height: "90vh", cursor: "grab" }}
-        style={{ width: "100%", cursor: "grab" }}
+        // style={{ width: "100%", cursor: "grab" }}
         // src={poster_path}
         src={backdrop_path}
         alt={title}

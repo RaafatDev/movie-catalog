@@ -8,3 +8,11 @@
 @import "./components/navbar/MainNav.scss";
 @import "./components/MovieVideos.scss";
 @import "./components/slider/MainSlider.scss";
+@import "./components/slider/Slide.scss";
+
+@import "./components/Credits.scss";
+@import "./components/Movie.scss";
+
+img {
+  width: 100%;
+}

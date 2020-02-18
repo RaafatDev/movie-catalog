@@ -12,8 +12,9 @@ import Home from "./pages/Home";
 import About from "./pages/About";
 import SearchResults from "./pages/SearchResults";
 // import MovieDetails from "./pages/MovieDetails";
-import MovieDetails2 from "./pages/MovieDetails2";
+import MovieDetails from "./pages/MovieDetails";
 import ViewAll from "./pages/ViewAll";
+import NotFound from "./pages/NotFound";
 
 export type StoreApi = {
   state: typeof initialState;
@@ -39,14 +40,15 @@ const App: React.FC = () => {
           <Route exact path="/results" component={SearchResults} />
           <Route exact path="/viewall" component={ViewAll} />
           {/* <Route path="/:id" component={MovieDetails} /> */}
-          <Route exact path="/movie/:id/:title" component={MovieDetails2} />
+          <Route exact path="/movie/:id/:title" component={MovieDetails} />
           {/* <Route path="/search/keyword/:id" component={SearchResults} /> */}
           <Route
             exact
             path="/search?keyword:keyword"
             component={SearchResults}
           />
-          <Route path="/" render={() => <div className="display-1">404</div>} />
+          {/* <Route path="/" render={() => <div className="display-1">404</div>} /> */}
+          <Route path="/" render={NotFound} />
           {/* <Router exact path="/" component={Home} /> */}
         </Switch>
         {/* <div className="App">
