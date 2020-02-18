@@ -30,32 +30,27 @@ const App: React.FC = () => {
   const [state, dispatch] = useReducer(movieReducer, initialState);
 
   return (
-    <MoviesContext.Provider value={{ state, dispatch } as StoreApi}>
-      <Router>
-        <MainNav />
+    <div className="app min-vh-100">
+      <MoviesContext.Provider value={{ state, dispatch } as StoreApi}>
+        <Router>
+          <MainNav />
 
-        <Switch>
-          <Route exact path="/" component={Home} />
-          <Route exact path="/about" component={About} />
-          <Route exact path="/results" component={SearchResults} />
-          <Route exact path="/viewall" component={ViewAll} />
-          {/* <Route path="/:id" component={MovieDetails} /> */}
-          <Route exact path="/movie/:id/:title" component={MovieDetails} />
-          {/* <Route path="/search/keyword/:id" component={SearchResults} /> */}
-          <Route
-            exact
-            path="/search?keyword:keyword"
-            component={SearchResults}
-          />
-          {/* <Route path="/" render={() => <div className="display-1">404</div>} /> */}
-          <Route path="/" render={NotFound} />
-          {/* <Router exact path="/" component={Home} /> */}
-        </Switch>
-        {/* <div className="App">
-          <MoviesList />
-        </div> */}
-      </Router>
-    </MoviesContext.Provider>
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route exact path="/about" component={About} />
+            <Route exact path="/results" component={SearchResults} />
+            <Route exact path="/viewall" component={ViewAll} />
+            <Route exact path="/movie/:id/:title" component={MovieDetails} />
+            <Route
+              exact
+              path="/search?keyword:keyword"
+              component={SearchResults}
+            />
+            <Route path="/" render={NotFound} />
+          </Switch>
+        </Router>
+      </MoviesContext.Provider>
+    </div>
   );
 };
 

@@ -4,3 +4,36 @@
     width: 100%;
   }
 }
+.movie-container {
+  position: relative;
+  &__info {
+    display: none;
+    background-color: rgba(0, 0, 0, 0.7);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    transition: 1s ease-in;
+  }
+
+  &:hover .movie-container__info {
+    display: block;
+    //   bottom: 2px;
+  }
+  // &:hover .movie-container__info {
+  //   width: 50px;
+  // }
+  // &__image {
+  //   width: 50px;
+  // }
+  // &__image::before {
+  //   position: absolute;
+  //   background: red;
+  //   width: 100px;
+  //   top: 0;
+  //   right: 0;
+  //   bottom: 0;
+  //   left: 0;
+  //   content: "hiiiiii";
+  // }
+}

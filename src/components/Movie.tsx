@@ -16,7 +16,7 @@ const Movie: React.FC<MovieProps> = ({ oneMovie }) => {
 
   return (
     // <div className="shadow text-center d-flex flex-column align-items-stretch">
-    <div className="movie-container shadow text-center">
+    <div className="movie-container text-center">
       <Link
         to={{
           pathname: `/movie/${id}/${title.split(" ").join("-")}`,
@@ -27,12 +27,13 @@ const Movie: React.FC<MovieProps> = ({ oneMovie }) => {
       >
         <img
           // style={{ minWidth: "200px", width: "100%" }}
+          className="movie-container__image rounded-lg"
           src={poster_path}
           alt={title + id}
         />
       </Link>
-      <div className="p-2">
-        <p className="font-weight-bold lead mb-0">{title}</p>
+      <div className="movie-container__info p-2">
+        <p className="lead mb-0">{title}</p>
         <p className="lead">({release_date}) </p>
       </div>
     </div>

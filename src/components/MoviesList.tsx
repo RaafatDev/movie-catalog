@@ -34,7 +34,8 @@ const MoviesList: React.FC = () => {
 
   return (
     // <div className="container bg-primary p-4 p-md-0 mt-4">
-    <div className="container bg-primary  mt-4">
+    // <div className="container bg-primary  mt-4">
+    <div className="movies-list-container container text-light  mt-4">
       <h1>Movies</h1>
       <div className="container">
         <div className="row">
@@ -42,7 +43,7 @@ const MoviesList: React.FC = () => {
             state.movieArr &&
             state.movieArr.slice(0, 10).map((x: PopularMovie) => (
               <div
-                className="col border m-2 p-0 d-flex align-items-stretch"
+                className="col m-2 p-0 d-flex align-items-stretch"
                 key={x.id}
               >
                 <Movie oneMovie={x} key={x.id} />
@@ -57,7 +58,7 @@ const MoviesList: React.FC = () => {
             state.tvShowArr &&
             state.tvShowArr.slice(0, 10).map((x: PopularMovie) => (
               <div
-                className="col border m-2 p-0 d-flex align-items-stretch"
+                className="col m-2 p-0 d-flex align-items-stretch"
                 key={x.id}
               >
                 <Movie oneMovie={x} key={x.id} />

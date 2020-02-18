@@ -33,7 +33,7 @@ const Slid: React.FC<MovieProps> = ({ oneMovie }) => {
       <div className="container">
         <div className="slide slide--has-caption slick-slide">
           {/* <div className="container"> */}
-          <div className="slide__caption border">
+          <div className="slide__caption">
             <Link
               to={{
                 pathname: `/movie/${id}/${title.split(" ").join("-")}`,

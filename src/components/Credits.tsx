@@ -37,10 +37,6 @@ const Credits: React.FC<Props> = ({ cast, actors }) => {
         </a>
       </div>
 
-      {/* <div>{cast.} </div> */}
-      {/* {cast.map((x: any) => { */}
-      {/* <div className="row"> */}
-      {/* <div className="container bg-danger collapse" id="collapseExample"> */}
       <div className="container">
         <div className="row collapse" id="collapseExample">
           {cast.map((member: ICast, index: number) => {
@@ -51,18 +47,10 @@ const Credits: React.FC<Props> = ({ cast, actors }) => {
               <div
                 key={index}
                 className="cast-container clo col-6 col-sm-4 col-md-3 p-0 border d-flex align-items-stretch"
-                // style={{ maxWidth: "180px" }}
               >
                 <div className="cast text-center">
                   <div className="cast__img-container">
-                    <img
-                      // style={{
-                      //   width: "100%",
-                      //   height: "200px"
-                      // }}
-                      src={imgSrc}
-                      alt={member.name}
-                    />
+                    <img src={imgSrc} alt={member.name} />
                   </div>
                   <div className="cast__character">
                     <span className="lead">{member.name} </span>

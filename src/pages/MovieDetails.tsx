@@ -3,35 +3,45 @@ import { RouteComponentProps, useHistory } from "react-router-dom";
 import { useURL } from "../hooks/useURL";
 import useCombineFetch from "../hooks/useCombineFetch";
 import Credits from "../components/Credits";
-// import MovieImages from "../components/MovieVideos";
 import ImagesSlide from "../components/ImagesSlide";
 import MovieVideos from "../components/MovieVideos";
+import BasicDetails from "./BasicDetails";
 
 interface Props extends RouteComponentProps<{ id: string }> {}
 
-const MovieDetails: React.FC<Props> = props => {
-  const id = props.match.params.id;
+const MovieDetails: React.FC<Props> = () => {
+  // const id = props.match.params.id;
   const history = useHistory<any>();
 
-  const {
-    isMovie,
-    title,
-    release_date,
-    id: movieId,
-    poster_path,
-    // backdrop_path,
-    overview,
-    Genres
-  } = JSON.parse(history.location.state.movie);
+  const movie = JSON.parse(history.location.state.movie);
 
-  const { url } = useURL(isMovie, movieId);
+  const { url } = useURL(movie.isMovie, movie.id);
 
   const [combinedFetch] = useCombineFetch(url);
 
   console.log({ combinedFetch });
 
+  // let trailers: Element;
+  let trailers: any;
+  let images: any;
+  if (combinedFetch) {
+    if (!combinedFetch?.videos || combinedFetch?.videos?.results.length === 0) {
+      trailers = <h3>No Videos Found! </h3>;
+    } else {
+      trailers = combinedFetch.videos.results.map((video, index) => (
+        <MovieVideos video={video} key={index} index={index} />
+      ));
+    }
+
+    if (!combinedFetch?.images || !combinedFetch?.images?.backdrops) {
+      images = <h3>No Images Found </h3>;
+    } else {
+      images = <ImagesSlide images={combinedFetch.images} />;
+    }
+  }
+
   return (
-    <div className="mt-5 p-5 border container-fluid">
+    <div className="movie-details-container mt-5 p-5 container-fluid">
       <div id="accordion">
         <div className="card">
           <div className="card-header" id="headingOne">
@@ -55,32 +65,16 @@ const MovieDetails: React.FC<Props> = props => {
             data-parent="#accordion"
           >
             <div className="card-body">
-              <div className="container">
-                {/* <p className="h1">Title: {title} </p> */}
-                <p className="h1">{title} </p>
-              </div>
-              {/* <BasicInfo /> */}
-              <div className="container">
+              <div className="container-fluid">
                 <div className="row">
-                  <div className="col">
-                    {/* <img className="" width="400px" src={poster_path} alt={title} /> */}
-                    <img
-                      className=""
-                      width="400px"
-                      src={poster_path}
-                      alt={title}
-                    />
-                    {/* <img className="" width="400px" src={backdrop_path} alt={title} /> */}
-                  </div>
-                  <div className="col">
-                    <p>Release Date: {release_date} </p>
-                    <p>Genres: {Genres}</p>
-                    {/* <p>id: {id}</p> */}
-                    <p>{combinedFetch.budget} </p>
-                    <p>Overview: {overview} </p>
+                  <div className="col-12  text-center border border-red">
+                    <p className="h1">{movie.title} </p>
                   </div>
                 </div>
-              </div>{" "}
+                {/* <p className="h1">Title: {title} </p> */}
+              </div>
+
+              <BasicDetails combinedFetch={combinedFetch} movie={movie} />
             </div>
           </div>
         </div>
@@ -104,34 +98,9 @@ const MovieDetails: React.FC<Props> = props => {
             aria-labelledby="headingTwo"
             data-parent="#accordion"
           >
-            {/* <div className="card-body"> */}
-            {combinedFetch && combinedFetch.images && (
-              <div>
-                {/* <MovieImages images={combinedFetch.images} /> */}
-                <ImagesSlide images={combinedFetch.images} />
-              </div>
-            )}
+            {images}
 
-            {combinedFetch &&
-            combinedFetch.videos &&
-            !combinedFetch.videos.results ? (
-              <h3>there is no Trailers to show </h3>
-            ) : (
-              <>
-                {/* {
-
-                combinedFetch.videos.results.length > 0 ? 
-                <p className="h3 mt-4">Trailers available: </p> : <h
-              } */}
-                {combinedFetch &&
-                  combinedFetch.videos &&
-                  combinedFetch.videos.results.map((video, index) => (
-                    <MovieVideos video={video} key={index} index={index} />
-                    // <MovieVideos video={video} key={video.key} />
-                  ))}
-              </>
-            )}
-            {/* </div> */}
+            {trailers}
           </div>
         </div>
         <div className="card">
@@ -155,6 +124,9 @@ const MovieDetails: React.FC<Props> = props => {
             data-parent="#accordion"
           >
             <div className="card-body">
+              {combinedFetch && combinedFetch.Actors === "N/A" && (
+                <h1>Noooooo Actors</h1>
+              )}
               {combinedFetch && combinedFetch.credits && (
                 // {combinedFetch && combinedFetch.credits && combinedFetch.credits.cast && (
                 <div className="container mt-4">

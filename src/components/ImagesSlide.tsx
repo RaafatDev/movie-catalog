@@ -85,7 +85,7 @@ const ImagesSlide: React.FC<Props> = ({ images: { backdrops } }) => {
     ]
   };
   return (
-    <div className="ImagesSlide">
+    <div className="ImagesSlide mb-4">
       <Slider {...settings}>
         {backdrops.map((image: any, index: number) => (
           <MovieImages

@@ -6,7 +6,7 @@ interface Props {}
 
 const Home: React.FC<Props> = () => {
   return (
-    <div className="mt-4 pt-3 border">
+    <div className="mt-4 pt-3">
       {/* <div className="container"> */}
       <MainSlider />
       {/* </div> */}

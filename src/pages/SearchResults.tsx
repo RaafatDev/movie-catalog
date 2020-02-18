@@ -31,14 +31,14 @@ const SearchResults: React.FC<Props> = () => {
 
   return (
     <div>
-      <div className="container bg-primary  mt-5">
+      <div className="container text-light  mt-5">
         <h1>Result for: {history.location.state.keyword} </h1>
         <div className="container">
           <div className="row">
             {movieArr &&
               movieArr.map((x: PopularMovie) => (
                 <div
-                  className="col border m-2 p-0 d-flex align-items-stretch"
+                  className="col  m-2 p-0 d-flex align-items-stretch"
                   key={x.id}
                 >
                   <Movie oneMovie={x} key={x.id} />

@@ -13,25 +13,16 @@ interface Props {
 const MovieVideos: React.FC<Props> = ({ video, index }) => {
   console.log({ video, index });
 
-  // let classShow = "show";
-  //
-  // console.log(video.key);
-  // console.log(video.id);
-
   const videoSrc = "https://www.youtube.com/embed/" + video.key;
 
   const iframeRef = useRef<any>(null);
   const modalRef = useRef<any>(null);
 
   const playVideo = () => {
-    // modalRef.current.display = "block";
-    // classShow = "show"
     iframeRef.current.src = videoSrc;
-    // console.log(modalRef.current.display);
   };
 
   const stopVideo = () => {
-    // iframeRef.current.src = "";
     iframeRef.current.src = iframeRef.current.src;
   };
 
@@ -40,29 +31,31 @@ const MovieVideos: React.FC<Props> = ({ video, index }) => {
   }, []);
   return (
     <div>
-      <button
-        type="button"
-        className="btn btn-primary mt-3"
-        data-toggle="modal"
-        // data-target=".bd-example-modal-lg"
-        // data-target={"#" + video.key}
-        data-target={"#" + video.type + index.toString()}
-        // data-target={"#" + video.id}
-        onClick={playVideo}
-      >
-        {video.name}
-      </button>
+      <div className="container">
+        <div className="row">
+          <div className="col d-flex align-items-center  border-bottom">
+            {video.name}
+          </div>
+          <div className="col d-flex align-items-center justify-content-center">
+            <button
+              type="button"
+              className="btn btn-primary"
+              data-toggle="modal"
+              data-target={"#" + video.type + index.toString()}
+              onClick={playVideo}
+            >
+              Watch Trailer
+            </button>
+          </div>
+        </div>
+      </div>
       <div
-        // className={`modal fade bd-example-modal-lg ${classShow}`}
         className="modal fade bd-example-modal-lg"
-        // id={video.key}
         id={video.type + index.toString()}
-        // id={video.id}
         ref={modalRef}
         tabIndex={-1}
         role="dialog"
         aria-labelledby="myLargeModalLabel"
-        // style={{ display: "none" }}
         aria-hidden="true"
       >
         <div className="modal-dialog modal-lg">
@@ -71,7 +64,6 @@ const MovieVideos: React.FC<Props> = ({ video, index }) => {
               <h5 className="modal-title" id="exampleModalLongTitle">
                 {video.name}
               </h5>
-              {/* Close Button !!!!! */}
               <button
                 type="button"
                 className="close"
@@ -86,7 +78,6 @@ const MovieVideos: React.FC<Props> = ({ video, index }) => {
               <iframe
                 ref={iframeRef}
                 className="embed-responsive-item"
-                // src={`https://www.youtube.com/embed/` + video.key}
                 src={""}
                 allowFullScreen
               ></iframe>
@@ -94,8 +85,6 @@ const MovieVideos: React.FC<Props> = ({ video, index }) => {
           </div>
         </div>
       </div>
-
-      {/* End Modal  */}
     </div>
   );
 };

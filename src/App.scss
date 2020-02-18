@@ -12,7 +12,17 @@
 
 @import "./components/Credits.scss";
 @import "./components/Movie.scss";
+@import "./components/MoviesList.scss";
+@import "./pages/MovieDetails.scss";
 
 img {
   width: 100%;
+}
+
+body {
+  // min-height: 100vh !important;
+}
+
+.app {
+  background-color: #1e2129;
 }
