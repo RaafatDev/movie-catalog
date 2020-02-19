@@ -47,7 +47,8 @@ const App: React.FC = () => {
               path="/search?keyword:keyword"
               component={SearchResults}
             />
-            <Route path="/" render={NotFound} />
+            {/* <Route path="/" render={NotFound} /> */}
+            <Route path="/" render={Home} />
           </Switch>
         </Router>
       </MoviesContext.Provider>
