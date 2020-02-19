@@ -1,20 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { RouteComponentProps, useHistory } from "react-router";
-import MoviesList from "../components/MoviesList";
-import Movie from "../components/Movie";
+// import MoviesList from "./movies-list/MoviesList";
+import Movie from "./movies-list/Movie";
 import { PopularMovie } from "../model/PopularMovie";
 
-interface Props extends RouteComponentProps {
-  // match: any;
-}
+interface Props extends RouteComponentProps {}
 
 const SearchResults: React.FC<Props> = () => {
-  // console.log({ match });
-  // console.log({ location });
-  // console.log({ history });
-  // console.log({ children });
   const history = useHistory<any>();
-  console.log(history.location.state);
 
   const [movieArr, setMovieArr] = useState([]);
 
@@ -23,11 +16,7 @@ const SearchResults: React.FC<Props> = () => {
     if (movieArrParsed) {
       setMovieArr(movieArrParsed);
     }
-    console.log({ movieArrParsed });
   }, [history.location.state.searchedMovies]);
-  // setMovieArr(JSON.parse(history.location.state.searchedMovies));
-  console.log({ history });
-  console.log({ movieArr });
 
   return (
     <div>

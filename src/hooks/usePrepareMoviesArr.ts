@@ -2,30 +2,18 @@ import { useState, useEffect } from "react";
 import { movieGenres } from "../model/genre";
 import { PopularMovie } from "../model/PopularMovie";
 import { basePosterUrl } from "../urls_and_keys";
-// import { movieRequestSuccess } from "../appState/movieActions";
 
-// const usePrepareMoviesArr = (rowArr: any, dispatch: any) => {
 const usePrepareMoviesArr = (rowArr: any) => {
-  // const usePrepareMoviesArr = ([]) => {
   //
   const [sortedArr, setSortedArr] = useState<any>([]);
 
-  // console.log("usePrepareMoviesArr 1");
-
-  // console.log({ rowArr });
-  // console.log({ sortedArr });
-
   const sortData = (rowArr: any) => {
-    // const sort = () => {
     let Arr: any[] = [];
 
     if (!rowArr) return;
 
     if (rowArr.length === 0) return;
 
-    // console.log({ rowArr });
-
-    // if (!rowArr.results) return;
     rowArr.results.map((movie: PopularMovie) => {
       if (!movie.genre_ids) return;
       const movie_genre = movie.genre_ids
@@ -36,7 +24,6 @@ const usePrepareMoviesArr = (rowArr: any) => {
         })
         .join(", ");
 
-      // console.log("usePrepareMoviesArr 4");
       const movieArrTwo = {
         isMovie: movie.title ? true : false,
         title: movie.title ? movie.title : movie.name,
@@ -61,13 +48,10 @@ const usePrepareMoviesArr = (rowArr: any) => {
     setSortedArr([...Arr]);
   };
   useEffect(() => {
-    // setSortedArr(rowArr);
-    // sort();
     sortData(rowArr);
   }, [rowArr]);
 
   return [sortedArr, sortData];
-  // return [sortedArr];
 };
 
 export default usePrepareMoviesArr;

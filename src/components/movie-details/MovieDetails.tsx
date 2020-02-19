@@ -1,10 +1,10 @@
-import React from "react";
+import React, { Suspense } from "react";
 import { RouteComponentProps, useHistory } from "react-router-dom";
-import { useURL } from "../hooks/useURL";
-import useCombineFetch from "../hooks/useCombineFetch";
-import Credits from "../components/Credits";
-import ImagesSlide from "../components/ImagesSlide";
-import MovieVideos from "../components/MovieVideos";
+import { useURL } from "../../hooks/useURL";
+import useCombineFetch from "../../hooks/useCombineFetch";
+import Credits from "./Credits";
+import ImagesSlide from "./ImagesSlide";
+import MovieVideos from "./MovieVideos";
 import BasicDetails from "./BasicDetails";
 
 interface Props extends RouteComponentProps<{ id: string }> {}
@@ -68,7 +68,7 @@ const MovieDetails: React.FC<Props> = () => {
               <div className="container-fluid">
                 <div className="row">
                   <div className="col-12  text-center border border-red">
-                    <p className="h1">{movie.title} </p>
+                    <p className="h1 my-3">{movie.title} </p>
                   </div>
                 </div>
                 {/* <p className="h1">Title: {title} </p> */}

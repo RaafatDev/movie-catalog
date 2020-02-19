@@ -4,16 +4,16 @@ import {
   movieRequestSuccess,
   movieRequestFailure,
   tvShowRequestSuccess
-} from "../appState/movieActions";
-import { MoviesContext } from "../App";
-import { PopularMovie } from "../model/PopularMovie";
+} from "../../appState/movieActions";
+import { MoviesContext } from "../../App";
+import { PopularMovie } from "../../model/PopularMovie";
 
 import Movie from "./Movie";
 
-import { popular_tv_url, popular_url } from "../urls_and_keys";
+import { popular_tv_url, popular_url } from "../../urls_and_keys";
 
-import usePrepareMoviesArr from "../hooks/usePrepareMoviesArr";
-import { useFetch } from "../hooks/useFetch";
+import usePrepareMoviesArr from "../../hooks/usePrepareMoviesArr";
+import { useFetch } from "../../hooks/useFetch";
 
 const MoviesList: React.FC = () => {
   //!
@@ -30,7 +30,7 @@ const MoviesList: React.FC = () => {
     if (sortedMoviesArr) dispatch(movieRequestSuccess(sortedMoviesArr));
     if (error) dispatch(movieRequestFailure);
   }, [sortedMoviesArr, sortedTvShowsArr]);
-  console.log({ state });
+  // console.log({ state });
 
   return (
     // <div className="container bg-primary p-4 p-md-0 mt-4">

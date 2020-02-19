@@ -12,24 +12,16 @@ const Suggestion: React.FC<Props> = ({ movie }) => {
         className="suggestions__item d-flex border bg-white"
         key={movie.index}
       >
-        <img
-          src={movie.poster_path}
-          className="suggestions__item__image"
-          // style={{ width: "32px", height: "50px" }}
-        />
+        <img src={movie.poster_path} className="suggestions__item__image" />
 
         <div className="suggestions__item__info pl-2">
-          {/* <a className="suggestions__item__info__name m-0"> */}
           <Link
             to={{
               pathname: `/movie/${movie.id}/${movie.title
                 .split(" ")
                 .join("-")}`,
               state: {
-                // from: "root",
-                // name: `${title}`,
                 movie: JSON.stringify(movie)
-                // detail: oneMovie
               }
             }}
           >
@@ -37,7 +29,6 @@ const Suggestion: React.FC<Props> = ({ movie }) => {
               {movie.title}
             </p>
           </Link>
-          {/* </a> */}
           <p className="suggestions__item__info__year m-0 text-muted">
             Release: {movie.release_date}
           </p>

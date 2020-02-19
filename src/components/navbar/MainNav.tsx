@@ -1,8 +1,6 @@
 import React, { useState, useEffect, useLayoutEffect } from "react";
 import { Link } from "react-router-dom";
-// import { useFetch } from "../../hooks/useFetch";
-// import useDebounce from "../../hooks/draft/useDebounce";
-// import usePrepareMoviesArr from "../../hooks/usePrepareMoviesArr";
+
 import Suggestion from "./Suggestion";
 import useDebouncedSearch from "../../hooks/useDebouncedSearch";
 
@@ -13,7 +11,6 @@ const MainNav: React.FC<Props> = () => {
   const [showSuggestions, setShowSuggestions] = useState(false);
   const searchRef = React.useRef<any>(null);
   const sortedArr = useDebouncedSearch(searchTerm, 500);
-  // const sortedArr = useDebouncedSearch(searchTerm, 700);
 
   function handleClick(e: any) {
     const clickedElement = e.target;
@@ -33,18 +30,15 @@ const MainNav: React.FC<Props> = () => {
     }
 
     if (clickedButton) {
-      // console.log("button clicked !!!!!!!");
       setShowSuggestions(false);
       searchRef.current.value = "";
     }
 
     if (!clickedSearchBox && !clickedSuggestions) {
-      console.log("nothing important was clicked ");
       setShowSuggestions(false);
-
-      // return;
     }
   }
+
   useEffect(() => {
     window.addEventListener("click", handleClick);
 
@@ -80,7 +74,6 @@ const MainNav: React.FC<Props> = () => {
             </li>
           </ul>
           <form className="form-inline my-2 my-md-0 search-form form-group">
-            {/* <div> */}
             <input
               ref={searchRef}
               onChange={e => {
@@ -102,13 +95,11 @@ const MainNav: React.FC<Props> = () => {
             >
               {showSuggestions &&
                 sortedArr &&
-                sortedArr.slice(0, 5).map((movie: any, index: number) => (
-                  <Suggestion
-                    movie={movie}
-                    key={index}
-                    // setShowSuggestions={setShowSuggestions}
-                  />
-                ))}
+                sortedArr
+                  .slice(0, 5)
+                  .map((movie: any, index: number) => (
+                    <Suggestion movie={movie} key={index} />
+                  ))}
 
               {showSuggestions && sortedArr.length !== 0 && (
                 <Link
@@ -122,14 +113,12 @@ const MainNav: React.FC<Props> = () => {
                     }
                   }}
                 >
-                  {/* <Link to={`/search?keyword=${searchRef.current.value}`}> */}
                   <button className="suggestions__button btn btn-primary btn-block border">
                     View All
                   </button>
                 </Link>
               )}
             </div>
-            {/* </div> */}
           </form>
         </div>
       </div>

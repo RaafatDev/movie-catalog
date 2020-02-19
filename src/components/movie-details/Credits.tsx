@@ -1,7 +1,6 @@
 import React from "react";
-// import no_image from ""
 
-import { baseActorFaceUrl } from "../urls_and_keys";
+// import { baseActorFaceUrl } from "../urls_and_keys";
 
 interface ICast {
   character: string;
@@ -14,9 +13,6 @@ interface Props {
 }
 
 const Credits: React.FC<Props> = ({ cast, actors }) => {
-  //   console.log({ props });
-
-  // const test = "https://image.tmdb.org/t/p/original";
   return (
     <div>
       <div>
@@ -24,9 +20,7 @@ const Credits: React.FC<Props> = ({ cast, actors }) => {
         <span className="h3">The Cast: </span>
         {actors} ....
         <a
-          // className="btn btn-primary btn-sm"
           className="link alert-link text-primary"
-          // className=" stretched-link"
           type="button"
           data-toggle="collapse"
           data-target="#collapseExample"

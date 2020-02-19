@@ -6,8 +6,17 @@ export interface ICombined {
   // overview: string;
   // credits: { cast: any[] };
   credits: { cast: any[] };
-  Actors: string;
-  budget: string;
+  budget: number;
   videos: { results: any[] };
   images: { backdrops: any[]; posters: any[] };
+  //
+  Genre: string;
+  Director: string;
+  Writer: string;
+  Actors: string;
+  Country: string;
+  Awards: string;
+  Ratings: { Source: string; Value: string }[];
+  imdbRating: string;
+  Production: string;
 }

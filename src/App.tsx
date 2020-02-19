@@ -8,13 +8,13 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.scss";
 // import MoviesList from "./components/MoviesList";
 import MainNav from "./components/navbar/MainNav";
-import Home from "./pages/Home";
-import About from "./pages/About";
-import SearchResults from "./pages/SearchResults";
+import Home from "./components/Home";
+import About from "./components/About";
+import SearchResults from "./components/SearchResults";
 // import MovieDetails from "./pages/MovieDetails";
-import MovieDetails from "./pages/MovieDetails";
-import ViewAll from "./pages/ViewAll";
-import NotFound from "./pages/NotFound";
+import MovieDetails from "./components/movie-details/MovieDetails";
+import ViewAll from "./components/ViewAll";
+import NotFound from "./components/NotFound";
 
 export type StoreApi = {
   state: typeof initialState;
@@ -30,8 +30,8 @@ const App: React.FC = () => {
   const [state, dispatch] = useReducer(movieReducer, initialState);
 
   return (
-    // <div className="app min-vh-100">
-    <div className="app ">
+    <div className="app min-vh-100">
+      {/* <div className="app "> */}
       <MoviesContext.Provider value={{ state, dispatch } as StoreApi}>
         <Router>
           <MainNav />

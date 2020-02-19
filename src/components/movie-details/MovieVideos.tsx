@@ -11,8 +11,6 @@ interface Props {
 }
 
 const MovieVideos: React.FC<Props> = ({ video, index }) => {
-  console.log({ video, index });
-
   const videoSrc = "https://www.youtube.com/embed/" + video.key;
 
   const iframeRef = useRef<any>(null);
@@ -36,7 +34,7 @@ const MovieVideos: React.FC<Props> = ({ video, index }) => {
           <div className="col d-flex align-items-center  border-bottom">
             {video.name}
           </div>
-          <div className="col d-flex align-items-center justify-content-center">
+          <div className="col d-flex align-items-center justify-content-center p-1">
             <button
               type="button"
               className="btn btn-primary"
