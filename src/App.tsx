@@ -33,7 +33,7 @@ const App: React.FC = () => {
     <div className="app min-vh-100">
       {/* <div className="app "> */}
       <MoviesContext.Provider value={{ state, dispatch } as StoreApi}>
-        <Router>
+        <Router basename="/movie-catalog">
           <MainNav />
 
           <Switch>
@@ -47,8 +47,7 @@ const App: React.FC = () => {
               path="/search?keyword:keyword"
               component={SearchResults}
             />
-            {/* <Route path="/" render={NotFound} /> */}
-            <Route path="/" render={Home} />
+            <Route path="/" render={NotFound} />
           </Switch>
         </Router>
       </MoviesContext.Provider>
