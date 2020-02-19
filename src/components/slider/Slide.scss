@@ -5,12 +5,14 @@
   }
   .slide {
     position: relative;
+    background-color: coral;
     width: 50%;
     /* width: auto; */
     /* border: 1px solid red; */
     // }
 
     &__caption {
+      // background-color: darkblue;
       bottom: 110px;
       min-height: 80px;
       // left: 40px;
@@ -35,3 +37,7 @@
     }
   }
 }
+
+// .slick-slider {
+//   background-color: blueviolet;
+// }

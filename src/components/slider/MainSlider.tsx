@@ -79,6 +79,7 @@ const MainSlider: React.FC = () => {
   };
   return (
     <div className="main-slider container">
+      {/* <div className="main-slider "> */}
       {/* <div className="main-slider" ref={mainSliderRef}> */}
       {/* <Slider {...settings} ref={mainSliderRef}> */}
       <Slider {...settings}>
@@ -87,9 +88,13 @@ const MainSlider: React.FC = () => {
         {state.movieArr &&
           state.movieArr[0] &&
           state.movieArr[0].poster_path &&
-          state.movieArr.map((x: PopularMovie) => (
-            <Slid oneMovie={x} key={x.id} />
-          ))}
+          state.movieArr.map(
+            (x: PopularMovie) =>
+              x.backdrop_path !== "/img/no_image.png" && (
+                <Slid oneMovie={x} key={x.id} />
+              )
+            // <div>1</div>
+          )}
       </Slider>
     </div>
   );

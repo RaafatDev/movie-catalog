@@ -8,7 +8,7 @@ interface MovieProps {
 const Slid: React.FC<MovieProps> = ({ oneMovie }) => {
   // const { id, overview, poster_path, title, release_date } = oneMovie;
   const {
-    poster_path,
+    // poster_path,
     title,
     backdrop_path,
     id,
@@ -16,12 +16,16 @@ const Slid: React.FC<MovieProps> = ({ oneMovie }) => {
     release_date,
     Genres
   } = oneMovie;
+  console.log({ title });
+
+  console.log({ backdrop_path });
   return (
     <div className="slide-container">
       {/* <h1>Hiiiii</h1> */}
       {/* <h1>single Movie</h1> */}
       {/* <h2>{oneMovie.title}</h2> */}
       {/* <img width="200px" src={poster_path} /> */}
+      {/* <div></div> */}
       <img
         // style={{ width: "100%", height: "90vh", cursor: "grab" }}
         // style={{ width: "100%", cursor: "grab" }}

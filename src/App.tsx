@@ -30,7 +30,8 @@ const App: React.FC = () => {
   const [state, dispatch] = useReducer(movieReducer, initialState);
 
   return (
-    <div className="app min-vh-100">
+    // <div className="app min-vh-100">
+    <div className="app ">
       <MoviesContext.Provider value={{ state, dispatch } as StoreApi}>
         <Router>
           <MainNav />
