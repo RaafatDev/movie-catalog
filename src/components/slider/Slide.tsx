@@ -25,9 +25,13 @@ const Slid: React.FC<MovieProps> = ({ oneMovie }) => {
             </Link>
             <ul className="list-inline">
               <li className="slide__caption__release-date list-inline-item">
-                Release date: {release_date}
+                <span>Release date: </span>
+                {release_date}
               </li>
-              <li className="list-inline-item text-white">Genres: {Genres}</li>
+              <li className="slide__caption__genres list-inline-item">
+                <span>Genres: </span>
+                {Genres}
+              </li>
             </ul>
             <p className="slide__caption__overview d-none d-md-block">
               {overview}{" "}

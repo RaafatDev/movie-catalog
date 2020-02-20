@@ -34,8 +34,12 @@ const Credits: React.FC<Props> = ({ cast, actors }) => {
       <div className="container">
         <div className="row collapse" id="collapseExample">
           {cast.map((member: ICast, index: number) => {
+            console.log(member.profile_path);
+
             const imgSrc = member.profile_path
-              ? `https://image.tmdb.org/t/p/original${member.profile_path}`
+              ? // ? `https://image.tmdb.org/t/p/original${member.profile_path}`
+                // `https://image.tmdb.org/t/p/w92/${member.profile_path}`
+                `https://image.tmdb.org/t/p/w185/${member.profile_path}`
               : `${process.env.PUBLIC_URL}/img/no_image.png`;
             return (
               <div

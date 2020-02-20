@@ -33,10 +33,12 @@ const usePrepareMoviesArr = (rowArr: any) => {
         // imdbID: movie.id,
         id: JSON.stringify(movie.id),
         poster_path: movie.poster_path
-          ? `${basePosterUrl}w1280${movie.poster_path}`
+          ? // ? `${basePosterUrl}w1280${movie.poster_path}`
+            `${basePosterUrl}w300${movie.poster_path}`
           : `${process.env.PUBLIC_URL}/img/no_image.png`,
         backdrop_path: movie.backdrop_path
-          ? `${basePosterUrl}w1280${movie.backdrop_path}`
+          ? // ? `${basePosterUrl}w1280${movie.backdrop_path}`
+            `${basePosterUrl}w780${movie.backdrop_path}`
           : `${process.env.PUBLIC_URL}/img/no_image.png`,
         overview: movie.overview,
         genre_ids: movie.genre_ids,

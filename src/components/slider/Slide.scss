@@ -1,12 +1,31 @@
 .slide-container {
+  position: relative;
+  &::before {
+    content: "";
+    // width: 100%;
+    // height: 50vh;
+    position: absolute;
+    // z-index: 100000;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    // color: white;
+    background-color: rgba(0, 0, 0, 0.3);
+  }
   img {
     width: 100%;
     cursor: grab;
   }
   .slide {
     position: relative;
-    background-color: coral;
+    // background-color: coral;
     width: 50%;
+
+    $breakpoint-1: 1160px;
+    @media (max-width: $breakpoint-1) {
+      width: 80%;
+    }
     /* width: auto; */
     /* border: 1px solid red; */
     // }
@@ -22,17 +41,34 @@
       // }
       &__title {
         display: inline-block;
-        font-weight: 400;
+        font-weight: 300;
         font-size: 1.86rem;
-        color: white;
+        color: #fff;
+        &:hover {
+          color: #ccc;
+        }
       }
 
-      &__release-date {
+      &__release-date,
+      &__genres {
         color: #fff;
+        font-size: 0.9rem;
+        span {
+          color: #ddd;
+        }
       }
+
+      // &__genres {
+      //   span {
+      //     color: #ddd;
+      //   }
+      //   color: #fff;
+      //   font-size: 0.9rem;
+      // }
 
       &__overview {
-        color: #fff;
+        color: #ddd;
+        font-size: 13px;
       }
     }
   }
