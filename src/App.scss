@@ -15,8 +15,10 @@
 
 @import "./components/movies-list/Movie.scss";
 @import "./components/movies-list/MoviesList.scss";
-// @import "./pages/MovieDetails.scss";
 
+@import "./components/About.scss";
+
+// @import "./pages/MovieDetails.scss";
 img {
   width: 100%;
 }

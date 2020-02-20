@@ -40,8 +40,8 @@ const MainSlider: React.FC = () => {
     initialSlide: 1,
     // slidesToShow: 3,
     // slidesToScroll: 3
-    // autoplay: true,
-    autoplay: false,
+    autoplay: true,
+    // autoplay: false,
     arrows: false,
     // speed: 2000,
     autoplaySpeed: 2000,

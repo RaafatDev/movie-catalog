@@ -100,6 +100,13 @@ const MovieDetails: React.FC<Props> = () => {
           >
             {images}
 
+            {// combinedFetch &&
+            // combinedFetch.videos &&
+            combinedFetch?.videos?.results && (
+              <div className="container">
+                <p className="trailer-available">Available Trailers:</p>{" "}
+              </div>
+            )}
             {trailers}
           </div>
         </div>
@@ -124,9 +131,10 @@ const MovieDetails: React.FC<Props> = () => {
             data-parent="#accordion"
           >
             <div className="card-body">
-              {combinedFetch && combinedFetch.Actors === "N/A" && (
-                <h1>Noooooo Actors</h1>
+              {combinedFetch && Object.keys(combinedFetch).length === 0 && (
+                <h1>No Actors Found</h1>
               )}
+              {combinedFetch.Actors === "N/A" && <h1>No Actors Found</h1>}
               {combinedFetch && combinedFetch.credits && (
                 // {combinedFetch && combinedFetch.credits && combinedFetch.credits.cast && (
                 <div className="container mt-4">

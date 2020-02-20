@@ -11,6 +11,8 @@ interface Props {
 }
 
 const MovieVideos: React.FC<Props> = ({ video, index }) => {
+  console.log({ video });
+
   const videoSrc = "https://www.youtube.com/embed/" + video.key;
 
   const iframeRef = useRef<any>(null);
@@ -39,7 +41,7 @@ const MovieVideos: React.FC<Props> = ({ video, index }) => {
               type="button"
               className="btn btn-primary"
               data-toggle="modal"
-              data-target={"#" + video.type + index.toString()}
+              data-target={"#" + "trailer" + index.toString()}
               onClick={playVideo}
             >
               Watch Trailer
@@ -49,7 +51,7 @@ const MovieVideos: React.FC<Props> = ({ video, index }) => {
       </div>
       <div
         className="modal fade bd-example-modal-lg"
-        id={video.type + index.toString()}
+        id={"trailer" + index.toString()}
         ref={modalRef}
         tabIndex={-1}
         role="dialog"

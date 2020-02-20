@@ -50,9 +50,24 @@ const ImagesSlide: React.FC<Props> = ({ images: { backdrops } }) => {
       {
         breakpoint: 768,
         settings: {
+          className: "center",
+          centerMode: true,
           dots: false,
           arrows: false,
           slidesToShow: 2,
+          infinite: true,
+          slidesToScroll: 1,
+          swipeToSlide: true
+        }
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          dots: false,
+          className: "center",
+          centerMode: true,
+          arrows: false,
+          slidesToShow: 1,
           infinite: true,
           slidesToScroll: 1,
           swipeToSlide: true
