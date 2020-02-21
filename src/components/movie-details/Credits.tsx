@@ -13,13 +13,46 @@ interface Props {
 }
 
 const Credits: React.FC<Props> = ({ cast, actors }) => {
+  // const cast2 = undefined;
   return (
     <div>
       <div>
-        {" "}
-        <span className="h3">The Cast: </span>
-        {actors} ....
-        <a
+        {cast && cast.length === 0 && actors && (
+          <>
+            <span className="h3">The Cast: </span> {actors}
+          </>
+        )}
+        <div className="container">
+          <div className="row">
+            {cast.map((member: ICast, index: number) => {
+              const imgSrc = member.profile_path
+                ? // ? `https://image.tmdb.org/t/p/original${member.profile_path}`
+                  // `https://image.tmdb.org/t/p/w92/${member.profile_path}`
+                  `https://image.tmdb.org/t/p/w185/${member.profile_path}`
+                : `${process.env.PUBLIC_URL}/img/no_image.png`;
+              return (
+                <div
+                  key={index}
+                  className="cast-container clo col-6 col-sm-4 col-md-3 p-0 border d-flex align-items-stretch"
+                >
+                  <div className="cast text-center">
+                    <div className="cast__img-container">
+                      <img src={imgSrc} alt={member.name} />
+                    </div>
+                    <div className="cast__character">
+                      <span className="lead">{member.name} </span>
+                      <br />
+                      <span className="">{member.character} </span>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>{" "}
+        {/* <span className="h3">The Cast: </span>
+        {actors} .... */}
+        {/* <a
           className="link alert-link text-primary"
           type="button"
           data-toggle="collapse"
@@ -28,10 +61,10 @@ const Credits: React.FC<Props> = ({ cast, actors }) => {
           aria-controls="collapseExample"
         >
           View All Cast
-        </a>
+        </a> */}
       </div>
 
-      <div className="container">
+      {/* <div className="container">
         <div className="row collapse" id="collapseExample">
           {cast.map((member: ICast, index: number) => {
             const imgSrc = member.profile_path
@@ -58,7 +91,7 @@ const Credits: React.FC<Props> = ({ cast, actors }) => {
             );
           })}
         </div>
-      </div>
+      </div> */}
     </div>
     // </div>
   );

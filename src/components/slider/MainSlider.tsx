@@ -12,29 +12,12 @@ const MainSlider: React.FC = () => {
   //! $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$4
 
   var settings = {
-    // dotsClass: "{top: -45px}",
-    // dotsClass: "inside-dots, inside-dots > li",
-    // customPaging: function(i: any) {
-    //   return (
-    //     <div className="test1">
-    //       <a>
-    //         {/* <img src={`${baseUrl}/abstract0${i + 1}.jpg`} /> */}
-    //         <div>Hii</div>
-    //       </a>
-    //     </div>
-    //   );
-    // },
     // dots: true,
     // infinite: true,
     // speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
     dots: true,
-    // customPaging: function() {
-    //   // return <a>{state.movieArr}</a>;
-    //   return <div>{state.movieArr[0].title}</div>;
-    // },
-    // // dots: false,
     infinite: true,
     // speed: 500,
     initialSlide: 1,
@@ -79,12 +62,7 @@ const MainSlider: React.FC = () => {
   };
   return (
     <div className="main-slider container">
-      {/* <div className="main-slider "> */}
-      {/* <div className="main-slider" ref={mainSliderRef}> */}
-      {/* <Slider {...settings} ref={mainSliderRef}> */}
       <Slider {...settings}>
-        {/* {state && <h1>{state.error} </h1>} */}
-        {/* {contextTest.state.error && <h1>something went wrong</h1>} */}
         {state.movieArr &&
           state.movieArr[0] &&
           state.movieArr[0].poster_path &&
@@ -93,7 +71,6 @@ const MainSlider: React.FC = () => {
               x.backdrop_path !== "/img/no_image.png" && (
                 <Slid oneMovie={x} key={x.id} />
               )
-            // <div>1</div>
           )}
       </Slider>
     </div>

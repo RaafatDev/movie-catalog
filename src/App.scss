@@ -4,6 +4,16 @@
 @import "~slick-carousel/slick/slick.css";
 @import "~slick-carousel/slick/slick-theme.css";
 
+// $dot-color: white;
+$dot-color: #fff;
+
+$extra-extra-small-size: 360px;
+$extra-small-size: 475px;
+$small-size: 575px;
+$medium-size: 767px;
+$large-size: 991px;
+$extra-large-size: 1199px;
+
 @import "./components/movie-details/MovieDetails.scss";
 @import "./components/movie-details/ImagesSlide.scss";
 @import "./components/movie-details/MovieVideos.scss";
@@ -25,4 +35,5 @@ img {
 
 .app {
   background-color: #1e2129;
+  margin-top: 55px;
 }

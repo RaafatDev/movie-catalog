@@ -38,32 +38,75 @@ const BasicDetails: React.FC<Props> = ({
   }
 
   return (
-    <div>
-      <div className="container-fluid">
+    <div className="basic-info-container">
+      <div className="container-fluid basic-info">
         <div className="row">
-          <div className="col-12 col-md-5 text-center">
+          <div className="col-12 col-md-5 pt-4 text-center">
             <img className="basic-info__image" src={poster_path} alt={title} />
           </div>
           <div className="col mt-3 mt-md-0 pt-4">
-            {release_date && <p>Release Date: {release_date} </p>}
+            {release_date && (
+              <>
+                <span>Release Date:</span> {release_date}
+                <br />
+              </>
+            )}
 
-            {Genre && Genre !== "N/A" && <p>Genres: {Genre}</p>}
+            {Genre && Genre !== "N/A" && (
+              <>
+                {" "}
+                <span>Genres:</span> {Genre}
+                <br />
+              </>
+            )}
 
             {budget && budget !== 0 && (
-              <p>Budget: {new Intl.NumberFormat().format(budget)} </p>
+              <>
+                <span>Budget:</span> {new Intl.NumberFormat().format(budget)}{" "}
+                <br />
+              </>
             )}
-            {Director && Director !== "N/A" && <p>Director: {Director} </p>}
-            {Writer && Writer !== "N/A" && <p>Writer: {Writer} </p>}
-            {Country && Country !== "N/A" && <p>Country: {Country} </p>}
-            {Awards && Awards !== "N/A" && <p>Awards: {Awards} </p>}
+            {Director && Director !== "N/A" && (
+              <>
+                <span>Director:</span> {Director} <br />
+              </>
+            )}
+            {Writer && Writer !== "N/A" && (
+              <>
+                <span>Writer:</span> {Writer} <br />
+              </>
+            )}
+            {Country && Country !== "N/A" && (
+              <>
+                <span>Country:</span> {Country} <br />
+              </>
+            )}
+            {Awards && Awards !== "N/A" && (
+              <>
+                <span>Awards:</span> {Awards} <br />
+              </>
+            )}
             {Production && Production !== "N/A" && (
-              <p>Production: {Production} </p>
+              <>
+                <span>Production:</span> {Production} <br />
+              </>
             )}
-            {imdbRating && imdbRating !== "N/A" && <p>IMDB: {imdbRating} </p>}
+            {imdbRating && imdbRating !== "N/A" && (
+              <>
+                <span>IMDB: </span>
+                {imdbRating} <br />
+              </>
+            )}
             {RottenTomato !== "" && RottenTomato !== "N/A" && (
-              <p>Rotten Tomatoes: {RottenTomato} </p>
+              <p>
+                <span>Rotten Tomatoes:</span> {RottenTomato}{" "}
+              </p>
             )}
-            {overview && <p>Overview: {overview} </p>}
+            {overview && (
+              <p>
+                <span>Overview:</span> {overview}{" "}
+              </p>
+            )}
           </div>
         </div>
       </div>

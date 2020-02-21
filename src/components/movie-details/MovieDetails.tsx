@@ -41,7 +41,11 @@ const MovieDetails: React.FC<Props> = () => {
   }
 
   return (
-    <div className="movie-details-container mt-5 p-5 container-fluid">
+    <div
+      // style={{ width: "100% !important" }}
+      // className="movie-details-container mt-5 p-5 container-fluid"
+      className="movie-details-container mt-sm-5 px-sm-5 pb-5"
+    >
       <div id="accordion">
         <div className="card">
           <div className="card-header" id="headingOne">
@@ -68,7 +72,9 @@ const MovieDetails: React.FC<Props> = () => {
               <div className="container-fluid">
                 <div className="row">
                   <div className="col-12  text-center border border-red">
-                    <p className="h1 my-3">{movie.title} </p>
+                    <p className="h1 my-3 movie-detail__title">
+                      {movie.title}{" "}
+                    </p>
                   </div>
                 </div>
                 {/* <p className="h1">Title: {title} </p> */}

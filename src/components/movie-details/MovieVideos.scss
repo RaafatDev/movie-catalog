@@ -1,6 +1,9 @@
-// * {
-//   border: 1px solid red;
-// }
+.trailer-button {
+  @media (max-width: $small-size) {
+    width: 100%;
+    display: block;
+  }
+}
 .modal-dialog {
   // width: 90%;
   width: auto;
@@ -20,15 +23,3 @@
     }
   }
 }
-// #collapseCast a:not(.collapsed):after {
-//   content: "- Show Less";
-// }
-// #collapseExample {
-//   margin: -40px;
-// }
-/* .test1 { */
-/* min-height: 80px; */
-/* position: absolute; */
-/* bottom: 100; */
-/* left: 0; */
-/* width: 100%; */

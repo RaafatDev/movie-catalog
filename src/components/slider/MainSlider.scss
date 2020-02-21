@@ -1,12 +1,5 @@
-/* d */
-/* begin caption  */
-// .main-slider{
-
-// }
-
 .main-slider {
   .slick-list {
-    // width: 100vw !important;
     width: 100vw;
     max-width: 100vw;
     position: relative;
@@ -14,9 +7,7 @@
     right: 50%;
     margin-left: -50vw;
     margin-right: -50vw;
-    // position: absolute;
     overflow: hidden;
-    // margin-left: ;
   }
 
   img {
@@ -24,73 +15,57 @@
     // max-width: 90%;
   }
 }
-/* .slide__caption__title */
-/* end caption  */
+
 .slick-dots {
-  //! bottom: 100px;
   bottom: 100px;
-  /* // play with the number of pixels to position it as you want */
-  //! left: 30px;
-  // left: 30px;
-  /* background-color: blue; */
-  //! width: auto;
   width: auto;
 
+  @media (max-width: $medium-size) {
+    bottom: 25px;
+  }
+
+  //* the size of the dots !!!!!
   li {
     margin: 0 5px;
-    width: 10px;
+    width: 5px;
     height: 10px;
+
+    @media (max-width: $extra-extra-small-size) {
+      width: 1px;
+    }
   }
 }
-//!!!!!!!!!!!!!!!!!!!!!!!!!
-//!!!!!!!!!!!!!!!!!!!!!!!!!
-$dot-color: white;
-// $dot-color: blue;
-.slick-dots li button {
-  /* opacity: 0.25; */
-  // border: 1px solid white;
-  border: 1px solid $dot-color;
-  box-sizing: border-box;
-  // width: 17px;
-  width: 10px;
-  // height: 17px;
-  height: 10px;
-  border-radius: 50%;
-  /* width: ; */
+
+.slick-dots li button:focus:before {
+  opacity: 0.3;
 }
+//!
+.slick-dots li button {
+  box-sizing: border-box;
+
+  width: 10px;
+}
+
+//!  the dots
+.slick-dots li button:before {
+  font-size: 12px;
+
+  color: $dot-color;
+
+  @media (max-width: $small-size) {
+    font-size: 8px;
+    margin: 0;
+    padding: 0;
+    width: 10px;
+  }
+}
+
 .slick-dots li.slick-active button:before {
   color: $dot-color;
   opacity: 1;
 }
-.slick-dots li button:before {
-  // font-size: large;
-  font-size: 10px;
-
-  top: -3px;
-  left: 0.5px;
-  color: $dot-color;
-  // border: 1px solid white;
-  // color: red;
-  // width: 17px;
-  width: 10px;
-  // height: 17px;
-  height: 10px;
-}
-/* !!!!!!!!!!!1 */
-.slick-dots li button:focus:before {
-  // opacity: 0.25;
-  opacity: 0.3;
-  // color: white;
-  // opacity: 1;
-  /* opacity: 0.55; */
-}
 
 .slick-dots li.slick-active button:focus:before,
 .slick-dots li button:hover:before {
-  // opacity: 1;
   opacity: 0.75;
-  // opacity: 0.6;
-  color: $dot-color;
 }
-
-//!!!!!!!!!!!!!!!!!!!!!!!!!

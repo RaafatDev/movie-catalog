@@ -43,7 +43,7 @@ const MoviesList: React.FC = () => {
             state.movieArr &&
             state.movieArr.slice(0, 10).map((x: PopularMovie) => (
               <div
-                className="col m-2 p-0 d-flex align-items-stretch"
+                className="col m-2 p-0 d-flex justify-content-center align-items-stretch"
                 key={x.id}
               >
                 <Movie oneMovie={x} key={x.id} />
@@ -58,7 +58,7 @@ const MoviesList: React.FC = () => {
             state.tvShowArr &&
             state.tvShowArr.slice(0, 10).map((x: PopularMovie) => (
               <div
-                className="col m-2 p-0 d-flex align-items-stretch"
+                className="col m-2 p-0 d-flex justify-content-center align-items-stretch"
                 key={x.id}
               >
                 <Movie oneMovie={x} key={x.id} />

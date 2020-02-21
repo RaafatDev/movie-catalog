@@ -20,7 +20,7 @@ const SearchResults: React.FC<Props> = () => {
 
   return (
     <div>
-      <div className="container text-light  mt-5">
+      <div className="container text-light mt-5">
         <h1>Result for: {history.location.state.keyword} </h1>
         <div className="container">
           <div className="row">
