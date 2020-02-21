@@ -44,7 +44,8 @@ const MovieDetails: React.FC<Props> = () => {
     <div
       // style={{ width: "100% !important" }}
       // className="movie-details-container mt-5 p-5 container-fluid"
-      className="movie-details-container mt-sm-5 px-sm-5 pb-5"
+      // className="movie-details-container mt-sm-5 px-sm-5 pb-5"
+      className="movie-details-container  px-sm-5 pb-5"
     >
       <div id="accordion">
         <div className="card">

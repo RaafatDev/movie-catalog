@@ -3,6 +3,7 @@ import React, { useReducer } from "react";
 import { movieReducer, initialState } from "./appState/movieReducer";
 import { Actions } from "./appState/movieActions";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import ScrollToTop from "./ScrollTop";
 // import MainSlider from "./components/slider/MainSlider";
 
 import "./App.scss";
@@ -34,8 +35,8 @@ const App: React.FC = () => {
       {/* <div className="app "> */}
       <MoviesContext.Provider value={{ state, dispatch } as StoreApi}>
         <Router basename="/movie-catalog">
+          <ScrollToTop />
           <MainNav />
-
           <Switch>
             <Route exact path="/" component={Home} />
             <Route exact path="/about" component={About} />
