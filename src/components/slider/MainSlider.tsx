@@ -27,7 +27,7 @@ const MainSlider: React.FC = () => {
     // autoplay: false,
     arrows: false,
     // speed: 2000,
-    autoplaySpeed: 2000,
+    autoplaySpeed: 5000,
     // autoplaySpeed: 1500
     // cssEase: "linear"
     pauseOnHover: false
