@@ -22,6 +22,9 @@ const BasicDetails: React.FC<Props> = ({
     Production
   }
 }) => {
+  let budgetFormat = budget
+    ? new Intl.NumberFormat().format(budget)
+    : undefined;
   let RottenTomato: string = "";
 
   // console.log({ Ratings });
@@ -36,6 +39,10 @@ const BasicDetails: React.FC<Props> = ({
       }
     });
   }
+
+  console.log("budgggggggggggggggget");
+
+  console.log({ budget });
 
   return (
     <div className="basic-info-container">
@@ -60,10 +67,9 @@ const BasicDetails: React.FC<Props> = ({
               </>
             )}
 
-            {budget && budget !== 0 && (
+            {budgetFormat && (
               <>
-                <span>Budget:</span> {new Intl.NumberFormat().format(budget)}{" "}
-                <br />
+                <span>Budget:</span> {budgetFormat} <br />
               </>
             )}
             {Director && Director !== "N/A" && (
