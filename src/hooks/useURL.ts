@@ -1,6 +1,6 @@
 //
 
-export const useURL = (isMovie: boolean, movieId: string) => {
+export const useURL = (isMovie: boolean, movieId: any) => {
   // const url = isMovie
   //   ? `${tmdb_url_before}${movieId}${tmdb_url_after}`
   //   : `${tv_tmdb_url_before}${movieId}${tv_tmdb_url_after}`;

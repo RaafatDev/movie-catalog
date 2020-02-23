@@ -35,7 +35,8 @@ const App: React.FC = () => {
     <div className="app min-vh-100">
       {/* <div className="app "> */}
       <MoviesContext.Provider value={{ state, dispatch } as StoreApi}>
-        <Router basename="/movie-catalog">
+        {/* <Router basename="/movie-catalog"> */}
+        <Router basename={process.env.PUBLIC_URL}>
           {/* <Router> */}
           <ScrollToTop />
           <MainNav />

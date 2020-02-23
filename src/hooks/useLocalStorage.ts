@@ -2,60 +2,23 @@ import { useState, useEffect } from "react";
 
 // interface Props {}
 // const useLocalStorage = (key: any, initialValue: any) => {
-const useLocalStorage = (key: any, defaultValue: any) => {
-  //   // State to store our value
-  //   // Pass initial state function to useState so logic is only executed once
-  //   const [storedValue, setStoredValue] = useState(() => {
-  //     try {
-  //       // Get from local storage by key
-  //       const item = window.localStorage.getItem(key);
-  //       // Parse stored json or if none return initialValue
-  //       return item ? JSON.parse(item) : initialValue;
-  //     } catch (error) {
-  //       // If error also return initialValue
-  //       console.log(error);
-  //       return initialValue;
-  //     }
-  //   });
-
-  //   // Return a wrapped version of useState's setter function that ...
-  //   // ... persists the new value to localStorage.
-  //   const setValue = (value: any) => {
-  //     try {
-  //       // Allow value to be a function so we have same API as useState
-  //       const valueToStore =
-  //         value instanceof Function ? value(storedValue) : value;
-  //       // Save state
-  //       setStoredValue(valueToStore);
-  //       // Save to local storage
-  //       window.localStorage.setItem(key, JSON.stringify(valueToStore));
-  //     } catch (error) {
-  //       // A more advanced implementation would handle the error case
-  //       console.log(error);
-  //     }
-  //   };
-
-  //   return [storedValue, setValue];
-
-  const [state, setState] = useState<any>(() => {
-    let value;
+const useLocalStorage = (key: any, initialValue: any) => {
+  // const useLocalStorage = (key: string, initialValue: any) => {
+  const [local, setLocal] = useState(() => {
     try {
-      value = JSON.parse(
-        window.localStorage.getItem(key) || JSON.stringify(defaultValue)
+      return JSON.parse(
+        window.localStorage.getItem(key) || JSON.stringify(initialValue)
       );
-    } catch (e) {
-      value = defaultValue;
+    } catch (error) {
+      return initialValue;
     }
   });
 
   useEffect(() => {
-    console.log("the state in the useEffect in the hook", state);
+    window.localStorage.setItem(key, JSON.stringify(local));
+  }, [local]);
 
-    // window.localStorage.setItem(key, state);
-    window.localStorage.setItem(key, JSON.stringify(state));
-  }, [state]);
-
-  return [state, setState];
+  return [local, setLocal];
 };
 
 export default useLocalStorage;
