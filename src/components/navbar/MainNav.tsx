@@ -104,7 +104,8 @@ const MainNav: React.FC<Props> = () => {
               {showSuggestions && sortedArr.length !== 0 && (
                 <Link
                   to={{
-                    pathname: `/search?keyword=${searchRef.current.value
+                    // pathname: `/search?keyword=${searchRef.current.value
+                    pathname: `/search/keyword=${searchRef.current.value
                       .split(" ")
                       .join("-")}`,
                     state: {

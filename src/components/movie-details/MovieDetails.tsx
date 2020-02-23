@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import React, { Suspense, useEffect } from "react";
 import { RouteComponentProps, useHistory } from "react-router-dom";
 import { useURL } from "../../hooks/useURL";
 import useCombineFetch from "../../hooks/useCombineFetch";
@@ -6,18 +6,44 @@ import Credits from "./Credits";
 import ImagesSlide from "./ImagesSlide";
 import MovieVideos from "./MovieVideos";
 import BasicDetails from "./BasicDetails";
+import useLocalStorage from "../../hooks/useLocalStorage";
 
 interface Props extends RouteComponentProps<{ id: string }> {}
 
 const MovieDetails: React.FC<Props> = () => {
   // const id = props.match.params.id;
   const history = useHistory<any>();
+  console.log({ history });
 
   const movie = JSON.parse(history.location.state.movie);
 
+  console.log({ movie });
+
   const { url } = useURL(movie.isMovie, movie.id);
 
+  console.log({ url });
+
   const [combinedFetch] = useCombineFetch(url);
+
+  console.log({ combinedFetch });
+
+  const [storageValue, setStorageValue] = useLocalStorage(
+    "movie-detail",
+    JSON.stringify(combinedFetch)
+  );
+
+  // const [testState, setTestState] = useLocalStorage("test", {
+  //   one: "one",
+  //   two: "two"
+  // });
+  // console.log({ testState });
+  useEffect(() => {
+    // setTestState("two");
+    setStorageValue(combinedFetch);
+
+    return () => localStorage.removeItem("movie-detail");
+  }, [combinedFetch]);
+  console.log("OUT", { storageValue });
 
   console.log({ combinedFetch });
 

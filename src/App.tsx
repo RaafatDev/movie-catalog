@@ -2,7 +2,8 @@ import React, { useReducer } from "react";
 // import { movieReducer, initialState, State } from "./appState/movieReducer";
 import { movieReducer, initialState } from "./appState/movieReducer";
 import { Actions } from "./appState/movieActions";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+// import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { HashRouter as Router, Route, Switch } from "react-router-dom";
 import ScrollToTop from "./ScrollTop";
 // import MainSlider from "./components/slider/MainSlider";
 
@@ -35,6 +36,7 @@ const App: React.FC = () => {
       {/* <div className="app "> */}
       <MoviesContext.Provider value={{ state, dispatch } as StoreApi}>
         <Router basename="/movie-catalog">
+          {/* <Router> */}
           <ScrollToTop />
           <MainNav />
           <Switch>
@@ -45,7 +47,8 @@ const App: React.FC = () => {
             <Route exact path="/movie/:id/:title" component={MovieDetails} />
             <Route
               exact
-              path="/search?keyword:keyword"
+              // path="/search?keyword:keyword"
+              path="/search/keyword:keyword"
               component={SearchResults}
             />
             <Route path="/" render={NotFound} />
