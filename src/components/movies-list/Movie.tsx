@@ -7,12 +7,13 @@ interface MovieProps {
 }
 
 const Movie: React.FC<MovieProps> = ({ oneMovie }) => {
-  const { id, poster_path, title, release_date } = oneMovie;
+  const { isMovie, id, poster_path, title, release_date } = oneMovie;
+  const kind: string = isMovie ? "film" : "tv-show";
 
   return (
     <Link
       to={{
-        pathname: `/movie/${id}/${title.split(" ").join("-")}`,
+        pathname: `/details/${kind}/${id}/${title.split(" ").join("-")}`,
         state: {
           movie: JSON.stringify(oneMovie)
         }

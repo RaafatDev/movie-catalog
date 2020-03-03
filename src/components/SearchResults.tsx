@@ -33,11 +33,11 @@ const SearchResults: React.FC<Props> = ({ match }) => {
     // }, [history.location.state.searchedMovies]);
   }, [history.location.state]);
 
-  console.log({ history });
-  console.log({ match });
-  console.log(match.params.keyword);
+  // console.log({ history });
+  // console.log({ match });
+  // console.log(match.params.keyword);
 
-  console.log({ localState });
+  // console.log({ localState });
 
   return (
     <div>

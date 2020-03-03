@@ -3,6 +3,9 @@ import { useState, useEffect } from "react";
 // interface Props {}
 // const useLocalStorage = (key: any, initialValue: any) => {
 const useLocalStorage = (key: any, initialValue: any) => {
+  // console.log({ key });
+  // console.log({ initialValue });
+
   // const useLocalStorage = (key: string, initialValue: any) => {
   const [local, setLocal] = useState(() => {
     try {

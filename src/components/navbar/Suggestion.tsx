@@ -6,6 +6,10 @@ interface Props {
 }
 
 const Suggestion: React.FC<Props> = ({ movie }) => {
+  // console.log("suggestions", { movie });
+  // const kind = movie;
+  const kind: string = movie.isMovie ? "film" : "tv-show";
+
   return (
     <div>
       <div
@@ -17,7 +21,9 @@ const Suggestion: React.FC<Props> = ({ movie }) => {
         <div className="suggestions__item__info pl-2">
           <Link
             to={{
-              pathname: `/movie/${movie.id}/${movie.title
+              // pathname: `/movie/${movie.id}/${movie.title
+              // /details/${kind}
+              pathname: `/details/${kind}/${movie.id}/${movie.title
                 .split(" ")
                 .join("-")}`,
               state: {

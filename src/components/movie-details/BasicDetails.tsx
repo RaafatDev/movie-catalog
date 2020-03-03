@@ -4,12 +4,16 @@ import { ICombined } from "../../model/combined";
 
 interface Props {
   combinedFetch: ICombined;
-  movie: PopularMovie;
+  // movie: PopularMovie;
 }
 
 const BasicDetails: React.FC<Props> = ({
-  movie: { poster_path, title, release_date, overview },
+  // movie: { poster_path, title, release_date, overview },
   combinedFetch: {
+    poster_path,
+    title,
+    release_date,
+    overview,
     budget,
     Genre,
     Director,
@@ -20,8 +24,29 @@ const BasicDetails: React.FC<Props> = ({
     Ratings,
     imdbRating,
     Production
+    //
   }
 }) => {
+  // const newTitle = {
+
+  // const title: combinedFetch.title ? movie.title : movie.name,
+  //   release_date: movie.release_date
+  //     ? movie.release_date
+  //     : movie.first_air_date,
+  //   // imdbID: movie.id,
+  //   id: JSON.stringify(movie.id),
+  //   poster_path: movie.poster_path
+  //     ? // ? `${basePosterUrl}w1280${movie.poster_path}`
+  //       `${basePosterUrl}w300${movie.poster_path}`
+  //     : `${process.env.PUBLIC_URL}/img/no_image.png`,
+  //   backdrop_path: movie.backdrop_path
+  //     ? // ? `${basePosterUrl}w1280${movie.backdrop_path}`
+  //       `${basePosterUrl}w780${movie.backdrop_path}`
+  //     : `${process.env.PUBLIC_URL}/img/no_image.png`,
+  //   overview: movie.overview,
+
+  // }
+
   let budgetFormat = budget
     ? new Intl.NumberFormat().format(budget)
     : undefined;
@@ -40,9 +65,9 @@ const BasicDetails: React.FC<Props> = ({
     });
   }
 
-  console.log("budgggggggggggggggget");
+  // console.log("budgggggggggggggggget");
 
-  console.log({ budget });
+  // console.log({ budget });
 
   return (
     <div className="basic-info-container">

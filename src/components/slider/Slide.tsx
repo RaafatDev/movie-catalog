@@ -6,7 +6,16 @@ interface MovieProps {
   oneMovie: PopularMovie;
 }
 const Slid: React.FC<MovieProps> = ({ oneMovie }) => {
-  const { title, backdrop_path, id, overview, release_date, Genres } = oneMovie;
+  const {
+    isMovie,
+    title,
+    backdrop_path,
+    id,
+    overview,
+    release_date,
+    Genres
+  } = oneMovie;
+  const kind: string = isMovie ? "film" : "tv-show";
   return (
     <div className="slide-container">
       <img src={backdrop_path} alt={title} />
@@ -15,7 +24,10 @@ const Slid: React.FC<MovieProps> = ({ oneMovie }) => {
           <div className="slide__caption">
             <Link
               to={{
-                pathname: `/movie/${id}/${title.split(" ").join("-")}`,
+                // pathname: `/movie/${id}/${title.split(" ").join("-")}`,
+                pathname: `/details/${kind}/${id}/${title
+                  .split(" ")
+                  .join("-")}`,
                 state: {
                   movie: JSON.stringify(oneMovie)
                 }

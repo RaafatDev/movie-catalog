@@ -45,6 +45,7 @@ const usePrepareMoviesArr = (rowArr: any) => {
         Genres: movie_genre
       };
       Arr.push(movieArrTwo);
+      // return Arr.push(movieArrTwo);
     });
 
     setSortedArr([...Arr]);

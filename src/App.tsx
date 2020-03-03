@@ -45,7 +45,11 @@ const App: React.FC = () => {
             <Route exact path="/about" component={About} />
             <Route exact path="/results" component={SearchResults} />
             <Route exact path="/viewall" component={ViewAll} />
-            <Route exact path="/movie/:id/:title" component={MovieDetails} />
+            <Route
+              exact
+              path="/details/:kind/:id/:title"
+              component={MovieDetails}
+            />
             <Route
               exact
               // path="/search?keyword:keyword"

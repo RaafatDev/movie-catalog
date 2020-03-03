@@ -1,6 +1,17 @@
 export interface ICombined {
   imdb_id: string;
   id: string;
+  //
+  title: string;
+  name?: string;
+  number_of_episodes?: number;
+  number_of_seasons?: number;
+
+  release_date: string;
+  first_air_date?: string;
+  poster_path: string;
+  backdrop_path: string;
+  overview: string;
   // poster_path: string;
   // backdrop_path: string;
   // overview: string;
@@ -19,4 +30,5 @@ export interface ICombined {
   Ratings: { Source: string; Value: string }[];
   imdbRating: string;
   Production: string;
+  Runtime: string;
 }

@@ -8,32 +8,36 @@ import MovieVideos from "./MovieVideos";
 import BasicDetails from "./BasicDetails";
 import useLocalStorage from "../../hooks/useLocalStorage";
 
-interface Props extends RouteComponentProps<{ id: string }> {}
+interface Props
+  extends RouteComponentProps<{ id: string; kind: string; title: string }> {}
 
 const MovieDetails: React.FC<Props> = ({ match }) => {
-  const id = match.params.id;
-  const history = useHistory<any>();
+  // console.log({ match });
+  // const history = useHistory<any>();
+
+  const { id, kind, title } = match.params;
+  // const id = match.params.id;
+  // const kind = match.params.kind;
+  // const title = match.params;
+  // let localStorageName: string = `local-movie${id}`;
+  // console.log({ localStorageName });
+
+  // const [localMovie, setLocalMovie] = useLocalStorage(
+  //   "local-movie",
+  //   history.location.state && history.location.state.movie
+  // );
+  // const [localMovie, setLocalMovie] = useLocalStorage(
+  //   localStorageName,
+  //   history.location.state && history.location.state.movie
+  // );
+
   // console.log({ history });
-  const [localMovie, setLocalMovie] = useLocalStorage(
-    "local-movie",
-    history.location.state && history.location.state.movie
-  );
-
-  // const movie = JSON.parse(history.location.state.movie);
-
   // console.log({ localMovie });
 
-  // const { url } = useURL(movie.isMovie, movie.id);
   // const { url } = useURL(localMovie.isMovie, localMovie.id);
-  const { url } = useURL(localMovie.isMovie, localMovie.id);
-
-  // console.log({ url });
+  const { url } = useURL(kind, id);
 
   const [combinedFetch] = useCombineFetch(url);
-
-  // console.log({ combinedFetch });
-  //!!!!!
-  //!!!!!
 
   const [storageValue, setStorageValue] = useLocalStorage(
     "movie-detail",
@@ -41,56 +45,28 @@ const MovieDetails: React.FC<Props> = ({ match }) => {
     combinedFetch
   );
 
-  // const [testState, setTestState] = useLocalStorage("test", {
-  //   one: "one",
-  //   two: "two"
-  // });
-  // console.log({ testState });
   useEffect(() => {
-    // console.log("in the useEffect out the if ");
-    // console.log({ history });
-    if (history.location.state) {
-      const movie = JSON.parse(history.location.state.movie);
-      // console.log("innnnnnnnnnnnn");
-
-      // console.log({ movie });
-
-      setLocalMovie(movie);
-      // console.log("in the useEffect in the if");
-      // } else {
-      // setLocalMovie(localMovie);
-    }
-    // console.log("lout sitedddddddddddddddddd");
-
-    return () => localStorage.removeItem("local-movie");
+    // if (history.location.state) {
+    //   const movie = JSON.parse(history.location.state.movie);
+    //   setLocalMovie(movie);
+    // }
+    // return () => localStorage.removeItem("local-movie");
+    // return () => localStorage.removeItem(localStorageName);
   }, []);
 
   useEffect(() => {
-    // console.log("in the useEffect out the if ");
-    // console.log({ history });
-    // if (history.location.state) {
-    //   const movie = JSON.parse(history.location.state.movie);
-    //   console.log("innnnnnnnnnnnn");
-
-    //   console.log({ movie });
-
-    //   setLocalMovie(movie);
-    //   // console.log("in the useEffect in the if");
-    // } else {
-    //   // setLocalMovie(localMovie);
-    // }
-    // console.log("lout sitedddddddddddddddddd");
-
-    // setTestState("two");
     setStorageValue(combinedFetch);
 
     return () => {
       localStorage.removeItem("movie-detail");
     };
   }, [combinedFetch]);
-  // console.log("OUT", { storageValue });
 
   // console.log({ combinedFetch });
+  // console.log({ storageValue });
+  // if (storageValue.videos) {
+  //   console.log("the videos in storage values", storageValue.videos);
+  // }
 
   // let trailers: Element;
   let trailers: any;
@@ -148,7 +124,8 @@ const MovieDetails: React.FC<Props> = ({ match }) => {
                   <div className="col-12  text-center border border-red">
                     <p className="h1 my-3 movie-detail__title">
                       {/* {movie.title}{" "} */}
-                      {localMovie.title}{" "}
+                      {/* {localMovie.title}{" "} */}
+                      {title}{" "}
                     </p>
                   </div>
                 </div>
@@ -156,7 +133,8 @@ const MovieDetails: React.FC<Props> = ({ match }) => {
               </div>
 
               {/* <BasicDetails combinedFetch={combinedFetch} movie={movie} /> */}
-              <BasicDetails combinedFetch={storageValue} movie={localMovie} />
+              {/* <BasicDetails combinedFetch={storageValue} movie={localMovie} /> */}
+              <BasicDetails combinedFetch={storageValue} />
             </div>
           </div>
         </div>
