@@ -12,6 +12,7 @@ export default function useDebouncedSearch(value: any, delay: number) {
 
     const response = await fetch(search_url);
     const data = await response.json();
+    // console.log({ data });
 
     return data;
   };
@@ -30,6 +31,7 @@ export default function useDebouncedSearch(value: any, delay: number) {
     if (debouncedValue) {
       searchMovie(debouncedValue).then((data: any) => {
         setSortedArr(data);
+        // console.log("kdkdkd", { data });
       });
     } else {
       setSortedArr([]);

@@ -1,101 +1,67 @@
-import React, { Suspense, useEffect } from "react";
+import React, { useEffect } from "react";
 import { RouteComponentProps, useHistory } from "react-router-dom";
 import { useURL } from "../../hooks/useURL";
 import useCombineFetch from "../../hooks/useCombineFetch";
+import useFetchOrSession from "../../hooks/useFetchOrSession";
 import Credits from "./Credits";
 import ImagesSlide from "./ImagesSlide";
 import MovieVideos from "./MovieVideos";
 import BasicDetails from "./BasicDetails";
 import useLocalStorage from "../../hooks/useLocalStorage";
+import useSessionStorage from "../../hooks/useSessionStorage";
 
 interface Props
   extends RouteComponentProps<{ id: string; kind: string; title: string }> {}
 
 const MovieDetails: React.FC<Props> = ({ match }) => {
-  // console.log({ match });
-  // const history = useHistory<any>();
-
+  //
   const { id, kind, title } = match.params;
-  // const id = match.params.id;
-  // const kind = match.params.kind;
-  // const title = match.params;
-  // let localStorageName: string = `local-movie${id}`;
-  // console.log({ localStorageName });
 
-  // const [localMovie, setLocalMovie] = useLocalStorage(
-  //   "local-movie",
-  //   history.location.state && history.location.state.movie
-  // );
-  // const [localMovie, setLocalMovie] = useLocalStorage(
-  //   localStorageName,
-  //   history.location.state && history.location.state.movie
-  // );
+  const sessionStorageName: string = "movie-details22";
 
-  // console.log({ history });
-  // console.log({ localMovie });
-
-  // const { url } = useURL(localMovie.isMovie, localMovie.id);
   const { url } = useURL(kind, id);
 
-  const [combinedFetch] = useCombineFetch(url);
-
-  const [storageValue, setStorageValue] = useLocalStorage(
-    "movie-detail",
-    // JSON.stringify(combinedFetch)
-    combinedFetch
+  // const [combinedFetch] = useCombineFetch(url);
+  // const [combinedFetch2] = useCombineFetch2(url, localStorageCustomName);
+  // const [storageValue, isLoading, error] = useCombineFetch2(
+  const [movieDetails, isLoading, error] = useFetchOrSession(
+    url,
+    sessionStorageName
   );
 
   useEffect(() => {
-    // if (history.location.state) {
-    //   const movie = JSON.parse(history.location.state.movie);
-    //   setLocalMovie(movie);
-    // }
-    // return () => localStorage.removeItem("local-movie");
-    // return () => localStorage.removeItem(localStorageName);
+    return () => {
+      sessionStorage.removeItem(sessionStorageName);
+    };
   }, []);
 
-  useEffect(() => {
-    setStorageValue(combinedFetch);
-
-    return () => {
-      localStorage.removeItem("movie-detail");
-    };
-  }, [combinedFetch]);
-
-  // console.log({ combinedFetch });
-  // console.log({ storageValue });
-  // if (storageValue.videos) {
-  //   console.log("the videos in storage values", storageValue.videos);
-  // }
-
-  // let trailers: Element;
   let trailers: any;
   let images: any;
-  if (storageValue) {
-    if (!storageValue?.videos || storageValue?.videos?.results.length === 0) {
-      trailers = <h3>No Videos Found! </h3>;
+  if (movieDetails) {
+    if (!movieDetails?.videos || movieDetails?.videos?.results.length === 0) {
+      // trailers = <h3>No Videos Found! </h3>;
+      trailers = (
+        <div className="container">
+          <p className="trailer-available"> No Related Videos Found! </p>{" "}
+        </div>
+      );
     } else {
-      trailers = storageValue.videos.results.map(
+      trailers = movieDetails.videos.results.map(
         (video: any, index: number) => (
           <MovieVideos video={video} key={index} index={index} />
         )
       );
     }
 
-    if (!storageValue?.images || !storageValue?.images?.backdrops) {
+    if (!movieDetails?.images || !movieDetails?.images?.backdrops) {
       images = <h3>No Images Found </h3>;
     } else {
-      images = <ImagesSlide images={storageValue.images} />;
+      images = <ImagesSlide images={movieDetails.images} />;
     }
   }
 
   return (
-    <div
-      // style={{ width: "100% !important" }}
-      // className="movie-details-container mt-5 p-5 container-fluid"
-      // className="movie-details-container mt-sm-5 px-sm-5 pb-5"
-      className="movie-details-container  px-sm-5 pb-5"
-    >
+    <div className="movie-details-container  px-sm-5 pb-5">
       <div id="accordion">
         <div className="card">
           <div className="card-header" id="headingOne">
@@ -123,18 +89,19 @@ const MovieDetails: React.FC<Props> = ({ match }) => {
                 <div className="row">
                   <div className="col-12  text-center border border-red">
                     <p className="h1 my-3 movie-detail__title">
-                      {/* {movie.title}{" "} */}
-                      {/* {localMovie.title}{" "} */}
-                      {title}{" "}
+                      {title.split("-").join(" ")}{" "}
                     </p>
                   </div>
                 </div>
-                {/* <p className="h1">Title: {title} </p> */}
               </div>
 
-              {/* <BasicDetails combinedFetch={combinedFetch} movie={movie} /> */}
-              {/* <BasicDetails combinedFetch={storageValue} movie={localMovie} /> */}
-              <BasicDetails combinedFetch={storageValue} />
+              {isLoading && <h1>Loading ............</h1>}
+              {error && (
+                <h3>
+                  {`:(`} <br /> it seems like something went wrong!{" "}
+                </h3>
+              )}
+              <BasicDetails combinedFetch={movieDetails} />
             </div>
           </div>
         </div>
@@ -160,9 +127,7 @@ const MovieDetails: React.FC<Props> = ({ match }) => {
           >
             {images}
 
-            {// combinedFetch &&
-            // combinedFetch.videos &&
-            storageValue?.videos?.results && (
+            {movieDetails?.videos?.results.length > 0 && (
               <div className="container">
                 <p className="trailer-available">Available Trailers:</p>{" "}
               </div>
@@ -191,16 +156,20 @@ const MovieDetails: React.FC<Props> = ({ match }) => {
             data-parent="#accordion"
           >
             <div className="card-body">
-              {storageValue && Object.keys(storageValue).length === 0 && (
+              {movieDetails && Object.keys(movieDetails).length === 0 && (
                 <h1>No Actors Found</h1>
               )}
-              {storageValue.Actors === "N/A" && <h1>No Actors Found</h1>}
-              {storageValue && storageValue.credits && (
-                // {combinedFetch && combinedFetch.credits && combinedFetch.credits.cast && (
+              {movieDetails.Actors === "N/A" && (
+                <p>
+                  unfortunately, we couldn't find information related to the
+                  Actors {`:(`}{" "}
+                </p>
+              )}
+              {movieDetails && movieDetails.credits && (
                 <div className="container mt-4">
                   <Credits
-                    cast={storageValue.credits.cast}
-                    actors={storageValue.Actors}
+                    cast={movieDetails.credits.cast}
+                    actors={movieDetails.Actors}
                   />
                 </div>
               )}

@@ -8,7 +8,7 @@ const usePrepareMoviesArr = (rowArr: any) => {
   const [sortedArr, setSortedArr] = useState<any>([]);
 
   const sortData = (rowArr: any) => {
-    let Arr: any[] = [];
+    let movieInfoArr: any[] = [];
 
     if (!rowArr) return;
 
@@ -24,7 +24,7 @@ const usePrepareMoviesArr = (rowArr: any) => {
         })
         .join(", ");
 
-      const movieArrTwo = {
+      const movieInfo = {
         isMovie: movie.title ? true : false,
         title: movie.title ? movie.title : movie.name,
         release_date: movie.release_date
@@ -44,11 +44,11 @@ const usePrepareMoviesArr = (rowArr: any) => {
         genre_ids: movie.genre_ids,
         Genres: movie_genre
       };
-      Arr.push(movieArrTwo);
+      movieInfoArr.push(movieInfo);
       // return Arr.push(movieArrTwo);
     });
 
-    setSortedArr([...Arr]);
+    setSortedArr([...movieInfoArr]);
   };
   useEffect(() => {
     sortData(rowArr);

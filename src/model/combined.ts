@@ -12,10 +12,6 @@ export interface ICombined {
   poster_path: string;
   backdrop_path: string;
   overview: string;
-  // poster_path: string;
-  // backdrop_path: string;
-  // overview: string;
-  // credits: { cast: any[] };
   credits: { cast: any[] };
   budget: number;
   videos: { results: any[] };

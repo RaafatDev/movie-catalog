@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 
 import Suggestion from "./Suggestion";
 import useDebouncedSearch from "../../hooks/useDebouncedSearch";
+import useLocalStorage from "../../hooks/useLocalStorage";
 
 interface Props {}
 
@@ -11,6 +12,10 @@ const MainNav: React.FC<Props> = () => {
   const [showSuggestions, setShowSuggestions] = useState(false);
   const searchRef = React.useRef<any>(null);
   const sortedArr = useDebouncedSearch(searchTerm, 500);
+  const [searchBoxArr, setSearchBoxArr] = useLocalStorage(
+    "search-bar-arr",
+    sortedArr
+  );
 
   function handleClick(e: any) {
     const clickedElement = e.target;
@@ -38,6 +43,13 @@ const MainNav: React.FC<Props> = () => {
       setShowSuggestions(false);
     }
   }
+
+  useEffect(() => {
+    if (sortedArr.length > 0) {
+      setSearchBoxArr(sortedArr);
+    }
+    // return () => localStorage.removeItem("search-bar-arr");
+  }, [sortedArr]);
 
   useEffect(() => {
     window.addEventListener("click", handleClick);

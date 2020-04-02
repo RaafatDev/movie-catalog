@@ -4,11 +4,9 @@ import { ICombined } from "../../model/combined";
 
 interface Props {
   combinedFetch: ICombined;
-  // movie: PopularMovie;
 }
 
 const BasicDetails: React.FC<Props> = ({
-  // movie: { poster_path, title, release_date, overview },
   combinedFetch: {
     poster_path,
     title,
@@ -18,56 +16,31 @@ const BasicDetails: React.FC<Props> = ({
     Genre,
     Director,
     Writer,
+    number_of_episodes,
+    number_of_seasons,
     // Actors,
     Country,
     Awards,
     Ratings,
     imdbRating,
-    Production
+    Production,
+    Runtime
+
     //
   }
 }) => {
-  // const newTitle = {
-
-  // const title: combinedFetch.title ? movie.title : movie.name,
-  //   release_date: movie.release_date
-  //     ? movie.release_date
-  //     : movie.first_air_date,
-  //   // imdbID: movie.id,
-  //   id: JSON.stringify(movie.id),
-  //   poster_path: movie.poster_path
-  //     ? // ? `${basePosterUrl}w1280${movie.poster_path}`
-  //       `${basePosterUrl}w300${movie.poster_path}`
-  //     : `${process.env.PUBLIC_URL}/img/no_image.png`,
-  //   backdrop_path: movie.backdrop_path
-  //     ? // ? `${basePosterUrl}w1280${movie.backdrop_path}`
-  //       `${basePosterUrl}w780${movie.backdrop_path}`
-  //     : `${process.env.PUBLIC_URL}/img/no_image.png`,
-  //   overview: movie.overview,
-
-  // }
-
   let budgetFormat = budget
     ? new Intl.NumberFormat().format(budget)
     : undefined;
   let RottenTomato: string = "";
 
-  // console.log({ Ratings });
-  // console.log({ imdbRating });
   if (Ratings && Ratings.length > 0) {
     Ratings.map(Rat => {
       if (Rat.Source === "Rotten Tomatoes") {
-        // console.log("gooooot it ");
-
         RottenTomato = Rat.Value;
-        // console.log(Rat.Source);
       }
     });
   }
-
-  // console.log("budgggggggggggggggget");
-
-  // console.log({ budget });
 
   return (
     <div className="basic-info-container">
@@ -88,6 +61,27 @@ const BasicDetails: React.FC<Props> = ({
               <>
                 {" "}
                 <span>Genres:</span> {Genre}
+                <br />
+              </>
+            )}
+            {Runtime && Runtime !== "N/A" && (
+              <>
+                {" "}
+                <span>Runtime:</span> {Runtime}
+                <br />
+              </>
+            )}
+            {number_of_episodes && number_of_episodes !== undefined && (
+              <>
+                {" "}
+                <span>Number Of Episodes:</span> {number_of_episodes}
+                <br />
+              </>
+            )}
+            {number_of_seasons && number_of_seasons !== undefined && (
+              <>
+                {" "}
+                <span>Number Of Seasons:</span> {number_of_seasons}
                 <br />
               </>
             )}

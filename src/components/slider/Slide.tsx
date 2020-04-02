@@ -15,7 +15,13 @@ const Slid: React.FC<MovieProps> = ({ oneMovie }) => {
     release_date,
     Genres
   } = oneMovie;
+
   const kind: string = isMovie ? "film" : "tv-show";
+
+  // if (backdrop_path === "/img/no_image.png") {
+  //   return null;
+  // }
+
   return (
     <div className="slide-container">
       <img src={backdrop_path} alt={title} />

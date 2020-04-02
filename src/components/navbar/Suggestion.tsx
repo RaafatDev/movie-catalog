@@ -1,21 +1,18 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { PopularMovie } from "../../model/PopularMovie";
 
 interface Props {
-  movie: any;
+  movie: PopularMovie;
 }
 
 const Suggestion: React.FC<Props> = ({ movie }) => {
-  // console.log("suggestions", { movie });
-  // const kind = movie;
+  //
   const kind: string = movie.isMovie ? "film" : "tv-show";
 
   return (
     <div>
-      <div
-        className="suggestions__item d-flex border bg-white"
-        key={movie.index}
-      >
+      <div className="suggestions__item d-flex border bg-white">
         <img src={movie.poster_path} className="suggestions__item__image" />
 
         <div className="suggestions__item__info pl-2">

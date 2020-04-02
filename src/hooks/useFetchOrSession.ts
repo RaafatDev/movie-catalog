@@ -2,9 +2,12 @@ import { useState, useEffect } from "react";
 import { ICombined } from "../model/combined";
 import { basePosterUrl } from "../urls_and_keys";
 
-type Hook = (tmdb_url: string) => [ICombined, boolean, string | null];
+type Hook = (
+  tmdb_url: string,
+  key: string
+) => [ICombined, boolean, string | null];
 
-const useCombineFetch: Hook = (tmdb_url: string) => {
+const useFetchOrSession: Hook = (tmdb_url: string, key: string) => {
   const [data, setData] = useState<ICombined>({} as ICombined);
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -15,23 +18,25 @@ const useCombineFetch: Hook = (tmdb_url: string) => {
 
     return json;
   };
-  const fetchBoth = async () => {
+
+  const nestedFetch = async () => {
+    // console.log("nestedFetchchchchchchchch is called ");
+
     setIsLoading(true);
     let combined: any = {};
     try {
-      const json = await fetchData(tmdb_url);
-
-      const imdb_id = json.external_ids.imdb_id;
+      const tmdb_data = await fetchData(tmdb_url);
+      // const tmdb_data = await fetchData("www.omdbapi.com");
+      const imdb_id = tmdb_data.external_ids.imdb_id;
 
       if (imdb_id) {
         const omdb_url = `https://www.omdbapi.com/?apikey=${process.env.REACT_APP_OMDB_KEY}&i=${imdb_id}&plot=full`;
 
         try {
-          const json2 = await fetchData(omdb_url);
+          const omdb_data = await fetchData(omdb_url);
+          combined = { ...tmdb_data, ...omdb_data };
 
-          combined = { ...json, ...json2 };
-
-          sortInfo(combined);
+          sortCombinedData(combined);
         } catch (error) {
           console.log("error");
         }
@@ -42,29 +47,21 @@ const useCombineFetch: Hook = (tmdb_url: string) => {
     setIsLoading(false);
   };
 
-  const sortInfo = (combined: any) => {
-    const sorted = {
-      // imdb_id:combined.imdb_id,
+  const sortCombinedData = (combined: any) => {
+    const sortedCombined = {
       imdb_id: combined.imdb_id,
       id: combined.id,
-
-      //
       title: combined.title ? combined.title : combined.name,
       number_of_episodes: combined.number_of_episodes,
       number_of_seasons: combined.number_of_seasons,
-
       release_date: combined.release_date
         ? combined.release_date
         : combined.first_air_date,
-      // id: JSON.stringify(movie.id),
       poster_path: combined.poster_path
-        ? // ? `${basePosterUrl}w1280${movie.poster_path}`
-          // `${basePosterUrl}w300${combined.poster_path}`
-          `${basePosterUrl}w780${combined.poster_path}`
+        ? `${basePosterUrl}w780${combined.poster_path}`
         : `${process.env.PUBLIC_URL}/img/no_image.png`,
       backdrop_path: combined.backdrop_path
-        ? // ? `${basePosterUrl}w1280${movie.backdrop_path}`
-          `${basePosterUrl}w780${combined.backdrop_path}`
+        ? `${basePosterUrl}w780${combined.backdrop_path}`
         : `${process.env.PUBLIC_URL}/img/no_image.png`,
       overview: combined.overview,
       // credits: { cast: any[] };
@@ -89,23 +86,25 @@ const useCombineFetch: Hook = (tmdb_url: string) => {
       Runtime: combined.Runtime
     };
 
-    setData(sorted);
+    sessionStorage.setItem(key, JSON.stringify(sortedCombined));
+    setData(sortedCombined);
   };
 
   useEffect(() => {
-    const localCheck = localStorage.getItem("movie-detail");
+    const localCheck = sessionStorage.getItem(key);
     if (localCheck) {
-      // console.log("there is local Storage search-bar-arr", localCheck);
+      // console.log("there is local Storage search-bar-arr", key);
+      // sendData();
+      setData(JSON.parse(localCheck));
+      setIsLoading(false);
     }
     if (!localCheck) {
       // console.log("noooooo local for search-bar-arr", localCheck);
+      nestedFetch();
     }
-    // console.log("only local check ", localCheck);
-
-    fetchBoth();
   }, [tmdb_url]);
 
   return [data, isLoading, error];
 };
 
-export default useCombineFetch;
+export default useFetchOrSession;
