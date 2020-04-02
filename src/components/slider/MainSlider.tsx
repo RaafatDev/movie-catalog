@@ -61,8 +61,8 @@ const MainSlider: React.FC = () => {
     // ]
   };
   // console.log(state);
-  console.log(process.env.PUBLIC_URL);
-  console.log(process.env);
+  // console.log(process.env.PUBLIC_URL);
+  // console.log(process.env);
 
   return (
     <div className="main-slider container">
