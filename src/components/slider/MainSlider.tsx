@@ -61,6 +61,8 @@ const MainSlider: React.FC = () => {
     // ]
   };
   // console.log(state);
+  console.log(process.env.PUBLIC_URL);
+  console.log(process.env);
 
   return (
     <div className="main-slider container">
@@ -71,7 +73,8 @@ const MainSlider: React.FC = () => {
           state.movieArr[0].backdrop_path &&
           state.movieArr.map(
             (movie: PopularMovie) =>
-              movie.backdrop_path !== "/img/no_image.png" && (
+              movie.backdrop_path !==
+                process.env.PUBLIC_URL + "/img/no_image.png" && (
                 <Slid oneMovie={movie} key={movie.id} />
               )
           )}
