@@ -24,6 +24,7 @@ const MoviesList: React.FC = () => {
   const [sortedTvShowsArr] = usePrepareMoviesArr(tvDataArr);
   // const [sortedMoviesArr] = usePrepareMoviesArr(dataArr, dispatch);
   const [sortedMoviesArr] = usePrepareMoviesArr(dataArr);
+
   useEffect(() => {
     if (isLoading) dispatch(movieRequestSend());
     if (sortedTvShowsArr) dispatch(tvShowRequestSuccess(sortedTvShowsArr));
@@ -51,6 +52,8 @@ const MoviesList: React.FC = () => {
             ))}
         </div>
       </div>
+      <hr />
+      {/* <br /> */}
       <h1>TV Shows</h1>
       <div className="container">
         <div className="row">
