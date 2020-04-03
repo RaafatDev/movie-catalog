@@ -15,6 +15,7 @@ const useFetchOrSession: Hook = (tmdb_url: string, key: string) => {
   const fetchData = async (url: string) => {
     const response = await fetch(url);
     const json = await response.json();
+    // console.log("json", json);
 
     return json;
   };
@@ -28,6 +29,7 @@ const useFetchOrSession: Hook = (tmdb_url: string, key: string) => {
       const tmdb_data = await fetchData(tmdb_url);
       // const tmdb_data = await fetchData("www.omdbapi.com");
       const imdb_id = tmdb_data.external_ids.imdb_id;
+      // console.log("nested Fetch", imdb_id);
 
       if (imdb_id) {
         const omdb_url = `https://www.omdbapi.com/?apikey=${process.env.REACT_APP_OMDB_KEY}&i=${imdb_id}&plot=full`;
@@ -40,6 +42,10 @@ const useFetchOrSession: Hook = (tmdb_url: string, key: string) => {
         } catch (error) {
           console.log("error");
         }
+      } else {
+        // if there is no imdb => then we can't fetch the data from OMDB api
+        combined = { ...tmdb_data };
+        sortCombinedData(combined);
       }
     } catch (error) {
       setError(error);
@@ -48,6 +54,8 @@ const useFetchOrSession: Hook = (tmdb_url: string, key: string) => {
   };
 
   const sortCombinedData = (combined: any) => {
+    // console.log("combined ", combined);
+
     const sortedCombined = {
       imdb_id: combined.imdb_id,
       id: combined.id,
@@ -99,6 +107,7 @@ const useFetchOrSession: Hook = (tmdb_url: string, key: string) => {
       setIsLoading(false);
     }
     if (!localCheck) {
+      // console.log("1111");
       // console.log("noooooo local for search-bar-arr", localCheck);
       nestedFetch();
     }

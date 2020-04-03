@@ -31,7 +31,7 @@ const MoviesList: React.FC = () => {
     if (sortedMoviesArr) dispatch(movieRequestSuccess(sortedMoviesArr));
     if (error) dispatch(movieRequestFailure);
   }, [sortedMoviesArr, sortedTvShowsArr]);
-  // console.log({ state });
+  // console.log("the global state", state);
 
   return (
     // <div className="container bg-primary p-4 p-md-0 mt-4">

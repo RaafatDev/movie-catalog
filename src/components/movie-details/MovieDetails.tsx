@@ -34,6 +34,7 @@ const MovieDetails: React.FC<Props> = ({ match }) => {
       sessionStorage.removeItem(sessionStorageName);
     };
   }, []);
+  // console.log("movieDetails", movieDetails);
 
   let trailers: any;
   let images: any;
