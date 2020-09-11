@@ -9,6 +9,7 @@ interface Props {
 const Suggestion: React.FC<Props> = ({ movie }) => {
   //
   const kind: string = movie.isMovie ? "film" : "tv-show";
+  // console.log("the movie infors: ", movie);
 
   return (
     <div>
@@ -23,9 +24,10 @@ const Suggestion: React.FC<Props> = ({ movie }) => {
               pathname: `/details/${kind}/${movie.id}/${movie.title
                 .split(" ")
                 .join("-")}`,
+              // pathname: `/details/${kind}/${id}/${title.split(" ").join("-")}`,
               state: {
-                movie: JSON.stringify(movie)
-              }
+                movie: JSON.stringify(movie),
+              },
             }}
           >
             <p className="suggestions__item__info__title m-0  font-weight-bold">

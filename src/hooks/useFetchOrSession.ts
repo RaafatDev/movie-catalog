@@ -91,24 +91,29 @@ const useFetchOrSession: Hook = (tmdb_url: string, key: string) => {
       Ratings: combined.Ratings,
       imdbRating: combined.imdbRating,
       Production: combined.Production,
-      Runtime: combined.Runtime
+      Runtime: combined.Runtime,
     };
-
-    sessionStorage.setItem(key, JSON.stringify(sortedCombined));
+    // todo: restore the data in the local-session after the refactoring and restructuring the code
+    // sessionStorage.setItem(key, JSON.stringify(sortedCombined));
     setData(sortedCombined);
   };
 
   useEffect(() => {
-    const localCheck = sessionStorage.getItem(key);
+    // make the test fail to not store >> temporary till the restructure !
+    // todo: make the localCheck work again after the refactoring and restructuring the code
+    // const localCheck = sessionStorage.getItem(key);
+    const localCheck = false;
+
     if (localCheck) {
-      // console.log("there is local Storage search-bar-arr", key);
+      // if (false) {
+      console.log("there is local Storage search-bar-arr", key);
       // sendData();
       setData(JSON.parse(localCheck));
       setIsLoading(false);
     }
     if (!localCheck) {
       // console.log("1111");
-      // console.log("noooooo local for search-bar-arr", localCheck);
+      console.log("noooooo local for search-bar-arr", localCheck);
       nestedFetch();
     }
   }, [tmdb_url]);

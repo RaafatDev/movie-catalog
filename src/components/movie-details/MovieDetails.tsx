@@ -31,7 +31,8 @@ const MovieDetails: React.FC<Props> = ({ match }) => {
 
   useEffect(() => {
     return () => {
-      sessionStorage.removeItem(sessionStorageName);
+      // todo: removie the sessionStorageName after the refactoring and restructuring the code
+      // sessionStorage.removeItem(sessionStorageName);
     };
   }, []);
   // console.log("movieDetails", movieDetails);
@@ -102,7 +103,7 @@ const MovieDetails: React.FC<Props> = ({ match }) => {
                   {`:(`} <br /> it seems like something went wrong!{" "}
                 </h3>
               )}
-              <BasicDetails combinedFetch={movieDetails} />
+              {!isLoading && <BasicDetails combinedFetch={movieDetails} />}
             </div>
           </div>
         </div>
