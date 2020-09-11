@@ -18,7 +18,7 @@ const usePrepareMoviesArr = (rowArr: any) => {
       if (!movie.genre_ids) return;
       const movie_genre = movie.genre_ids
         .map((number: any) => {
-          return movieGenres.find(genreObject => {
+          return movieGenres.find((genreObject) => {
             return genreObject.id === number;
           })?.name;
         })
@@ -42,7 +42,7 @@ const usePrepareMoviesArr = (rowArr: any) => {
           : `${process.env.PUBLIC_URL}/img/no_image.png`,
         overview: movie.overview,
         genre_ids: movie.genre_ids,
-        Genres: movie_genre
+        Genres: movie_genre,
       };
       movieInfoArr.push(movieInfo);
       // return Arr.push(movieArrTwo);
