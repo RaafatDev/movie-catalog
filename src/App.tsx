@@ -1,22 +1,25 @@
 import React, { useReducer } from "react";
-// import { movieReducer, initialState, State } from "./appState/movieReducer";
 import { movieReducer, initialState } from "./appState/movieReducer";
 import { Actions } from "./appState/movieActions";
-// import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { HashRouter as Router, Route, Switch } from "react-router-dom";
 import ScrollToTop from "./ScrollTop";
-// import MainSlider from "./components/slider/MainSlider";
 
+// ##########
+import {
+  Home,
+  About,
+  SearchResults,
+  ViewAll,
+  NotFound,
+  MovieDetails,
+} from "./pages";
+
+// ##########
 import "./App.scss";
-// import MoviesList from "./components/MoviesList";
 import MainNav from "./components/navbar/MainNav";
-import Home from "./components/Home";
-import About from "./components/About";
-import SearchResults from "./components/SearchResults";
 // import MovieDetails from "./pages/MovieDetails";
-import MovieDetails from "./components/movie-details/MovieDetails";
-import ViewAll from "./components/ViewAll";
-import NotFound from "./components/NotFound";
+// import MovieDetails from "./components/movie-details/MovieDetails";
+import FirstGraphqlCom from "./graphComp/firstGraphqlCom";
 
 export type StoreApi = {
   state: typeof initialState;
@@ -39,7 +42,11 @@ const App: React.FC = () => {
         <Router basename={process.env.PUBLIC_URL}>
           {/* <Router> */}
           <ScrollToTop />
-          <MainNav />
+          {/* <MainNav /> */}
+          {/* <FirstGraphqlCom />
+          <FirstGraphqlCom />
+          <FirstGraphqlCom />
+          <FirstGraphqlCom /> */}
           <Switch>
             <Route exact path="/" component={Home} />
             <Route exact path="/about" component={About} />
@@ -50,6 +57,7 @@ const App: React.FC = () => {
               path="/details/:kind/:id/:title"
               component={MovieDetails}
             />
+
             <Route
               exact
               // path="/search?keyword:keyword"

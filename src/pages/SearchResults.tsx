@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { RouteComponentProps } from "react-router";
-import Movie from "./movies-list/Movie";
+import Movie from "../components/movies-list/Movie";
 import { PopularMovie } from "../model/PopularMovie";
 import useDebouncedSearch from "../hooks/useDebouncedSearch";
+import Layout from "../components/Layout";
 
 interface Props extends RouteComponentProps<{ keyword: string }> {}
 
@@ -40,28 +41,30 @@ const SearchResults: React.FC<Props> = ({ match }) => {
   }, [match, sortedFromDebounced]);
 
   return (
-    <div>
-      <div className="container text-light mt-5">
-        {match.params && match.params.keyword && (
-          <h1>
-            Result for: {match.params.keyword.substring(1).toUpperCase()}{" "}
-          </h1>
-        )}
-        <div className="container">
-          <div className="row">
-            {movieArr &&
-              movieArr.map((x: PopularMovie) => (
-                <div
-                  className="col  m-2 p-0 d-flex align-items-stretch justify-content-center"
-                  key={x.id}
-                >
-                  <Movie oneMovie={x} key={x.id} />
-                </div>
-              ))}
+    <Layout>
+      <div>
+        <div className="container text-light mt-5">
+          {match.params && match.params.keyword && (
+            <h1>
+              Result for: {match.params.keyword.substring(1).toUpperCase()}{" "}
+            </h1>
+          )}
+          <div className="container">
+            <div className="row">
+              {movieArr &&
+                movieArr.map((x: PopularMovie) => (
+                  <div
+                    className="col  m-2 p-0 d-flex align-items-stretch justify-content-center"
+                    key={x.id}
+                  >
+                    <Movie oneMovie={x} key={x.id} />
+                  </div>
+                ))}
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </Layout>
   );
 };
 

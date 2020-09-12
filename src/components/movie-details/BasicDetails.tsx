@@ -1,5 +1,5 @@
 import React from "react";
-import { PopularMovie } from "../../model/PopularMovie";
+// import { PopularMovie } from "../../model/PopularMovie";
 import { ICombined } from "../../model/combined";
 
 interface Props {
@@ -24,10 +24,10 @@ const BasicDetails: React.FC<Props> = ({
     Ratings,
     imdbRating,
     Production,
-    Runtime
+    Runtime,
 
     //
-  }
+  },
 }) => {
   let budgetFormat = budget
     ? new Intl.NumberFormat().format(budget)
@@ -35,7 +35,7 @@ const BasicDetails: React.FC<Props> = ({
   let RottenTomato: string = "";
 
   if (Ratings && Ratings.length > 0) {
-    Ratings.map(Rat => {
+    Ratings.map((Rat) => {
       if (Rat.Source === "Rotten Tomatoes") {
         RottenTomato = Rat.Value;
       }

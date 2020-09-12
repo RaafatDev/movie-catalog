@@ -14,7 +14,8 @@ $medium-size: 767px;
 $large-size: 991px;
 $extra-large-size: 1199px;
 
-@import "./components/movie-details/MovieDetails.scss";
+// @import "./components/movie-details/MovieDetails.scss";
+@import "./pages/MovieDetails.scss";
 @import "./components/movie-details/ImagesSlide.scss";
 @import "./components/movie-details/MovieVideos.scss";
 @import "./components/movie-details/Credits.scss";
@@ -26,7 +27,7 @@ $extra-large-size: 1199px;
 @import "./components/movies-list/Movie.scss";
 @import "./components/movies-list/MoviesList.scss";
 
-@import "./components/About.scss";
+@import "./pages/About.scss";
 
 // @import "./pages/MovieDetails.scss";
 img {
