@@ -5,6 +5,7 @@ import Burger from "./Burger";
 interface Props {}
 
 const Nav = styled.nav`
+  color: white;
   width: 100%;
   height: 55px;
   border-bottom: 2px solid #f1f1f1;
@@ -15,6 +16,7 @@ const Nav = styled.nav`
     padding: 15px 0;
   }
 `;
+
 function Navbar({}: Props): ReactElement {
   return (
     <Nav>

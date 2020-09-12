@@ -14,7 +14,7 @@ const Layout = ({ children }: Props) => {
   return (
     <>
       <GlobalStyle />
-      <Navbar />
+      {/* <Navbar /> */}
       <div>{children}</div>
       <Footer />
     </>

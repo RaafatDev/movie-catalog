@@ -42,7 +42,7 @@ const App: React.FC = () => {
         <Router basename={process.env.PUBLIC_URL}>
           {/* <Router> */}
           <ScrollToTop />
-          {/* <MainNav /> */}
+          <MainNav />
           {/* <FirstGraphqlCom />
           <FirstGraphqlCom />
           <FirstGraphqlCom />

@@ -1,5 +1,6 @@
 import React, { ReactElement } from "react";
 import styled from "styled-components";
+import SearchBox from "./SearchBox";
 
 interface Props {
   open: boolean;
@@ -15,6 +16,7 @@ const StyledUl = styled.ul<StyledProps>`
   flex-flow: row nowrap;
   li {
     padding: 18px 10px;
+    /* padding: 08px 10px; */
   }
   @media (max-width: 768px) {
     flex-flow: column nowrap;
@@ -39,9 +41,12 @@ function RightNav({ open }: Props): ReactElement {
     <StyledUl open={open} style={{ color: "white" }}>
       <li>Home</li>
       <li>About Us</li>
-      <li>Contact Us</li>
-      <li>Sign In</li>
-      <li>Sign Up</li>
+      {/* <li>Contact Us</li> */}
+      {/* <li>Sign In</li> */}
+      {/* <li>Sign Up</li> */}
+      <li>
+        <SearchBox />
+      </li>
     </StyledUl>
   );
 }
