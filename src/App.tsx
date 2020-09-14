@@ -19,7 +19,6 @@ import "./App.scss";
 import MainNav from "./components/navbar/MainNav";
 // import MovieDetails from "./pages/MovieDetails";
 // import MovieDetails from "./components/movie-details/MovieDetails";
-import FirstGraphqlCom from "./graphComp/firstGraphqlCom";
 
 export type StoreApi = {
   state: typeof initialState;
@@ -48,11 +47,7 @@ const App: React.FC = () => {
           {/* <Router> */}
           <ScrollToTop />
           <MainNav />
-          {/* <FirstGraphqlCom /> */}
-          {/* <FirstGraphqlCom />
-          <FirstGraphqlCom />
-          <FirstGraphqlCom />
-          <FirstGraphqlCom /> */}
+
           <Switch>
             <Route exact path="/" component={Home} />
             <Route exact path="/about" component={About} />

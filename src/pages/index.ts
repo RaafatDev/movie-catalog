@@ -8,6 +8,5 @@ import SearchResults from "./SearchResults";
 import ViewAll from "./ViewAll";
 import NotFound from "./NotFound";
 import MovieDetails from "./MovieDetails";
-// import FirstGraphqlCom from "./graphComp/firstGraphqlCom";
 
 export { Home, About, SearchResults, ViewAll, NotFound, MovieDetails };
