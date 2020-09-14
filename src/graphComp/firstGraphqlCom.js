@@ -3,7 +3,7 @@ import { useQuery, gql } from "@apollo/client";
 
 const FETCH_MOVIES_LIST = gql`
   query fetchMoviesList {
-    moviesList {
+    movieList {
       id
       title
     }
@@ -15,10 +15,13 @@ const FirstGraphqlCom = () => {
   if (loading) return <p>Loading ... </p>;
   if (error) return <p>Error ... </p>;
 
-  console.log("data: ", data);
-  return data.moviesList.map((movie) => {
-    return <div style={{ color: "white" }}> {movie.title} </div>;
-  });
+  // console.log("data: in jsssss ", data);
+  return (
+    data &&
+    data.movieList.map((movie) => {
+      return <div style={{ color: "white" }}> {movie.title} </div>;
+    })
+  );
 };
 
 export default FirstGraphqlCom;

@@ -1,72 +1,99 @@
-import React, { useContext, useEffect } from "react";
-import {
-  movieRequestSend,
-  movieRequestSuccess,
-  movieRequestFailure,
-  tvShowRequestSuccess
-} from "../../appState/movieActions";
-import { MoviesContext } from "../../App";
+import React from "react";
+import { useQuery, gql } from "@apollo/client";
+
 import { PopularMovie } from "../../model/PopularMovie";
 
 import Movie from "./Movie";
 
-import { popular_tv_url, popular_url } from "../../urls_and_keys";
+type FragmentType = {
+  fragments?: {
+    basicDetail?: any;
+  };
+};
 
-import usePrepareMoviesArr from "../../hooks/usePrepareMoviesArr";
-import { useFetch } from "../../hooks/useFetch";
+let MovieListPage: FragmentType = {};
+
+MovieListPage.fragments = {
+  basicDetail: gql`
+    fragment testFragment on MovieList {
+      isMovie
+      title
+      release_date
+      id
+      poster_path
+      backdrop_path
+      overview
+      genre_ids
+    }
+  `,
+};
+
+const FETCH_TV_SHOW_LIST = gql`
+  query FetchTVShowList {
+    TVShowList {
+      ...testFragment
+    }
+  }
+  ${MovieListPage.fragments.basicDetail}
+`;
+
+const FETCH_MOVIES_LIST = gql`
+  query FetchMovieList {
+    movieList {
+      ...testFragment
+    }
+  }
+  ${MovieListPage.fragments.basicDetail}
+`;
 
 const MoviesList: React.FC = () => {
-  //!
-  const { state, dispatch } = useContext<any>(MoviesContext);
-  const [dataArr, isLoading, error] = useFetch(popular_url);
-  const [tvDataArr, tvIsLoading, tvError] = useFetch(popular_tv_url);
-  // const [sortedTvShowsArr] = usePrepareMoviesArr(tvDataArr, dispatch);
-  const [sortedTvShowsArr] = usePrepareMoviesArr(tvDataArr);
-  // const [sortedMoviesArr] = usePrepareMoviesArr(dataArr, dispatch);
-  const [sortedMoviesArr] = usePrepareMoviesArr(dataArr);
+  const {
+    loading: movieListLoading,
+    error: movieListError,
+    data: movieListData,
+  } = useQuery(FETCH_MOVIES_LIST);
 
-  useEffect(() => {
-    if (isLoading) dispatch(movieRequestSend());
-    if (sortedTvShowsArr) dispatch(tvShowRequestSuccess(sortedTvShowsArr));
-    if (sortedMoviesArr) dispatch(movieRequestSuccess(sortedMoviesArr));
-    if (error) dispatch(movieRequestFailure);
-  }, [sortedMoviesArr, sortedTvShowsArr]);
-  // console.log("the global state", state);
+  const {
+    loading: TVShowListLoading,
+    error: TVShowListError,
+    data: TVShowListData,
+  } = useQuery(FETCH_TV_SHOW_LIST);
+
+  if (movieListLoading || TVShowListLoading) return <div>Loading ... </div>;
+  if (movieListError || TVShowListError)
+    return <div>Something went wrong {":("}</div>;
 
   return (
-    // <div className="container bg-primary p-4 p-md-0 mt-4">
-    // <div className="container bg-primary  mt-4">
     <div className="movies-list-container container text-light  mt-4">
       <h1>Movies</h1>
       <div className="container">
         <div className="row">
-          {state &&
-            state.movieArr &&
-            state.movieArr.slice(0, 10).map((x: PopularMovie) => (
+          {movieListData &&
+            movieListData.movieList.slice(0, 10).map((movie: PopularMovie) => (
               <div
                 className="col m-2 p-0 d-flex justify-content-center align-items-stretch"
-                key={x.id}
+                key={movie.id}
               >
-                <Movie oneMovie={x} key={x.id} />
+                <Movie oneMovie={movie} key={movie.id} />
               </div>
             ))}
         </div>
       </div>
       <hr />
-      {/* <br /> */}
       <h1>TV Shows</h1>
       <div className="container">
         <div className="row">
-          {state &&
-            state.tvShowArr &&
-            state.tvShowArr.slice(0, 10).map((x: PopularMovie) => (
-              <div
-                className="col m-2 p-0 d-flex justify-content-center align-items-stretch"
-                key={x.id}
-              >
-                <Movie oneMovie={x} key={x.id} />
-              </div>
-            ))}
+          {TVShowListData &&
+            TVShowListData.TVShowList.slice(0, 10).map(
+              (TVShow: PopularMovie) => (
+                <div
+                  className="col m-2 p-0 d-flex justify-content-center align-items-stretch"
+                  key={TVShow.id}
+                >
+                  <Movie oneMovie={TVShow} key={TVShow.id} />
+                </div>
+              )
+            )}
         </div>
       </div>
     </div>

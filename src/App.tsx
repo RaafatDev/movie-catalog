@@ -33,6 +33,11 @@ export const MoviesContext = React.createContext<
 
 const App: React.FC = () => {
   const [state, dispatch] = useReducer(movieReducer, initialState);
+  console.log("hiii");
+  console.log("hiii");
+  console.log("hiii");
+  console.log("hiii");
+  console.log("hiii");
 
   return (
     <div className="app min-vh-100">
@@ -43,6 +48,7 @@ const App: React.FC = () => {
           {/* <Router> */}
           <ScrollToTop />
           <MainNav />
+          {/* <FirstGraphqlCom /> */}
           {/* <FirstGraphqlCom />
           <FirstGraphqlCom />
           <FirstGraphqlCom />

@@ -5,24 +5,16 @@ import Layout from "../components/Layout";
 import MoviesList from "../components/movies-list/MoviesList";
 import MainSlider from "../components/slider/MainSlider";
 // const MovieListLazy = React.lazy(() => import("./movies-list/MoviesList"));
+import MovieGrid from "../components/movie-grid/MovieGrid";
 
 interface Props {}
 
 const Home: React.FC<Props> = () => {
   return (
-    // <div className="mt-4 pt-3">
     <Layout>
       <div>
-        {/* <Suspense
-        fallback={
-          <div className="text-danger bg-light">
-            Looooooooooooding !!!!!!!!!!
-          </div>
-        }
-      > */}
+        {/* <MovieGrid /> */}
         <MainSlider />
-        {/* <MovieListLazy /> */}
-        {/* </Suspense> */}
         <MoviesList />
       </div>
     </Layout>

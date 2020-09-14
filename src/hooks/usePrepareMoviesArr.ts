@@ -14,7 +14,7 @@ const usePrepareMoviesArr = (rowArr: any) => {
 
     if (rowArr.length === 0) return;
 
-    console.log("rowArr:", rowArr);
+    // console.log("rowArr:", rowArr);
 
     rowArr.results.map((movie: PopularMovie) => {
       if (!movie.genre_ids) return;
