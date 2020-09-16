@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { RouteComponentProps } from "react-router";
-import Movie from "../components/movies-list/Movie";
-import { PopularMovie } from "../model/PopularMovie";
+
 import useDebouncedSearch from "../hooks/useDebouncedSearch";
-import Layout from "../components/Layout";
+
+import { PopularMovie } from "../model/PopularMovie";
+import { Layout, Movie } from "../components";
 
 interface Props extends RouteComponentProps<{ keyword: string }> {}
 

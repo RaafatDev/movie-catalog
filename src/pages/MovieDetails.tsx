@@ -4,11 +4,13 @@ import { RouteComponentProps } from "react-router-dom";
 import { QUERY_MOVIE_DETAIL } from "../graphql/queries";
 import { useQuery } from "@apollo/client";
 
-import Credits from "../components/movie-details/Credits";
-import ImagesSlide from "../components/movie-details/ImagesSlide";
-import MovieVideos from "../components/movie-details/MovieVideos";
-import BasicDetails from "../components/movie-details/BasicDetails";
-import Layout from "../components/Layout";
+import {
+  Layout,
+  BasicDetails,
+  Credits,
+  ImagesSlide,
+  MovieVideos,
+} from "../components";
 
 interface Props
   extends RouteComponentProps<{ id: string; kind: string; title: string }> {}

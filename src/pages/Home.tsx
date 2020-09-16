@@ -1,12 +1,9 @@
 import React from "react";
-import { useQuery } from "@apollo/client";
-
-import Layout from "../components/Layout";
-
-import MoviesList from "../components/movies-list/MoviesList";
-import MainSlider from "../components/slider/MainSlider";
 
 import { QUERY_MOVIES_LIST, QUERY_TV_SHOW_LIST } from "../graphql/queries";
+import { useQuery } from "@apollo/client";
+
+import { Layout, MoviesList, MainSlider } from "../components";
 
 interface Props {}
 

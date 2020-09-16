@@ -17,8 +17,6 @@ import {
 // ##########
 import "./App.scss";
 import MainNav from "./components/navbar/MainNav";
-// import MovieDetails from "./pages/MovieDetails";
-// import MovieDetails from "./components/movie-details/MovieDetails";
 
 export type StoreApi = {
   state: typeof initialState;
@@ -32,19 +30,11 @@ export const MoviesContext = React.createContext<
 
 const App: React.FC = () => {
   const [state, dispatch] = useReducer(movieReducer, initialState);
-  console.log("hiii");
-  console.log("hiii");
-  console.log("hiii");
-  console.log("hiii");
-  console.log("hiii");
 
   return (
     <div className="app min-vh-100">
-      {/* <div className="app "> */}
       <MoviesContext.Provider value={{ state, dispatch } as StoreApi}>
-        {/* <Router basename="/movie-catalog"> */}
         <Router basename={process.env.PUBLIC_URL}>
-          {/* <Router> */}
           <ScrollToTop />
           <MainNav />
 
