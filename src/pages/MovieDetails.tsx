@@ -1,21 +1,14 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { RouteComponentProps } from "react-router-dom";
-// import { useURL } from "../../hooks/useURL";
-import { useURL } from "../hooks/useURL";
-// import useCombineFetch from "../../hooks/useCombineFetch";
-// import useFetchOrSession from "../../hooks/useFetchOrSession";
-import useFetchOrSession from "../hooks/useFetchOrSession";
-// import Credits from "./Credits";
+
+import { QUERY_MOVIE_DETAIL } from "../graphql/queries";
+import { useQuery } from "@apollo/client";
+
 import Credits from "../components/movie-details/Credits";
-// import ImagesSlide from "../ImagesSlide";
 import ImagesSlide from "../components/movie-details/ImagesSlide";
-// import MovieVideos from "../MovieVideos";
 import MovieVideos from "../components/movie-details/MovieVideos";
-// import BasicDetails from "./BasicDetails";
 import BasicDetails from "../components/movie-details/BasicDetails";
 import Layout from "../components/Layout";
-// import useLocalStorage from "../../hooks/useLocalStorage";
-// import useSessionStorage from "../../hooks/useSessionStorage";
 
 interface Props
   extends RouteComponentProps<{ id: string; kind: string; title: string }> {}
@@ -23,50 +16,41 @@ interface Props
 const MovieDetails: React.FC<Props> = ({ match }) => {
   //
   const { id, kind, title } = match.params;
+  const isMovie = kind === "film" ? true : false;
 
-  const sessionStorageName: string = "movie-details22";
+  const { loading, error, data } = useQuery(QUERY_MOVIE_DETAIL, {
+    variables: { id: id, isMovie: isMovie },
+  });
 
-  const { url } = useURL(kind, id);
+  if (loading)
+    return <div style={{ color: "white", fontSize: "50px" }}>Loading ... </div>;
 
-  // const [combinedFetch] = useCombineFetch(url);
-  // const [combinedFetch2] = useCombineFetch2(url, localStorageCustomName);
-  // const [storageValue, isLoading, error] = useCombineFetch2(
-  const [movieDetails, isLoading, error] = useFetchOrSession(
-    url,
-    sessionStorageName
-  );
+  if (error) return <div>Error, something went wrong!</div>;
 
-  useEffect(() => {
-    return () => {
-      // todo: removie the sessionStorageName after the refactoring and restructuring the code
-      // sessionStorage.removeItem(sessionStorageName);
-    };
-  }, []);
-  // console.log("movieDetails", movieDetails);
+  const movieDetails = {
+    ...data.movieDetail.OMDB_MovieDetail,
+    ...data.movieDetail.TMDB_MovieDetail,
+  };
 
   let trailers: any;
   let images: any;
-  if (movieDetails) {
-    if (!movieDetails?.videos || movieDetails?.videos?.results.length === 0) {
-      // trailers = <h3>No Videos Found! </h3>;
-      trailers = (
-        <div className="container">
-          <p className="trailer-available"> No Related Videos Found! </p>{" "}
-        </div>
-      );
-    } else {
-      trailers = movieDetails.videos.results.map(
-        (video: any, index: number) => (
-          <MovieVideos video={video} key={index} index={index} />
-        )
-      );
-    }
+  if (!movieDetails?.videos || movieDetails?.videos?.length === 0) {
+    // trailers = <h3>No Videos Found! </h3>;
+    trailers = (
+      <div className="container">
+        <p className="trailer-available"> No Related Videos Found! </p>{" "}
+      </div>
+    );
+  } else {
+    trailers = movieDetails.videos?.map((video: any, index: number) => (
+      <MovieVideos video={video} key={index} index={index} />
+    ));
+  }
 
-    if (!movieDetails?.images || !movieDetails?.images?.backdrops) {
-      images = <h3>No Images Found </h3>;
-    } else {
-      images = <ImagesSlide images={movieDetails.images} />;
-    }
+  if (!movieDetails?.images || !movieDetails?.images?.backdrops) {
+    images = <h3>No Images Found </h3>;
+  } else {
+    images = <ImagesSlide images={movieDetails.images} />;
   }
 
   return (
@@ -105,13 +89,13 @@ const MovieDetails: React.FC<Props> = ({ match }) => {
                   </div>
                 </div>
 
-                {isLoading && <h1>Loading ............</h1>}
+                {loading && <h1>Loading ............</h1>}
                 {error && (
                   <h3>
                     {`:(`} <br /> it seems like something went wrong!{" "}
                   </h3>
                 )}
-                {!isLoading && <BasicDetails combinedFetch={movieDetails} />}
+                {!loading && <BasicDetails combinedFetch={movieDetails} />}
               </div>
             </div>
           </div>
@@ -137,7 +121,7 @@ const MovieDetails: React.FC<Props> = ({ match }) => {
             >
               {images}
 
-              {movieDetails?.videos?.results.length > 0 && (
+              {movieDetails?.videos?.results?.length > 0 && (
                 <div className="container">
                   <p className="trailer-available">Available Trailers:</p>{" "}
                 </div>
@@ -178,7 +162,8 @@ const MovieDetails: React.FC<Props> = ({ match }) => {
                 {movieDetails && movieDetails.credits && (
                   <div className="container mt-4">
                     <Credits
-                      cast={movieDetails.credits.cast}
+                      // cast={movieDetails.credits.cast}
+                      cast={movieDetails.credits}
                       actors={movieDetails.Actors}
                     />
                   </div>

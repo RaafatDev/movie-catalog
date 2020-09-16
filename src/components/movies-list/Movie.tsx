@@ -63,7 +63,7 @@ interface MovieProps {
 }
 
 const Movie: React.FC<MovieProps> = ({ oneMovie }) => {
-  console.log("one Movie: ", oneMovie);
+  // console.log("one Movie: ", oneMovie);
 
   const { isMovie, id, poster_path, title, release_date } = oneMovie;
   const kind: string = isMovie ? "film" : "tv-show";
