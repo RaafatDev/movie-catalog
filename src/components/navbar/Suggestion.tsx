@@ -9,22 +9,36 @@ interface Props {
 const Suggestion: React.FC<Props> = ({ movie }) => {
   //
   const kind: string = movie.isMovie ? "film" : "tv-show";
-  // console.log("the movie infors: ", movie);
+
+  // console.log("movieeeeeeeeeeeeeeeee: ", movie);
+
+  // console.log("the movie in the suggestions: ", movie);
+
+  let imgSrc: string;
+
+  if (movie.poster_path !== "no_image") {
+    imgSrc = movie.poster_path;
+  } else if (
+    movie.poster_path === "no_image" &&
+    movie.backdrop_path !== "no_image"
+  ) {
+    imgSrc = movie.backdrop_path;
+  } else {
+    imgSrc = `${process.env.PUBLIC_URL}/img/no_image.png`;
+  }
 
   return (
     <div>
       <div className="suggestions__item d-flex border bg-white">
-        <img src={movie.poster_path} className="suggestions__item__image" />
+        {/* <img src={movie.poster_path} className="suggestions__item__image" /> */}
+        <img src={imgSrc} className="suggestions__item__image" />
 
         <div className="suggestions__item__info pl-2">
           <Link
             to={{
-              // pathname: `/movie/${movie.id}/${movie.title
-              // /details/${kind}
               pathname: `/details/${kind}/${movie.id}/${movie.title
                 .split(" ")
                 .join("-")}`,
-              // pathname: `/details/${kind}/${id}/${title.split(" ").join("-")}`,
               state: {
                 movie: JSON.stringify(movie),
               },

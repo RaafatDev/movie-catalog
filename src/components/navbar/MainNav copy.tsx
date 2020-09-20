@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 import Suggestion from "./Suggestion";
-import { useQuery } from "@apollo/react-hooks";
+import NoSuggestions from "./NoSuggestion";
+import { useLazyQuery } from "@apollo/react-hooks";
 import { QUERY_SEARCH_LIST } from "../../graphql/queries";
 import LoadingSuggestions from "./Loading";
 
@@ -12,12 +13,13 @@ const MainNav: React.FC<Props> = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [showSuggestions, setShowSuggestions] = useState(false);
   const searchRef = React.useRef<any>(null);
+
   //* ##################
   const SEARCH_DEBOUNCE_TIMEOUT = 500;
+  const debounceSearch = useDebounce(searchTerm, SEARCH_DEBOUNCE_TIMEOUT);
 
-  const { loading, data } = useDebouncedQuery(
-    searchTerm,
-    SEARCH_DEBOUNCE_TIMEOUT
+  const [getMovieListApollo, { loading, called, data }] = useLazyQuery(
+    QUERY_SEARCH_LIST
   );
 
   function handleClick(e: any) {
@@ -48,12 +50,53 @@ const MainNav: React.FC<Props> = () => {
   }
 
   useEffect(() => {
+    if (debounceSearch) {
+      console.log("there is debounce !!! ");
+
+      getMovieListApollo({ variables: { searchTerm: debounceSearch } });
+    }
+  }, [debounceSearch]);
+
+  useEffect(() => {
     window.addEventListener("click", handleClick);
 
     return () => window.removeEventListener("click", handleClick);
   }, []);
 
   // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  let suggestions: any[] = [];
+  // let noResult = false;
+  if (
+    showSuggestions &&
+    called &&
+    data &&
+    !loading &&
+    data.searchMovieList.length > 0
+  ) {
+    //
+    console.log("sugestions: ", suggestions);
+
+    suggestions = data.searchMovieList
+      .slice(0, 5)
+      .map((movie: any, index: number) => (
+        <Suggestion movie={movie} key={index} />
+      ));
+    console.log("suggestions afterrrr : ", suggestions);
+  }
+
+  if (showSuggestions && called && data && data.searchMovieList.length == 0) {
+    console.log("search teeeeeeeeeeeerm : ", debounceSearch);
+
+    suggestions = [<NoSuggestions searchTerm={debounceSearch} key={1} />];
+  }
+  // if (showSuggestions && called && data && loading) {
+  //   suggestions = [<NoSuggestions searchTerm="Looooooooooooooooding" />];
+  // }
+  // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+  console.log("the data: ", data);
 
   return (
     <nav className="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
@@ -101,37 +144,37 @@ const MainNav: React.FC<Props> = () => {
               className="suggestions rounded"
               onClick={() => setShowSuggestions(true)}
             >
-              {showSuggestions && loading && <LoadingSuggestions />}
-
-              {showSuggestions &&
+              {/* {showSuggestions &&
                 data &&
+                !loading &&
                 data.searchMovieList &&
                 data.searchMovieList
                   .slice(0, 5)
                   .map((movie: any, index: number) => (
                     <Suggestion movie={movie} key={index} />
-                  ))}
+                  ))} */}
+              {/* {suggestions} */}
+              {/* {loading && <NoSuggestions searchTerm="Loading" />} */}
+              {/* {loading && <LoadingSuggestions />} */}
 
-              {showSuggestions &&
-                data &&
-                data.searchMovieList &&
-                data.searchMovieList.length !== 0 && (
-                  <Link
-                    to={{
-                      pathname: `/search/keyword=${searchRef.current.value
-                        .split(" ")
-                        .join("-")}`,
-                      state: {
-                        searchedMovies: JSON.stringify(data.searchMovieList),
-                        keyword: searchRef.current.value,
-                      },
-                    }}
-                  >
-                    <button className="suggestions__button btn btn-primary btn-block border">
-                      View All
-                    </button>
-                  </Link>
-                )}
+              {loading ? <LoadingSuggestions /> : suggestions}
+              {showSuggestions && data && data.searchMovieList.length !== 0 && (
+                <Link
+                  to={{
+                    pathname: `/search/keyword=${searchRef.current.value
+                      .split(" ")
+                      .join("-")}`,
+                    state: {
+                      searchedMovies: JSON.stringify(data.searchMovieList),
+                      keyword: searchRef.current.value,
+                    },
+                  }}
+                >
+                  <button className="suggestions__button btn btn-primary btn-block border">
+                    View All
+                  </button>
+                </Link>
+              )}
             </div>
           </form>
         </div>
@@ -166,22 +209,3 @@ function useDebounce(value: any, delay: any) {
 
   return debouncedValue;
 }
-
-const useDebouncedQuery = (value: string, delay: number) => {
-  const [debouncedValue, setDebouncedValue] = useState(value);
-
-  const queriedData = useQuery(QUERY_SEARCH_LIST, {
-    variables: { searchTerm: debouncedValue },
-  });
-
-  useEffect(() => {
-    const handler = setTimeout(() => {
-      setDebouncedValue(value.split(" ").join("+"));
-    }, [delay]);
-    return () => {
-      clearTimeout(handler);
-    };
-  }, [value]);
-
-  return queriedData;
-};
