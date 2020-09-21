@@ -63,10 +63,17 @@ interface MovieProps {
 }
 
 const Movie: React.FC<MovieProps> = ({ oneMovie }) => {
-  // console.log("one Movie: ", oneMovie);
-
-  const { isMovie, id, poster_path, title, release_date } = oneMovie;
+  const {
+    isMovie,
+    id,
+    poster_path,
+    backdrop_path,
+    title,
+    release_date,
+  } = oneMovie;
   const kind: string = isMovie ? "film" : "tv-show";
+
+  const imgSrc = poster_path !== "no_image" ? poster_path : backdrop_path;
 
   return (
     <Link
@@ -78,7 +85,14 @@ const Movie: React.FC<MovieProps> = ({ oneMovie }) => {
       }}
     >
       <StyledCard>
-        <img src={poster_path} alt={title + id} />
+        <img
+          src={
+            imgSrc !== "no_image"
+              ? imgSrc
+              : `${process.env.PUBLIC_URL}/img/no_image.png`
+          }
+          alt={title + id}
+        />
         <div className="movie-info">
           <StyledTitle>{title}</StyledTitle>
           <StyledDate>({release_date}) </StyledDate>

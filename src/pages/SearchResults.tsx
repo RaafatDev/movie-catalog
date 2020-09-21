@@ -43,12 +43,13 @@ const SearchResults: React.FC<Props> = ({ match, location }) => {
               {localSession &&
                 localSession.searchedMovies &&
                 JSON.parse(localSession.searchedMovies).map(
-                  (x: PopularMovie) => (
+                  (x: PopularMovie, index: number) => (
                     <div
                       className="col  m-2 p-0 d-flex align-items-stretch justify-content-center"
-                      key={x.id}
+                      key={index}
                     >
-                      <Movie oneMovie={x} key={x.id} />
+                      <Movie oneMovie={x} />
+                      {/* <Movie oneMovie={x} key={x.id} /> */}
                     </div>
                   )
                 )}

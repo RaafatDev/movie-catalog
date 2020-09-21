@@ -11,9 +11,6 @@ interface Props {
 }
 
 const Credits: React.FC<Props> = ({ cast, actors }) => {
-  // console.log("cart", cast);
-  // console.log("actors", actors);
-
   return (
     <div>
       <div>

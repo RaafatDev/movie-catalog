@@ -15,14 +15,11 @@ const useFetchOrSession: Hook = (tmdb_url: string, key: string) => {
   const fetchData = async (url: string) => {
     const response = await fetch(url);
     const json = await response.json();
-    // console.log("json", json);
 
     return json;
   };
 
   const nestedFetch = async () => {
-    // console.log("nestedFetchchchchchchchch is called ");
-
     setIsLoading(true);
     let combined: any = {};
     try {

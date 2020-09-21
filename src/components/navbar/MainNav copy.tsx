@@ -51,8 +51,6 @@ const MainNav: React.FC<Props> = () => {
 
   useEffect(() => {
     if (debounceSearch) {
-      console.log("there is debounce !!! ");
-
       getMovieListApollo({ variables: { searchTerm: debounceSearch } });
     }
   }, [debounceSearch]);
@@ -75,19 +73,15 @@ const MainNav: React.FC<Props> = () => {
     data.searchMovieList.length > 0
   ) {
     //
-    console.log("sugestions: ", suggestions);
 
     suggestions = data.searchMovieList
       .slice(0, 5)
       .map((movie: any, index: number) => (
         <Suggestion movie={movie} key={index} />
       ));
-    console.log("suggestions afterrrr : ", suggestions);
   }
 
   if (showSuggestions && called && data && data.searchMovieList.length == 0) {
-    console.log("search teeeeeeeeeeeerm : ", debounceSearch);
-
     suggestions = [<NoSuggestions searchTerm={debounceSearch} key={1} />];
   }
   // if (showSuggestions && called && data && loading) {
@@ -95,8 +89,6 @@ const MainNav: React.FC<Props> = () => {
   // }
   // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-  console.log("the data: ", data);
 
   return (
     <nav className="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
