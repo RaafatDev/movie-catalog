@@ -2,12 +2,20 @@ import React from "react";
 import { PopularMovie } from "../../model/PopularMovie";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+// import {} from "styled-components/cssprop";
 
-const StyledCard = styled.div`
+const StyledCard = styled.div<{ no_image: string }>`
   overflow: hidden;
   padding: 0 0 2px;
   margin: 0px auto 0;
   width: 200px;
+
+  height: 100%;
+
+  /* height: auto; */
+  /* border-bottom: 4px solid black; */
+  border-bottom: ${(props) =>
+    props.no_image === "no_image" ? "1px solid black" : "none"};
   /* font-family: Quicksand, arial, sans-serif; */
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.05), 0 0px 40px rgba(0, 0, 0, 0.08);
   border-radius: 5px;
@@ -76,50 +84,33 @@ const Movie: React.FC<MovieProps> = ({ oneMovie }) => {
   const imgSrc = poster_path !== "no_image" ? poster_path : backdrop_path;
 
   return (
-    <Link
-      to={{
-        pathname: `/details/${kind}/${id}/${title.split(" ").join("-")}`,
-        state: {
-          movie: JSON.stringify(oneMovie),
-        },
-      }}
-    >
-      <StyledCard>
-        <img
-          src={
-            imgSrc !== "no_image"
-              ? imgSrc
-              : `${process.env.PUBLIC_URL}/img/no_image.png`
-          }
-          alt={title + id}
-        />
-        <div className="movie-info">
-          <StyledTitle>{title}</StyledTitle>
-          <StyledDate>({release_date}) </StyledDate>
-        </div>
-      </StyledCard>
-      {/* <div className="movie-container text-center">
-        <img
-          className="movie-container__image rounded-lg"
-          src={poster_path}
-          alt={title + id}
-        />
-        <div className="movie-container__info p-2">
-          <p className="lead mb-0">{title}</p>
-          <p className="lead">({release_date}) </p>
-        </div>
-      </div> */}
-    </Link>
+    <div>
+      <Link
+        to={{
+          pathname: `/details/${kind}/${id}/${title.split(" ").join("-")}`,
+          state: {
+            movie: JSON.stringify(oneMovie),
+          },
+        }}
+      >
+        {/* <StyledCard noImage={imgSrc === "no_image" ? "noImage" : "none"}> */}
+        <StyledCard no_image={imgSrc}>
+          <img
+            src={
+              imgSrc !== "no_image"
+                ? imgSrc
+                : `${process.env.PUBLIC_URL}/img/no_image.png`
+            }
+            alt={title + id}
+          />
+          <div className="movie-info">
+            <StyledTitle>{title}</StyledTitle>
+            <StyledDate>({release_date}) </StyledDate>
+          </div>
+        </StyledCard>
+      </Link>
+    </div>
   );
 };
 
 export default Movie;
-
-/*
-background or the whole page is the same like the background of the cart: #17141d
-
-border-radius: 16px; 
-background: #17141d;
-box-shadow: 0 0 3rem #00
-
-*/

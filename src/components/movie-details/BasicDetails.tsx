@@ -9,6 +9,7 @@ interface Props {
 const BasicDetails: React.FC<Props> = ({
   combinedFetch: {
     poster_path,
+    backdrop_path,
     title,
     release_date,
     overview,
@@ -42,12 +43,22 @@ const BasicDetails: React.FC<Props> = ({
     });
   }
 
+  const imgSrc = poster_path !== "no_image" ? poster_path : backdrop_path;
+
   return (
     <div className="basic-info-container">
       <div className="container-fluid basic-info">
         <div className="row">
           <div className="col-12 col-md-5 pt-4 text-center">
-            <img className="basic-info__image" src={poster_path} alt={title} />
+            <img
+              className="basic-info__image"
+              src={
+                imgSrc !== "no_image"
+                  ? imgSrc
+                  : `${process.env.PUBLIC_URL}/img/no_image.png`
+              }
+              alt={title}
+            />
           </div>
           <div className="col mt-3 mt-md-0 pt-4">
             {release_date && (
