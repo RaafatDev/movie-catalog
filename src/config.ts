@@ -13,7 +13,7 @@ const dev = {
 };
 
 // export const config = process.env.NODE_ENV === "development" ? dev : prod;
-const config = process.env.REACT_APP_STAGE === "production" ? prod : dev;
+const config = process.env.NODE_ENV === "production" ? prod : dev;
 
 export default {
   // Add common config values here
