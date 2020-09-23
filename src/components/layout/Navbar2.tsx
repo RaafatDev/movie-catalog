@@ -1,7 +1,7 @@
 import React from "react";
-import MainNav from "./navbar/MainNav";
+import MainNav from "../navbar/MainNav";
 import { FaAlignRight } from "react-icons/fa";
-import PageLinks from "./constants/links";
+import PageLinks from "../constants/links";
 import styles from "./navbar.module.scss";
 
 interface Props {}

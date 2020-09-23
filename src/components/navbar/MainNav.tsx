@@ -2,9 +2,10 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 import Suggestion from "./Suggestion";
+import LoadingSuggestions from "./LoadingSuggestions";
+
 import { useQuery } from "@apollo/react-hooks";
 import { QUERY_SEARCH_LIST } from "../../graphql/queries";
-import LoadingSuggestions from "./Loading";
 
 interface Props {}
 
@@ -143,30 +144,6 @@ const MainNav: React.FC<Props> = () => {
 export default MainNav;
 
 // Hook
-function useDebounce(value: any, delay: any) {
-  // State and setters for debounced value
-  const [debouncedValue, setDebouncedValue] = useState(value);
-
-  useEffect(
-    () => {
-      // Update debounced value after delay
-      const handler = setTimeout(() => {
-        setDebouncedValue(value);
-      }, delay);
-
-      // Cancel the timeout if value changes (also on delay change or unmount)
-      // This is how we prevent debounced value from updating if value is changed ...
-      // .. within the delay period. Timeout gets cleared and restarted.
-      return () => {
-        clearTimeout(handler);
-      };
-    },
-    [value, delay] // Only re-call effect if value or delay changes
-  );
-
-  return debouncedValue;
-}
-
 const useDebouncedQuery = (value: string, delay: number) => {
   const [debouncedValue, setDebouncedValue] = useState(value);
 

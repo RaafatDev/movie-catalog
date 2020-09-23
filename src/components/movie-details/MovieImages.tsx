@@ -1,5 +1,4 @@
 import React, { MouseEvent } from "react";
-import { basePosterUrl } from "../../urls_and_keys";
 
 interface Props {
   image: {
@@ -11,6 +10,9 @@ interface Props {
 }
 
 const MovieImages: React.FC<Props> = ({ image, length, openOverlay }) => {
+  //
+  const basePosterUrl = `https://image.tmdb.org/t/p/`;
+
   const openModal = (e: MouseEvent<HTMLImageElement>) => {
     openOverlay(e);
   };

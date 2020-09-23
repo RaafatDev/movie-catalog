@@ -1,5 +1,4 @@
 import React from "react";
-// import { PopularMovie } from "../../model/PopularMovie";
 import { ICombined } from "../../model/combined";
 
 interface Props {

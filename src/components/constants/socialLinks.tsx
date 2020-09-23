@@ -1,10 +1,10 @@
-import React from "react"
+import React from "react";
 import {
   FaGithub,
   FaFacebookSquare,
   FaLinkedin,
   FaTwitterSquare,
-} from "react-icons/fa"
+} from "react-icons/fa";
 
 const data = [
   {
@@ -27,20 +27,26 @@ const data = [
     icon: <FaTwitterSquare className="social-icon"></FaTwitterSquare>,
     url: "#",
   },
-]
+];
 
-const links = data.map(link => {
+const links = data.map((link) => {
   return (
     <li key={link.id}>
       <a href={link.url} className="social-link">
         {link.icon}
       </a>
     </li>
-  )
-})
+  );
+});
 
-export default ({ styleClass }) => {
+interface Props {
+  styleClass: string;
+}
+
+const SocialLinks: React.FC<Props> = ({ styleClass }) => {
   return (
     <ul className={`social-links ${styleClass ? styleClass : ""}`}>{links}</ul>
-  )
-}
+  );
+};
+
+export default SocialLinks;

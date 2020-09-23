@@ -13,14 +13,10 @@ const Slid: React.FC<MovieProps> = ({ oneMovie }) => {
     id,
     overview,
     release_date,
-    Genres
+    Genres,
   } = oneMovie;
 
   const kind: string = isMovie ? "film" : "tv-show";
-
-  // if (backdrop_path === "/img/no_image.png") {
-  //   return null;
-  // }
 
   return (
     <div className="slide-container">
@@ -35,8 +31,8 @@ const Slid: React.FC<MovieProps> = ({ oneMovie }) => {
                   .split(" ")
                   .join("-")}`,
                 state: {
-                  movie: JSON.stringify(oneMovie)
-                }
+                  movie: JSON.stringify(oneMovie),
+                },
               }}
             >
               <h1 className="slide__caption__title">{title}</h1>

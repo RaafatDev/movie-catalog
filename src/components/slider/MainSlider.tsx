@@ -1,6 +1,6 @@
-import React, { useContext } from "react";
+import React from "react";
 import Slider from "react-slick";
-// import { MoviesContext } from "../../App";
+
 import Slid from "./Slide";
 import { PopularMovie } from "../../model/PopularMovie";
 
@@ -8,8 +8,7 @@ interface MainSliderProps {
   movieList: PopularMovie[];
 }
 const MainSlider: React.FC<MainSliderProps> = ({ movieList }) => {
-  // const { state } = useContext<any>(MoviesContext);
-
+  //
   var settings = {
     slidesToShow: 1,
     slidesToScroll: 1,

@@ -1,7 +1,8 @@
-import React, { useRef, MouseEvent, useState, useEffect } from "react";
+import React, { useRef, MouseEvent, useState } from "react";
 import Slider from "react-slick";
-// import { basePosterUrl } from "../urls_and_keys";
+
 import MovieImages from "./MovieImages";
+
 interface Props {
   images: {
     backdrops: { file_path: string }[];
@@ -57,8 +58,8 @@ const ImagesSlide: React.FC<Props> = ({ images: { backdrops } }) => {
           slidesToShow: 2,
           infinite: true,
           slidesToScroll: 1,
-          swipeToSlide: true
-        }
+          swipeToSlide: true,
+        },
       },
       {
         breakpoint: 600,
@@ -70,14 +71,14 @@ const ImagesSlide: React.FC<Props> = ({ images: { backdrops } }) => {
           slidesToShow: 1,
           infinite: true,
           slidesToScroll: 1,
-          swipeToSlide: true
-        }
-      }
+          swipeToSlide: true,
+        },
+      },
       // {
       //   breakpoint: 992,
       //   settings: "unslick"
       // }
-    ]
+    ],
   };
   return (
     <div className="ImagesSlide mb-4">

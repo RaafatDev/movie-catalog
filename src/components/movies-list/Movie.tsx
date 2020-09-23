@@ -93,7 +93,6 @@ const Movie: React.FC<MovieProps> = ({ oneMovie }) => {
           },
         }}
       >
-        {/* <StyledCard noImage={imgSrc === "no_image" ? "noImage" : "none"}> */}
         <StyledCard no_image={imgSrc}>
           <img
             src={

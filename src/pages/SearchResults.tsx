@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useLocalSession } from "../hooks/useLocalSessionType";
 
 import { RouteComponentProps } from "react-router";
