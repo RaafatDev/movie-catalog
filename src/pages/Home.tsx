@@ -27,7 +27,7 @@ const Home: React.FC<Props> = () => {
   return (
     <Layout>
       <div>
-        <MainSlider movieList={movieListData.movieList} />
+        {/* <MainSlider movieList={movieListData.movieList} /> */}
 
         <MoviesList movieList={movieListData.movieList} listType={"Movies"} />
         <MoviesList

@@ -17,7 +17,7 @@ const MoviesList: React.FC<MovieListProps> = ({ movieList, listType }) => {
           {movieList &&
             movieList.slice(0, 10).map((movie: PopularMovie) => (
               <div
-                className="col m-2 p-0 d-flex justify-content-center align-items-stretch"
+                className="col p-0 d-flex justify-content-center align-items-stretch"
                 key={movie.id}
               >
                 <Movie oneMovie={movie} key={movie.id} />
