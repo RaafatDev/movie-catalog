@@ -91,7 +91,8 @@ const MovieDetails: React.FC<Props> = ({ match }) => {
         </StyledSection>
         <StyledSection>
           Media (Images and Videos)
-          <Collapsible showTop={150} label="collapsable">
+          <Collapsible label="collapsible">
+            {/*  */}
             {images}
           </Collapsible>
           {movieDetails?.videos?.results?.length > 0 && (

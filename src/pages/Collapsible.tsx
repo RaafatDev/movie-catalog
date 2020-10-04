@@ -1,18 +1,17 @@
 import React, { useState, useRef, useEffect } from "react";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 // import "./styles.css";
 // https://www.youtube.com/watch?v=4F8EYGao9pc
 //
 // interface StyledButtonProps {
 //   fullHeight: any;
 // }
+interface StyledButtonProps {
+  showButton: boolean;
+}
 
-// const StyledButton = styled.button<StyledProps>`
-const StyledButton = styled.div`
-  /* position: absolute; */
-  /* z-index: 4; */
-  /* transform: translateY(1000px); */
-
+const StyledButton = styled.div<StyledButtonProps>`
+  display: ${({ showButton }) => (showButton ? "block" : "none")};
   background: blue;
   border: none;
   cursor: pointer;
@@ -24,25 +23,23 @@ const StyledButton = styled.div`
 `;
 
 interface StyledProps {
-  showTop: number;
+  initialHeight: number;
   isOpen: any;
   fullHeight: any;
 }
 
-const StyledContent = styled.div<StyledProps>`
-  overflow: hidden;
-  /* height: 0px; */
-  /* transform-origin: top left; */
-  transition: height ease 0.3s;
-
-  height: ${({ isOpen, fullHeight, showTop }) =>
-    // isOpen ? `${fullHeight.current.scrollHeight}px` : "0px"};
-    isOpen ? `${fullHeight.current.scrollHeight}px` : showTop + "px"};
-  /* ${({ isOpen }) =>
+/* ${({ isOpen }) =>
     isOpen &&
     css`
       height: 200px;
     `} */
+
+const StyledContent = styled.div<StyledProps>`
+  overflow: hidden;
+  transition: height ease 0.3s;
+
+  height: ${({ isOpen, fullHeight, initialHeight }) =>
+    isOpen ? `${fullHeight.current.scrollHeight}px` : initialHeight + "px"};
 
   .content {
     border: 1px solid #afafaf;
@@ -53,24 +50,39 @@ const StyledContent = styled.div<StyledProps>`
 `;
 
 interface Props {
-  showTop: number;
   label: any;
   children: any;
 }
 
-const Collapsible: React.FC<Props> = ({ showTop, label, children }) => {
+const Collapsible: React.FC<Props> = ({ label, children }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const parentRef = useRef<HTMLDivElement>(null);
-  // const [test, setTest] = useState(true);
 
-  // useEffect(() => {
-  //   if (parentRef.current) console.log(parentRef.current.scrollHeight);
-  // }, []);
+  const [showButton, setShowButton] = useState(false);
+  const [initialHeight, setInitialHeight] = useState(0);
+
+  const parentRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    // if (parentRef.current) console.log(parentRef.current.scrollHeight);
+
+    if (parentRef.current) {
+      let nodeList = parentRef.current.childNodes[0].childNodes[0].childNodes;
+
+      if (nodeList.length > 4) {
+        setShowButton(true);
+      }
+
+      if (nodeList.length > 0) {
+        // take one node element of the node-list and extract the offsetHeight
+        setInitialHeight((nodeList[0] as HTMLElement).offsetHeight * 1.5);
+      }
+    }
+  }, []);
 
   return (
     <div className="collapsible">
       <StyledContent
-        showTop={showTop}
+        initialHeight={initialHeight}
         ref={parentRef}
         fullHeight={parentRef}
         isOpen={isOpen}
@@ -82,11 +94,7 @@ const Collapsible: React.FC<Props> = ({ showTop, label, children }) => {
       >
         <div className="content">{children}</div>
       </StyledContent>
-      <StyledButton
-        // isOpen={isOpen}
-        // fullHeight={parentRef}
-        onClick={() => setIsOpen(!isOpen)}
-      >
+      <StyledButton onClick={() => setIsOpen(!isOpen)} showButton={showButton}>
         {label}
       </StyledButton>
       {/* {children} */}
@@ -95,18 +103,3 @@ const Collapsible: React.FC<Props> = ({ showTop, label, children }) => {
 };
 
 export default Collapsible;
-// export default function App() {
-//   return (
-//     <div className="App">
-//       <Collapsible label="See More 🍕"> whiiiiii</Collapsible>
-//       <Collapsible label="See More Two">
-//         <div>Hi </div>
-//         <div>Hi </div>
-//         <div>Hi </div>
-//       </Collapsible>
-//       <Collapsible label="See More Three">wwwww</Collapsible>
-//       <h1>Hello CodeSandbox</h1>
-//       <h2>Start editing to see some magic happen!</h2>
-//     </div>
-//   );
-// }
