@@ -1,12 +1,8 @@
 import React from "react";
 import { RouteComponentProps } from "react-router-dom";
 
-import styled from "styled-components";
-
 import { QUERY_MOVIE_DETAIL } from "../graphql/queries";
 import { useQuery } from "@apollo/client";
-
-import Collapsible from "./Collapsible";
 
 import {
   Layout,
@@ -15,19 +11,6 @@ import {
   ImagesSlide,
   MovieVideos,
 } from "../components";
-import ImageGallery from "./ImageGallery";
-
-const StyledContainer = styled.div`
-  color: white;
-  width: 80%;
-  margin: auto;
-`;
-
-const StyledSection = styled.section`
-  min-height: 90vh;
-  width: 100%;
-  border: 1px solid red;
-`;
 
 interface Props
   extends RouteComponentProps<{ id: string; kind: string; title: string }> {}
@@ -69,44 +52,11 @@ const MovieDetails: React.FC<Props> = ({ match }) => {
   if (!movieDetails?.images || !movieDetails?.images?.backdrops) {
     images = <h3>No Images Found </h3>;
   } else {
-    images = <ImageGallery images={movieDetails.images} />;
-    // images = <ImagesSlide images={movieDetails.images} />;
+    images = <ImagesSlide images={movieDetails.images} />;
   }
 
-  if (loading) return <h1>Loading ... </h1>;
-  if (error)
-    return (
-      <h1>
-        Error: it seems like something went wrong, please try again later{" "}
-      </h1>
-    );
   return (
     <Layout>
-      <StyledContainer>
-        <p>Basic Details</p>
-        <h2>{title.split("-").join(" ")} </h2>
-
-        <StyledSection>
-          {<BasicDetails combinedFetch={movieDetails} />}
-        </StyledSection>
-        <StyledSection>
-          Media (Images and Videos)
-          <Collapsible showTop={150} label="collapsable">
-            {images}
-          </Collapsible>
-          {movieDetails?.videos?.results?.length > 0 && (
-            <div className="container">
-              <p className="trailer-available">Available Trailers:</p>{" "}
-            </div>
-          )}
-          {trailers}
-        </StyledSection>
-      </StyledContainer>
-      {/*  */}
-      {/*  */}
-      {/*  */}
-      {/*  */}
-      {/*  */}
       <div className="movie-details-container  px-sm-5 pb-5">
         <div id="accordion">
           <div className="card">
