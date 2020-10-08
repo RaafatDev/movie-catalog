@@ -56,6 +56,7 @@ interface Props {
 
 const Collapsible: React.FC<Props> = ({ label, children }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [heightUint, setHeightUnit] = useState(0)
 
   const [showButton, setShowButton] = useState(false);
   const [initialHeight, setInitialHeight] = useState(0);
@@ -63,21 +64,41 @@ const Collapsible: React.FC<Props> = ({ label, children }) => {
   const parentRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    // React.useLayoutEffect(() => {
     // if (parentRef.current) console.log(parentRef.current.scrollHeight);
 
     if (parentRef.current) {
       let nodeList = parentRef.current.childNodes[0].childNodes[0].childNodes;
 
-      if (nodeList.length > 4) {
-        setShowButton(true);
-      }
+     
+       if(window.innerWidth < 640 &&  nodeList.length > 1) {
 
-      if (nodeList.length > 0) {
-        // take one node element of the node-list and extract the offsetHeight
-        setInitialHeight((nodeList[0] as HTMLElement).offsetHeight * 1.5);
+        setShowButton(true)
+
+        setInitialHeight(417)
+      }else if (window.innerWidth < 960 && nodeList.length > 2){
+        setShowButton(true)
+
+        setInitialHeight(277.5)
+
+      }else if (window.innerWidth < 1280 && nodeList.length > 3){
+        setShowButton(true);
+        // console.log('the window outter width: ', window.outerWidth > 1280);
+        
+        setInitialHeight(250)
+      }else if (window.innerWidth > 1280 && nodeList.length > 4){
+        setShowButton(true);
+        // console.log('the window outter width: ', window.outerWidth > 1280);
+        
+        setInitialHeight(250.5)
       }
+      
+     
+     
     }
   }, []);
+
+  console.log("the inisitial Hiehgt::: ;", initialHeight);
 
   return (
     <div className="collapsible">
