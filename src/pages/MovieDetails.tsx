@@ -8,13 +8,7 @@ import { useQuery } from "@apollo/client";
 
 import Collapsible from "./Collapsible";
 
-import {
-  Layout,
-  BasicDetails,
-  Credits,
-  ImagesSlide,
-  MovieVideos,
-} from "../components";
+import { Layout, BasicDetails, Credits, MovieVideos } from "../components";
 import ImageGallery from "./ImageGallery";
 
 const StyledContainer = styled.div`
@@ -27,6 +21,11 @@ const StyledSection = styled.section`
   min-height: 90vh;
   width: 100%;
   border: 1px solid red;
+
+  h4 {
+    padding: 50px 10px 0px 10px;
+    /* madding-top: 10px; */
+  }
 `;
 
 interface Props
@@ -86,12 +85,12 @@ const MovieDetails: React.FC<Props> = ({ match }) => {
         <p>Basic Details</p>
         <h2>{title.split("-").join(" ")} </h2>
 
-        <StyledSection>
+        {/* <StyledSection>
           {<BasicDetails combinedFetch={movieDetails} />}
-        </StyledSection>
+        </StyledSection> */}
         <StyledSection>
-          Media (Images and Videos)
-          <Collapsible label="collapsible">
+          <h4>The Media: Images and Videos</h4>
+          <Collapsible label="View All Image">
             {/*  */}
             {images}
           </Collapsible>

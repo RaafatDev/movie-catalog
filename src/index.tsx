@@ -4,6 +4,9 @@ import "./index.scss";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 
+import { ThemeProvider } from "styled-components";
+import * as theme from "./styled-components/theme";
+
 import { ApolloClient, InMemoryCache } from "@apollo/client";
 import { ApolloProvider } from "@apollo/client";
 
@@ -15,7 +18,9 @@ const client = new ApolloClient({
 
 ReactDOM.render(
   <ApolloProvider client={client}>
-    <App />
+    <ThemeProvider theme={theme}>
+      <App />
+    </ThemeProvider>
   </ApolloProvider>,
   document.getElementById("root")
 );

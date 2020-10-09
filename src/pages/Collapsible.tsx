@@ -12,14 +12,19 @@ interface StyledButtonProps {
 
 const StyledButton = styled.div<StyledButtonProps>`
   display: ${({ showButton }) => (showButton ? "block" : "none")};
-  background: blue;
+
+  background: ${(props) => props.theme.accentColor};
   border: none;
   cursor: pointer;
   font: unset;
-  padding: 0.3rem;
+  padding: 0.5rem;
   border-radius: 5px;
-  color: #ffffff;
+  color: #fff;
   margin-bottom: 0.5rem;
+
+  text-align: center;
+  font-weight: 700;
+  /* color: red; */
 `;
 
 interface StyledProps {
@@ -56,7 +61,7 @@ interface Props {
 
 const Collapsible: React.FC<Props> = ({ label, children }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [heightUint, setHeightUnit] = useState(0)
+  // const [heightUint, setHeightUnit] = useState(0)
 
   const [showButton, setShowButton] = useState(false);
   const [initialHeight, setInitialHeight] = useState(0);
@@ -70,35 +75,27 @@ const Collapsible: React.FC<Props> = ({ label, children }) => {
     if (parentRef.current) {
       let nodeList = parentRef.current.childNodes[0].childNodes[0].childNodes;
 
-     
-       if(window.innerWidth < 640 &&  nodeList.length > 1) {
-
-        setShowButton(true)
-
-        setInitialHeight(417)
-      }else if (window.innerWidth < 960 && nodeList.length > 2){
-        setShowButton(true)
-
-        setInitialHeight(277.5)
-
-      }else if (window.innerWidth < 1280 && nodeList.length > 3){
+      if (window.innerWidth < 640 && nodeList.length > 1) {
         setShowButton(true);
-        // console.log('the window outter width: ', window.outerWidth > 1280);
-        
-        setInitialHeight(250)
-      }else if (window.innerWidth > 1280 && nodeList.length > 4){
+
+        setInitialHeight(417);
+      } else if (window.innerWidth < 960 && nodeList.length > 2) {
         setShowButton(true);
-        // console.log('the window outter width: ', window.outerWidth > 1280);
-        
-        setInitialHeight(250.5)
+
+        setInitialHeight(277.5);
+      } else if (window.innerWidth < 1280 && nodeList.length > 3) {
+        setShowButton(true);
+
+        setInitialHeight(250);
+      } else if (window.innerWidth > 1280 && nodeList.length > 4) {
+        setShowButton(true);
+
+        setInitialHeight(250.5);
       }
-      
-     
-     
     }
   }, []);
 
-  console.log("the inisitial Hiehgt::: ;", initialHeight);
+  console.log("the Initial Height::: ;", initialHeight);
 
   return (
     <div className="collapsible">
