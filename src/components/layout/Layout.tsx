@@ -4,6 +4,7 @@ import Footer from "./Footer";
 // import Navbar from "../nav/Navbar";
 import Navbar from "../nav/Navbar";
 
+// import GlobalStyle from "../../styled-components/globalStyles";
 import GlobalStyle from "../../styled-components/globalStyles";
 
 interface Props {

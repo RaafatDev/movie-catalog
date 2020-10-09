@@ -10,7 +10,7 @@ import Collapsible from "./Collapsible";
 
 import { Layout, BasicDetails, Credits, MovieVideos } from "../components";
 import ImageGallery from "./ImageGallery";
-
+import { size } from "../styled-components/mediaQueries";
 const StyledContainer = styled.div`
   color: white;
   width: 80%;
@@ -25,9 +25,19 @@ const StyledSection = styled.section`
   h4 {
     padding: 50px 10px 0px 10px;
     /* madding-top: 10px; */
+
+    /* @media (min-width: ${size.md}) {
+      color: pink;
+    } */
   }
 `;
-
+const StyledVideoContainer = styled.div`
+  /* padding-bottom: 500px; */
+  margin: 60px 0;
+  @media (min-width: ${size.md}) {
+    margin: 50px;
+  }
+`;
 interface Props
   extends RouteComponentProps<{ id: string; kind: string; title: string }> {}
 
@@ -85,21 +95,23 @@ const MovieDetails: React.FC<Props> = ({ match }) => {
         <p>Basic Details</p>
         <h2>{title.split("-").join(" ")} </h2>
 
-        {/* <StyledSection>
+        <StyledSection>
           {<BasicDetails combinedFetch={movieDetails} />}
-        </StyledSection> */}
+        </StyledSection>
         <StyledSection>
           <h4>The Media: Images and Videos</h4>
           <Collapsible label="View All Image">
             {/*  */}
             {images}
           </Collapsible>
-          {movieDetails?.videos?.results?.length > 0 && (
-            <div className="container">
-              <p className="trailer-available">Available Trailers:</p>{" "}
-            </div>
-          )}
-          {trailers}
+          <StyledVideoContainer>
+            {movieDetails?.videos?.results?.length > 0 && (
+              <div className="container">
+                <p className="trailer-available">Available Trailers:</p>{" "}
+              </div>
+            )}
+            {trailers}
+          </StyledVideoContainer>
         </StyledSection>
       </StyledContainer>
       {/*  */}

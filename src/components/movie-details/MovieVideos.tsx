@@ -11,6 +11,8 @@ interface Props {
 }
 
 const MovieVideos: React.FC<Props> = ({ video, index }) => {
+  console.log("the videoooooooooo: ", video);
+
   const videoSrc = "https://www.youtube.com/embed/" + video.key;
 
   const iframeRef = useRef<any>(null);
@@ -42,7 +44,8 @@ const MovieVideos: React.FC<Props> = ({ video, index }) => {
               data-target={"#" + "trailer" + index.toString()}
               onClick={playVideo}
             >
-              Watch Trailer
+              {/* Watch {video.type} */}
+              Watch Video
             </button>
           </div>
         </div>
