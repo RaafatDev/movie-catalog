@@ -1,6 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
 import styled from "styled-components";
-import { screen_smaller_than } from "../styled-components/mediaQueries";
 // import "./styles.css";
 // https://www.youtube.com/watch?v=4F8EYGao9pc
 //
@@ -22,11 +21,6 @@ const $Button = styled.div<IButtonProps>`
     border-radius: 5px;
     color: #fff;
     margin-bottom: 0.5rem;
-
-    /* @media ${screen_smaller_than.xs} {
-        margin-left: calc(0.5rem + 5px);
-        margin-right: calc(0.5rem + 5px);
-    } */
 
     text-align: center;
     font-weight: 700;
@@ -60,22 +54,22 @@ const $Content = styled.div<IContentProps>`
 `;
 
 interface Props {
-    label: string;
-    initialHeight: number;
-    children: any;
+    label: any;
+    children: React.ReactNode;
 }
 
-const Collapsible: React.FC<Props> = ({ label, initialHeight, children }) => {
-    const INITIAL_HEIGHT = 150;
-
+const Collapsible: React.FC<Props> = ({ label, children }) => {
     const [isOpen, setIsOpen] = useState(false);
+    // const [isOpen, setIsOpen] = useState(true);
     // const [heightUint, setHeightUnit] = useState(0)
 
     const [showButton, setShowButton] = useState(false);
     // const [showButton, setShowButton] = useState(true);
-    // const [initialHeight, setInitialHeight] = useState(INITIAL_HEIGHT);
+    const [initialHeight, setInitialHeight] = useState(110);
+    // const [initialHeight2, setInitialHeight2] = useState({ containerHeight: 0, childImage: 0, counter: 0 });
 
     const parentRef = useRef<HTMLDivElement>(null);
+    // const imageContainerRef = useRef<HTMLDivElement>(null);
 
     const handleClick = () => {
         setIsOpen(!isOpen);
@@ -83,22 +77,43 @@ const Collapsible: React.FC<Props> = ({ label, initialHeight, children }) => {
         parentRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
     };
 
-    useEffect(() => {
-        if (parentRef.current) {
-            const containerHeight = parentRef.current.scrollHeight;
-            if (containerHeight > INITIAL_HEIGHT) {
-                // to see how the collapsible is performing for the cast
-                // test with the movie name: >> Jeena Isi Ka Naam Hai
+    let counter = 0;
+    const handleImageLoad = () => {
+        counter += 1;
+        // console.log("the counter: ", counter);
+        const imageList = parentRef.current?.querySelectorAll("img");
+
+        if (counter === imageList?.length) {
+            const galleryContainerHeight = imageList[0].parentElement?.parentElement?.scrollHeight;
+
+            const imageWrapperHeight = imageList[0]?.parentElement?.scrollHeight;
+
+            const rows = galleryContainerHeight && imageWrapperHeight && Math.round(galleryContainerHeight / imageWrapperHeight);
+            // const rows = galleryContainerHeight && imageWrapperHeight && galleryContainerHeight / imageWrapperHeight;
+
+            console.log("the rows new: ", typeof rows);
+            // console.log("the rows new: ",);
+
+            if (rows && rows <= 2) {
+                setShowButton(false);
+                setIsOpen(true);
+
+                // galleryContainerHeight && setInitialHeight(galleryContainerHeight);
+            }
+            if (rows && rows > 2) {
+                const ini_height = imageWrapperHeight && imageWrapperHeight * 1.5;
+
+                ini_height && setInitialHeight(ini_height);
                 setShowButton(true);
             }
         }
-    }, []);
-
+    };
     return (
         <div className="collapsible">
             <$Content
                 initialHeight={initialHeight}
                 ref={parentRef}
+                // fullHeight={parentRef.current?.scrollHeight}
                 fullHeight={parentRef}
                 isOpen={isOpen}
                 // style={
@@ -107,13 +122,20 @@ const Collapsible: React.FC<Props> = ({ label, initialHeight, children }) => {
                 //     : { height: "0px" }
                 // }
             >
-                <div className="content">{children}</div>
+                {/* <div className="content">{children}</div> */}
+                <div className="content">
+                    {React.Children.map(children, (child: any, i: any) => {
+                        // return React.cloneElement(child, { color: "red" });
+                        // return React.cloneElement(child, { setInitialHeight2: setInitialHeight2 });
+                        // return React.cloneElement(child, { setInitialHeight2, initialHeight2, imageContainerRef, handleImageLoad });
+                        return React.cloneElement(child, { handleImageLoad });
+                    })}
+                </div>
             </$Content>
-            {/* <$Button onClick={() => setIsOpen(!isOpen)} showButton={showButton}> */}
+
             <$Button onClick={handleClick} showButton={showButton}>
                 {label}
             </$Button>
-            {/* {children} */}
         </div>
     );
 };

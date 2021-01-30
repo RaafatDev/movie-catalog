@@ -39,18 +39,45 @@ interface Props {
         backdrops: { file_path: string }[];
         posters: { file_path: string }[];
     };
+
+    handleImageLoad?: any;
 }
 
-const ImageGallery = ({ images: { backdrops } }: Props) => {
+const ImageGallery = ({ images: { backdrops }, handleImageLoad }: Props) => {
     //   console.log({ backdrops });
-
+    // const imageContainerRef2 = React.useRef<HTMLDivElement>(null);
+    // let counter = 0;
+    // const handleImageChange = () => {
+    //     counter += 1;
+    //     if (backdrops.length === counter) {
+    //         if (imageContainerRef2.current) {
+    //             const containerHeight = imageContainerRef2.current?.scrollHeight;
+    //             const childImage = (imageContainerRef2.current.childNodes[0] as HTMLElement).scrollHeight;
+    //             if (setInitialHeight2) {
+    //                 setInitialHeight2({
+    //                     containerHeight,
+    //                     childImage,
+    //                     counter,
+    //                 });
+    //             }
+    //         }
+    //         // console.log("the insiiiiiiiiiiiiiiiiiiiiiiiiii: ", initialHeight2);
+    //     }
+    // };
     return (
         <StyledContainer>
+            {/* <StyledContainer ref={imageContainerRef2}> */}
+            {/* <StyledContainer ref={imageContainerRef}> */}
             {backdrops.map((image: any, index) => (
                 <ImageWrapper key={index}>
                     <img
                         // onClick={openModal}
+                        // onLoad={() => handleImageChange(index)}
+                        // onLoad={handleImageChange}
+                        onLoad={handleImageLoad}
+                        onError={handleImageLoad}
                         src={`${basePosterUrl}w1280${image.file_path}`}
+                        // src={index === 5 ? `${basePosterUrl}w1280` : `${basePosterUrl}w1280${image.file_path}`}
                         style={{ width: "100%" }}
                     />
                 </ImageWrapper>
