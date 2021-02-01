@@ -55,7 +55,6 @@ const BasicDetails: React.FC<Props> = ({
         // });
     }
 
-    // const imgSrc = poster_path !== "no_image" ? poster_path : backdrop_path;
     const imgSrc = getImagePath(poster_path, backdrop_path);
 
     const basicDetail: Record<string, any> = {
@@ -76,19 +75,14 @@ const BasicDetails: React.FC<Props> = ({
         //
     };
 
-    console.log("Rottent Tomato: ", RottenTomato);
+    // console.log("Rottent Tomato: ", RottenTomato);
 
     return (
         <div className="basic-info-container">
             <div className="container-fluid basic-info">
                 <div className="row">
                     <div className="col-12 col-md-5 pt-4 text-center">
-                        <img
-                            className="basic-info__image"
-                            // src={imgSrc !== "no_image" ? imgSrc : `${process.env.PUBLIC_URL}/img/no_image.png`}
-                            src={imgSrc}
-                            alt={title}
-                        />
+                        <img className="basic-info__image" src={imgSrc} alt={title} />
                     </div>
                     <div className="col mt-3 mt-md-0 pt-4">
                         {Object.keys(basicDetail).map((detail, index) => {

@@ -10,7 +10,7 @@ interface IButtonProps {
     showButton: boolean;
 }
 
-const $Button = styled.div<IButtonProps>`
+const SButton = styled.div<IButtonProps>`
     display: ${({ showButton }) => (showButton ? "block" : "none")};
 
     background: ${(props) => props.theme.accentColor};
@@ -39,7 +39,7 @@ interface IContentProps {
       height: 200px;
     `} */
 
-const $Content = styled.div<IContentProps>`
+const SContent = styled.div<IContentProps>`
     overflow: hidden;
     transition: height ease 0.3s;
 
@@ -54,63 +54,68 @@ const $Content = styled.div<IContentProps>`
 `;
 
 interface Props {
-    label: any;
+    label: string;
+    initialRowsDisplayed: number;
     children: React.ReactNode;
 }
 
-const Collapsible: React.FC<Props> = ({ label, children }) => {
+const Collapsible: React.FC<Props> = ({ label, children, initialRowsDisplayed }) => {
     const [isOpen, setIsOpen] = useState(false);
-    // const [isOpen, setIsOpen] = useState(true);
-    // const [heightUint, setHeightUnit] = useState(0)
-
     const [showButton, setShowButton] = useState(false);
-    // const [showButton, setShowButton] = useState(true);
     const [initialHeight, setInitialHeight] = useState(110);
-    // const [initialHeight2, setInitialHeight2] = useState({ containerHeight: 0, childImage: 0, counter: 0 });
 
     const parentRef = useRef<HTMLDivElement>(null);
-    // const imageContainerRef = useRef<HTMLDivElement>(null);
 
     const handleClick = () => {
+        console.log("clicked1!!!!");
         setIsOpen(!isOpen);
 
         parentRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
     };
 
-    let counter = 0;
+    let fnCalledCounter = 0; // functioned called-count for => ( onLoad && onError combined )
     const handleImageLoad = () => {
-        counter += 1;
-        // console.log("the counter: ", counter);
         const imageList = parentRef.current?.querySelectorAll("img");
 
-        if (counter === imageList?.length) {
-            const galleryContainerHeight = imageList[0].parentElement?.parentElement?.scrollHeight;
+        fnCalledCounter += 1;
+        if (fnCalledCounter === imageList?.length) {
+            //
+            if (imageList && imageList?.length > 1) {
+                //
+                const rows = new Set(); // number of the unique values represents the row-number
 
-            const imageWrapperHeight = imageList[0]?.parentElement?.scrollHeight;
+                for (let i = 0; i < imageList.length; i++) {
+                    const image = imageList[i];
+                    // const imageLeft = image.getBoundingClientRect().left;
+                    const imageTop = image.getBoundingClientRect().top;
+                    rows.add(imageTop);
+                }
 
-            const rows = galleryContainerHeight && imageWrapperHeight && Math.round(galleryContainerHeight / imageWrapperHeight);
-            // const rows = galleryContainerHeight && imageWrapperHeight && galleryContainerHeight / imageWrapperHeight;
+                if (rows.size > 2) {
+                    const containerHeight = parentRef.current?.scrollHeight;
+                    const rowHeight = containerHeight && containerHeight / rows.size;
 
-            console.log("the rows new: ", typeof rows);
-            // console.log("the rows new: ",);
+                    const initialHeight = rowHeight && rowHeight * initialRowsDisplayed;
 
-            if (rows && rows <= 2) {
+                    initialHeight && setInitialHeight(initialHeight);
+                    setShowButton(true);
+                } else {
+                    // rows.size =< 2
+                    setShowButton(false);
+                    setIsOpen(true);
+                }
+            } else {
+                // imageList === 1 || imageList < 1
                 setShowButton(false);
                 setIsOpen(true);
-
-                // galleryContainerHeight && setInitialHeight(galleryContainerHeight);
-            }
-            if (rows && rows > 2) {
-                const ini_height = imageWrapperHeight && imageWrapperHeight * 1.5;
-
-                ini_height && setInitialHeight(ini_height);
-                setShowButton(true);
+                // to see how the collapsible is performing for the gallery with one image
+                // test with the movie name: >> Jeena Isi Ka Naam Hai
             }
         }
     };
     return (
         <div className="collapsible">
-            <$Content
+            <SContent
                 initialHeight={initialHeight}
                 ref={parentRef}
                 // fullHeight={parentRef.current?.scrollHeight}
@@ -125,17 +130,15 @@ const Collapsible: React.FC<Props> = ({ label, children }) => {
                 {/* <div className="content">{children}</div> */}
                 <div className="content">
                     {React.Children.map(children, (child: any, i: any) => {
-                        // return React.cloneElement(child, { color: "red" });
-                        // return React.cloneElement(child, { setInitialHeight2: setInitialHeight2 });
-                        // return React.cloneElement(child, { setInitialHeight2, initialHeight2, imageContainerRef, handleImageLoad });
+                        //
                         return React.cloneElement(child, { handleImageLoad });
                     })}
                 </div>
-            </$Content>
+            </SContent>
 
-            <$Button onClick={handleClick} showButton={showButton}>
+            <SButton onClick={handleClick} showButton={showButton}>
                 {label}
-            </$Button>
+            </SButton>
         </div>
     );
 };

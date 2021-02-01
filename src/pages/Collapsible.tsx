@@ -11,7 +11,7 @@ interface IButtonProps {
     showButton: boolean;
 }
 
-const $Button = styled.div<IButtonProps>`
+const SButton = styled.div<IButtonProps>`
     display: ${({ showButton }) => (showButton ? "block" : "none")};
 
     background: ${(props) => props.theme.accentColor};
@@ -45,7 +45,7 @@ interface IContentProps {
       height: 200px;
     `} */
 
-const $Content = styled.div<IContentProps>`
+const SContent = styled.div<IContentProps>`
     overflow: hidden;
     transition: height ease 0.3s;
 
@@ -66,14 +66,8 @@ interface Props {
 }
 
 const Collapsible: React.FC<Props> = ({ label, initialHeight, children }) => {
-    const INITIAL_HEIGHT = 150;
-
     const [isOpen, setIsOpen] = useState(false);
-    // const [heightUint, setHeightUnit] = useState(0)
-
     const [showButton, setShowButton] = useState(false);
-    // const [showButton, setShowButton] = useState(true);
-    // const [initialHeight, setInitialHeight] = useState(INITIAL_HEIGHT);
 
     const parentRef = useRef<HTMLDivElement>(null);
 
@@ -86,9 +80,7 @@ const Collapsible: React.FC<Props> = ({ label, initialHeight, children }) => {
     useEffect(() => {
         if (parentRef.current) {
             const containerHeight = parentRef.current.scrollHeight;
-            if (containerHeight > INITIAL_HEIGHT) {
-                // to see how the collapsible is performing for the cast
-                // test with the movie name: >> Jeena Isi Ka Naam Hai
+            if (containerHeight > initialHeight) {
                 setShowButton(true);
             }
         }
@@ -96,7 +88,7 @@ const Collapsible: React.FC<Props> = ({ label, initialHeight, children }) => {
 
     return (
         <div className="collapsible">
-            <$Content
+            <SContent
                 initialHeight={initialHeight}
                 ref={parentRef}
                 fullHeight={parentRef}
@@ -108,11 +100,11 @@ const Collapsible: React.FC<Props> = ({ label, initialHeight, children }) => {
                 // }
             >
                 <div className="content">{children}</div>
-            </$Content>
+            </SContent>
             {/* <$Button onClick={() => setIsOpen(!isOpen)} showButton={showButton}> */}
-            <$Button onClick={handleClick} showButton={showButton}>
+            <SButton onClick={handleClick} showButton={showButton}>
                 {label}
-            </$Button>
+            </SButton>
             {/* {children} */}
         </div>
     );

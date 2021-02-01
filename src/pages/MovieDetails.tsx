@@ -18,7 +18,7 @@ import { Layout, BasicDetails, Credits, MovieVideos } from "../components";
 import { size, screen_smaller_than } from "../styled-components/mediaQueries";
 import { getImagePath } from "../util/helperFunctions";
 
-const $title = styled.div`
+const STitle = styled.div`
     padding: 1rem 0.7rem;
     font-size: 2.5rem;
     text-align: center;
@@ -39,7 +39,7 @@ const $title = styled.div`
     }
 `;
 
-const $msgWrapper = styled.div`
+const SMsgWrapper = styled.div`
     height: 100px;
     width: 100%;
     background-color: #343a40;
@@ -57,17 +57,19 @@ interface IBackgroundContainer {
     imageSrc: string;
 }
 
-const $backgroundContainer = styled.div<IBackgroundContainer>`
+const SBackgroundContainer = styled.div<IBackgroundContainer>`
     background: url(${(props) => props.imageSrc});
     background-size: cover;
     background-attachment: fixed;
+    /* padding-bottom: 70px; */
 `;
 
-const $Container = styled.div`
+const SContainer = styled.div`
     color: ${(props) => props.theme.primaryLightTextColor};
     width: 80%;
     margin: auto;
     background-color: ${(props) => props.theme.primaryColor};
+    /* padding-bottom: 300px; */
 
     @media ${screen_smaller_than.sm} {
         width: 90%;
@@ -77,21 +79,23 @@ const $Container = styled.div`
     }
 `;
 
-const $Section = styled.section`
-    min-height: 90vh;
+const SSection = styled.section`
+    /* min-height: 90vh; */
+    /* min-height: 80vh; */
+    min-height: 70vh;
     width: 100%;
 
     h4 {
         padding: 50px 10px 0px 10px;
     }
 `;
-const $VideoContainer = styled.div`
+const SVideoContainer = styled.div`
     margin: 60px 0;
     @media (min-width: ${size.md}) {
         margin: 50px;
     }
 `;
-const $CreditsContainer = styled.div``;
+const SCreditsContainer = styled.div``;
 
 interface Props extends RouteComponentProps<{ id: string; kind: string; title: string }> {}
 
@@ -113,16 +117,18 @@ const MovieDetails: React.FC<Props> = ({ match }) => {
         ...data.movieDetail.TMDB_MovieDetail,
     };
 
+    movieDetails.Actors = "N/A";
+    // const movieDetails = [];
     if (loading) return <h1>Loading ... </h1>;
     if (error) return <h1>Error: it seems like something went wrong, please try again later </h1>;
 
     const notAvailableMessage = (sectionName: string) => {
         return (
-            <$msgWrapper>
+            <SMsgWrapper>
                 <p>
                     No related <strong>{sectionName}</strong> were found {":("}
                 </p>
-            </$msgWrapper>
+            </SMsgWrapper>
         );
     };
 
@@ -144,23 +150,21 @@ const MovieDetails: React.FC<Props> = ({ match }) => {
     // const backgroundContainerImage = getImagePath(movieDetails.poster_path, movieDetails.backdrop_path);
     const backgroundContainerImage = getImagePath(movieDetails.backdrop_path, movieDetails.poster_path);
 
+    console.log("the movieDetails: ", movieDetails);
     return (
         <Layout>
-            <$backgroundContainer imageSrc={backgroundContainerImage}>
-                <$Container>
-                    <$title>{title.split("-").join(" ")} </$title>
+            <SBackgroundContainer imageSrc={backgroundContainerImage}>
+                <SContainer>
+                    <STitle>{title.split("-").join(" ")} </STitle>
 
-                    <$Section>{<BasicDetails combinedFetch={movieDetails} />}</$Section>
+                    <SSection>
+                        <BasicDetails combinedFetch={movieDetails} />
+                    </SSection>
 
-                    {/* $$$$$$$$$$$$$4 */}
-                    {/* $$$$$$$$$$$$$4 */}
-                    {/* $$$$$$$$$$$$$4 */}
-
-                    <$Section>
+                    <SSection>
                         <h4>The Media: Images and Videos</h4>
-
                         {movieDetails?.images?.backdrops.length > 0 ? (
-                            <CollapsibleGallery label="View All Image">
+                            <CollapsibleGallery label="View All Image" initialRowsDisplayed={1.5}>
                                 <TestImageGalleryTest images={movieDetails.images} />
                             </CollapsibleGallery>
                         ) : (
@@ -168,136 +172,33 @@ const MovieDetails: React.FC<Props> = ({ match }) => {
                         )}
 
                         {movieDetails?.videos?.length > 0 ? (
-                            <$VideoContainer>
+                            <SVideoContainer>
                                 <Collapsible label="see more" initialHeight={150}>
                                     {trailers}
                                 </Collapsible>
-                            </$VideoContainer>
+                            </SVideoContainer>
                         ) : (
                             notAvailableMessage("Videos")
                         )}
-                    </$Section>
-                    <$Section>
+                    </SSection>
+                    <SSection>
                         <h4>Credits: The Cast</h4>
-                        <$CreditsContainer>
-                            {movieDetails && Object.keys(movieDetails).length === 0 && <h1>No Actors Found</h1>}
-                            {movieDetails.Actors === "N/A" && <p>unfortunately, we couldn't find information related to the Actors {`:(`} </p>}
-                            {/* ############## */}
-                            {/* ############## */}
-                            {movieDetails?.credits?.length > 0 ? (
-                                <Collapsible label="see more" initialHeight={300}>
+                        {movieDetails?.credits?.length > 0 ? (
+                            <SCreditsContainer>
+                                <CollapsibleGallery label="View All Cast" initialRowsDisplayed={1.5}>
                                     <Credits
-                                        // cast={movieDetails.credits.cast}
+                                        //
                                         cast={movieDetails.credits}
                                         actors={movieDetails.Actors}
                                     />
-                                </Collapsible>
-                            ) : (
-                                notAvailableMessage("Cast information")
-                            )}
-                        </$CreditsContainer>
-                    </$Section>
-                </$Container>
-            </$backgroundContainer>
-            {/*  */}
-            {/*  */}
-            {/*  */}
-            {/*  */}
-            {/*  */}
-            <div className="movie-details-container  px-sm-5 pb-5">
-                <div id="accordion">
-                    <div className="card">
-                        <div className="card-header" id="headingOne">
-                            <h5 className="mb-0">
-                                <button
-                                    className="btn btn-link"
-                                    data-toggle="collapse"
-                                    data-target="#collapseOne"
-                                    aria-expanded="true"
-                                    aria-controls="collapseOne"
-                                >
-                                    Movie Details
-                                </button>
-                            </h5>
-                        </div>
-
-                        <div id="collapseOne" className="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
-                            <div className="card-body">
-                                <div className="container-fluid">
-                                    <div className="row">
-                                        <div className="col-12  text-center border border-red">
-                                            <p className="h1 my-3 movie-detail__title">{title.split("-").join(" ")} </p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                {loading && <h1>Loading ............</h1>}
-                                {error && (
-                                    <h3>
-                                        {`:(`} <br /> it seems like something went wrong!{" "}
-                                    </h3>
-                                )}
-                                {!loading && <BasicDetails combinedFetch={movieDetails} />}
-                            </div>
-                        </div>
-                    </div>
-                    <div className="card">
-                        <div className="card-header" id="headingTwo">
-                            <h5 className="mb-0">
-                                <button
-                                    className="btn btn-link collapsed"
-                                    data-toggle="collapse"
-                                    data-target="#collapseTwo"
-                                    aria-expanded="false"
-                                    aria-controls="collapseTwo"
-                                >
-                                    Media (Images and Videos)
-                                </button>
-                            </h5>
-                        </div>
-                        <div id="collapseTwo" className="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
-                            {/* {images} */}
-
-                            {movieDetails?.videos?.results?.length > 0 && (
-                                <div className="container">
-                                    <p className="trailer-available">Available Trailers:</p>{" "}
-                                </div>
-                            )}
-                            {/* {trailers} */}
-                        </div>
-                    </div>
-                    <div className="card">
-                        <div className="card-header" id="headingThree">
-                            <h5 className="mb-0">
-                                <button
-                                    className="btn btn-link collapsed"
-                                    data-toggle="collapse"
-                                    data-target="#collapseThree"
-                                    aria-expanded="false"
-                                    aria-controls="collapseThree"
-                                >
-                                    Credits: The Cast....
-                                </button>
-                            </h5>
-                        </div>
-                        <div id="collapseThree" className="collapse" aria-labelledby="headingThree" data-parent="#accordion">
-                            <div className="card-body">
-                                {movieDetails && Object.keys(movieDetails).length === 0 && <h1>No Actors Found</h1>}
-                                {movieDetails.Actors === "N/A" && <p>unfortunately, we couldn't find information related to the Actors {`:(`} </p>}
-                                {movieDetails && movieDetails.credits && (
-                                    <div className="container mt-4">
-                                        <Credits
-                                            // cast={movieDetails.credits.cast}
-                                            cast={movieDetails.credits}
-                                            actors={movieDetails.Actors}
-                                        />
-                                    </div>
-                                )}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                                </CollapsibleGallery>
+                            </SCreditsContainer>
+                        ) : (
+                            notAvailableMessage("Cast information")
+                        )}
+                    </SSection>
+                </SContainer>
+            </SBackgroundContainer>
         </Layout>
     );
 };

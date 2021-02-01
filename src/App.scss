@@ -15,7 +15,7 @@ $large-size: 991px;
 $extra-large-size: 1199px;
 
 // @import "./components/movie-details/MovieDetails.scss";
-@import "./pages/MovieDetails.scss";
+// @import "./pages/MovieDetails.scss";
 @import "./components/movie-details/ImagesSlide.scss";
 @import "./components/movie-details/MovieVideos.scss";
 @import "./components/movie-details/Credits.scss";
@@ -31,12 +31,12 @@ $extra-large-size: 1199px;
 
 // @import "./pages/MovieDetails.scss";
 img {
-  width: 100%;
+    width: 100%;
 }
 
 .app {
-  // background-color: #1e2129;
-  margin-top: 55px;
+    // background-color: #1e2129;
+    margin-top: 55px;
 }
 
 // a {
