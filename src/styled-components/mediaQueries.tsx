@@ -27,6 +27,7 @@ export const device = {
     xl: `(min-width: ${size.xl})`,
     xxl: `(min-width: ${size.xxl})`,
 };
+
 export const screen_smaller_than = {
     xxs: `(max-width: ${size.xxs})`,
     xs: `(max-width: ${size.xs})`,
@@ -35,4 +36,14 @@ export const screen_smaller_than = {
     lg: `(max-width: ${size.lg})`,
     xl: `(max-width: ${size.xl})`,
     xxl: `(max-width: ${size.xxl})`,
+};
+
+export const screen_bigger_than = {
+    xxs: `(min-width: ${size.xxs})`,
+    xs: `(min-width: ${size.xs})`,
+    sm: `(min-width: ${size.sm})`,
+    md: `(min-width: ${size.md})`,
+    lg: `(min-width: ${size.lg})`,
+    xl: `(min-width: ${size.xl})`,
+    xxl: `(min-width: ${size.xxl})`,
 };

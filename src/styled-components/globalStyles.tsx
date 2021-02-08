@@ -4,7 +4,7 @@ import * as theme from "../styled-components/theme";
 type ThemeType = typeof theme;
 
 interface Props {
-  theme: ThemeType;
+    theme: ThemeType;
 }
 const GlobalStyle = createGlobalStyle<Props>`
   * {
