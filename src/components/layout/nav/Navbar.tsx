@@ -23,7 +23,6 @@ const SButton = styled.button`
     cursor: pointer;
     font-weight: 700;
     outline: none;
-
     transition: opacity 300ms ease-in-out;
 
     &:hover {
@@ -33,41 +32,29 @@ const SButton = styled.button`
     @media ${screen_smaller_than.md} {
         display: none;
     }
-    /*     
-    @include breakpoint-down(medium) {
-        display: none;
-    } */
 `;
 
 const SNav = styled.nav`
     display: flex;
     position: relative;
-    /* background-color: $white; */
     background-color: #343a40;
-    /* background-color: green; */
     align-items: center;
     justify-content: space-between;
     padding: 1.065rem 1.5rem;
-    /* padding: $container-padding; */
 `;
 
 interface IMobileNav {
     isOpen: boolean;
 }
 const SMobileNav = styled.div<IMobileNav>`
-    /* background-color: $white; */
     background-color: white;
-
     position: absolute;
     z-index: 10;
-    /* width: calc(100% - calc(#{$container-x-axis} * 2)); */
     width: calc(100% - calc(1.5rem * 2));
     left: 50%;
     transform: translate(-50%);
-
     margin-top: 1.5rem;
     padding: 1.625rem;
-
     border-radius: 5px;
     animation: fade-in 300ms ease-in-out forwards;
 
@@ -79,16 +66,17 @@ const SMobileNav = styled.div<IMobileNav>`
         justify-content: center;
         align-items: stretch;
     }
+
     li {
         list-style: none;
         text-decoration: none;
     }
+
     a {
         display: block;
 
         padding: 0.625rem;
         text-align: center;
-        /* color: $darkBlue; */
         color: red;
     }
 
@@ -105,7 +93,6 @@ const SLinks = styled.div`
     li {
         list-style: none;
         text-decoration: none;
-        /* font-size: $font-sm; */
         font-size: 0.875rem;
 
         &:not(:last-child) {
@@ -113,7 +100,6 @@ const SLinks = styled.div`
         }
 
         a {
-            /* color: $grayishBlue; */
             color: hsl(233, 8%, 62%);
             transition: color 300ms ease-in-out;
         }
@@ -128,15 +114,12 @@ const SLinks = styled.div`
             content: "";
             display: block;
             position: absolute;
-
             /* background: linear-gradient(to right, $limeGreen, $brightCyan); */
             background: linear-gradient(to right, hsl(136, 65%, 51%), hsl(192, 70%, 51%));
-
             height: 5px;
             right: 0;
             left: 0;
             bottom: -30px;
-
             opacity: 0;
             transition: 300ms ease-in-out;
         }
@@ -159,30 +142,22 @@ interface IOverlay {
 const SOverLay = styled.div<IOverlay>`
     ${({ isOpen }) => isOpen && css``}
     position: fixed;
-    /* z-index: 10; */
-
     top: 0;
     bottom: 0;
     right: 0;
     left: 0;
-    /* background-color: red; */
     background-image: linear-gradient(hsl(233, 26%, 24%), transparent);
     /* background-image: linear-gradient(white, transparent); */
-
     animation: fade-in 300ms ease-in-out forwards;
 `;
 
 const SHeader = styled.header`
-    /* .header { */
-    // general styles
     font-size: 1.125rem;
     a,
     a:visited,
     a:hover {
         text-decoration: none;
     }
-
-    // end general styles
 
     /* &__mobile_nav_hidden {
         display: none;

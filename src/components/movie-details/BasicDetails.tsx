@@ -1,18 +1,6 @@
 import React from "react";
 import { ICombined } from "../../model/combined";
 import { getImagePath } from "../../util/helperFunctions";
-// import styled from "styled-components";
-
-// const $Container = styled.div`
-//     /* background-color: green; */
-//     /* border: 1px solid blue; */
-// `;
-
-// const StyledContainer = styled.div`
-//     color: white;
-//     width: 80%;
-//     margin: auto;
-// `
 
 interface Props {
     combinedFetch: ICombined;
@@ -38,8 +26,6 @@ const BasicDetails: React.FC<Props> = ({
         imdbRating,
         Production,
         Runtime,
-
-        //
     },
 }) => {
     let budgetFormat = budget ? new Intl.NumberFormat().format(budget) : undefined;
@@ -74,8 +60,6 @@ const BasicDetails: React.FC<Props> = ({
         Overview: overview,
         //
     };
-
-    // console.log("Rottent Tomato: ", RottenTomato);
 
     return (
         <div className="basic-info-container">

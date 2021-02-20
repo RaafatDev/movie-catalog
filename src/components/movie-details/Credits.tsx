@@ -1,4 +1,45 @@
 import React from "react";
+import styled from "styled-components";
+
+const SCastContainer = styled.div`
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: stretch;
+`;
+
+const SCastMemberWrapper = styled.div`
+    display: flex;
+    align-items: stretch;
+    justify-content: stretch;
+
+    border: 1px solid #dee2e6;
+    max-width: 180px;
+
+    @media only screen and (max-width: 400px) {
+        flex-basis: 50%;
+    }
+
+    @media only screen and (max-width: 250px) {
+        flex-basis: 100%;
+    }
+
+    .cast {
+        text-align: center;
+
+        .cast__img-container {
+            img {
+                width: 100%;
+                height: 200px;
+            }
+        }
+
+        .cast__name {
+            font-size: 1rem;
+            font-weight: 300;
+        }
+    }
+`;
 
 interface ICast {
     character: string;
@@ -13,40 +54,29 @@ interface Props {
 
 const Credits: React.FC<Props> = ({ cast, actors, handleImageLoad }) => {
     return (
-        <div>
-            <div>
-                {cast && cast.length === 0 && actors && actors !== "N/A" && (
-                    <>
-                        <span className="h3">The Cast: </span> {actors}
-                    </>
-                )}
-                <div className="container">
-                    <div className="row justify-content-center">
-                        {cast.map((member: ICast, index: number) => {
-                            const imgSrc = member.profile_path
-                                ? // ? `https://image.tmdb.org/t/p/original${member.profile_path}`
-                                  // `https://image.tmdb.org/t/p/w92/${member.profile_path}`
-                                  `https://image.tmdb.org/t/p/w185/${member.profile_path}`
-                                : `${process.env.PUBLIC_URL}/img/no_image.png`;
-                            return (
-                                <div key={index} className="cast-container clo col-6 col-sm-4 col-md-3 p-0 border d-flex align-items-stretch">
-                                    <div className="cast text-center">
-                                        <div className="cast__img-container">
-                                            <img onLoad={handleImageLoad} onError={handleImageLoad} src={imgSrc} alt={member.name} />
-                                        </div>
-                                        <div className="cast__character">
-                                            <span className="lead">{member.name} </span>
-                                            <br />
-                                            <span className="">{member.character} </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            );
-                        })}
-                    </div>
-                </div>{" "}
-            </div>
-        </div>
+        <SCastContainer>
+            {cast.map((member: ICast, index: number) => {
+                const imgSrc = member.profile_path
+                    ? // ? `https://image.tmdb.org/t/p/original${member.profile_path}`
+                      // `https://image.tmdb.org/t/p/w92/${member.profile_path}`
+                      `https://image.tmdb.org/t/p/w185/${member.profile_path}`
+                    : `${process.env.PUBLIC_URL}/img/no_image.png`;
+                return (
+                    <SCastMemberWrapper key={index}>
+                        <div className="cast">
+                            <div className="cast__img-container">
+                                <img onLoad={handleImageLoad} onError={handleImageLoad} src={imgSrc} alt={member.name} />
+                            </div>
+                            <div className="cast__character">
+                                <span className="cast__name">{member.name} </span>
+                                <br />
+                                <span>{member.character} </span>
+                            </div>
+                        </div>
+                    </SCastMemberWrapper>
+                );
+            })}
+        </SCastContainer>
     );
 };
 
